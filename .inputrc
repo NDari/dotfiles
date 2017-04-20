@@ -1,0 +1,2 @@
+# set the autocomplete of readline to ignore case when tab completing
+set completion-ignore-case On
