@@ -152,6 +152,28 @@ colorscheme solarized
 " Set mouse behavior to be more normal
 set mouse=a
 
+" Terminal navigation function
+" Make ctrl-h/j/k/l move between windows and auto-insert in terminals
+func! s:mapMoveToWindowInDirection(direction)
+    func! s:maybeInsertMode(direction)
+        stopinsert
+        execute "wincmd" a:direction
+
+        if &buftype == 'terminal'
+            startinsert!
+        endif
+    endfunc
+
+    execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
+                \ "<C-\\><C-n>"
+                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+    execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
+                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
+endfunc
+for dir in ["h", "j", "l", "k"]
+    call s:mapMoveToWindowInDirection(dir)
+endfor
+
 " deoplete.
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
@@ -183,11 +205,8 @@ autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType cpp setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
-" Move around in splits natuarally
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" source the file on init
+autocmd VimEnter * source $MYVIMRC
 
 " Make splits open naturally
 set splitbelow
