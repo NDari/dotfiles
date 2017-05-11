@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+iid=""
+aws ec2 stop-instances --instance-ids $iid
+lsof -i tcp:8157 | awk 'NR!=1 {print $2}' | xargs kill

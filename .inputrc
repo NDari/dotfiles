@@ -1,2 +1,11 @@
 # set the autocomplete of readline to ignore case when tab completing
 set completion-ignore-case On
+set show-all-if-ambiguous on
+"\e[A": history-search-backward            # arrow up
+"\e[B": history-search-forward             # arrow down
+"\e[C": forward-char
+"\e[D": backward-char                      # make left and right work normally
+
+# same as up arrow but with emacs keys
+"\C-p": history-search-backward
+"\C-n": history-search-forward

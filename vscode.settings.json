@@ -1,0 +1,23 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "window.zoomLevel": 0,
+    "editor.lineNumbers": "on",
+    "editor.tabCompletion": true,
+    "editor.fontFamily": "Consolas",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "editor.renderIndentGuides": false,
+    "vim.leader": ",",
+    "vim.enableNeovim": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.easymotion": true,
+    "vim.easymotionMarkerBackgroundColor": "#FFFFFFF",
+    "terminal.integrated.fontSize": 10,
+    "workbench.colorTheme": "Monokai Dimmed",
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 200,
+    "python.pythonPath": "/usr/local/bin/python3"
+}

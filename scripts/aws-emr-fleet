@@ -1,0 +1,179 @@
+#!/usr/bin/env bash
+
+set -eu
+
+numinstances=${1:-32}
+bootstrap_path=${2:-'s3://lskdjflskdjf-dev-datascience/Dari/tools/naseer-dmp-bootstrap-jupyter-12x'}
+cluster_name=${3:-'research'}
+name="$USER-$cluster_name"
+
+aws emr create-cluster \
+    --applications \
+        Name=Hadoop \
+        Name=Spark \
+        Name=Ganglia \
+        Name=Hive \
+    --tags 'Environment=Development' 'Business Unit=Pooled' 'Billing=Data Science' 'Name=Research' \
+    --ec2-attributes '
+        {
+            "KeyName": "Datascience-EMR",
+            "InstanceProfile": "skljdhf-emr-ec2",
+            "ServiceAccessSecurityGroup": "sg-0de681d143c93e501",
+            "SubnetIds": [
+                "subnet-03fd005a2367e7517",
+                "subnet-074a3bae9ec2069a6",
+                "subnet-071a8978f4e4e5cc2",
+                "subnet-0d23aafe951e0b5dc",
+                "subnet-073e4537900d9a7e4",
+                "subnet-0f99abe7e0812c203"
+            ], 
+            "EmrManagedSlaveSecurityGroup": "sg-0fd63b074e5a0315f",
+            "EmrManagedMasterSecurityGroup": "sg-0be503d7c24a7418b"
+        }' \
+    --release-label emr-5.25.0 \
+    --configurations '
+        [
+            {
+                "Classification": "capacity-scheduler",
+                "Properties": {
+                    "yarn.scheduler.capacity.resource-calculator": "org.apache.hadoop.yarn.util.resource.DominantResourceCalculator"
+                }
+            }
+        ]' \
+    --instance-fleets '
+        [
+            {
+                "InstanceFleetType": "CORE",
+                "TargetOnDemandCapacity": 0,
+                "TargetSpotCapacity": '$numinstances',
+                "LaunchSpecifications": {
+                    "SpotSpecification": {
+                        "TimeoutDurationMinutes": 60,
+                        "TimeoutAction": "TERMINATE_CLUSTER"
+                    }
+                },
+                "InstanceTypeConfigs": [
+                    {
+                        "WeightedCapacity": 1,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 128,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ],
+                            "EbsOptimized": true
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.xlarge"
+                    },
+                    {
+                        "WeightedCapacity": 2,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 256,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ],
+                            "EbsOptimized": true
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.2xlarge"
+                    },
+                    {
+                        "WeightedCapacity": 4,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 512,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ],
+                            "EbsOptimized": true
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.4xlarge"
+                    },
+                    {
+                        "WeightedCapacity": 8,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 1024,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ],
+                            "EbsOptimized": true
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.8xlarge"
+                    },
+                    {
+                        "WeightedCapacity": 16,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 2048,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ]
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.16xlarge"
+                    }
+                ],
+                "Name": "Core - 2"
+            },
+            {
+                "InstanceFleetType": "MASTER",
+                "TargetOnDemandCapacity": 1,
+                "TargetSpotCapacity": 0,
+                "InstanceTypeConfigs": [
+                    {
+                        "WeightedCapacity": 1,
+                        "EbsConfiguration": {
+                            "EbsBlockDeviceConfigs": [
+                                {
+                                    "VolumeSpecification": {
+                                        "SizeInGB": 2084,
+                                        "VolumeType": "gp2"
+                                    },
+                                    "VolumesPerInstance": 1
+                                }
+                            ]
+                        },
+                        "BidPriceAsPercentageOfOnDemandPrice": 100,
+                        "InstanceType": "r4.16xlarge"
+                    }
+                ],
+                "Name": "Master - 1"
+            }
+        ]' \
+    --bootstrap-actions '
+        [
+            {
+                "Path": "'$bootstrap_path'",
+                "Name": "bootstrap"
+            }
+        ]' \
+    --ebs-root-volume-size 100 \
+    --service-role Datameer-EMR-role \
+    --name $name \
+    --scale-down-behavior TERMINATE_AT_TASK_COMPLETION \
+    --region us-east-1

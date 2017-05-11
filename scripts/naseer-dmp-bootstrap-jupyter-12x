@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+
+set -x
+
+sudo yum -y update
+
+sudo yum -y install \
+    cmake \
+    ctags \
+    git \
+    geos-devel \
+    tmux
+
+
+# Python
+
+mc_script=Miniconda3-4.5.11-Linux-x86_64.sh
+
+aws s3 cp s3://psm-dev-datascience/Dari/tools/$mc_script .
+chmod a+x $mc_script
+bash ./$mc_script -b -p $HOME/miniconda3
+
+pybin=$HOME/miniconda3/bin
+
+echo "" >> $HOME/.bashrc
+SPARK_HOME=/usr/lib/spark
+echo "export SPARK_HOME=$SPARK_HOME" >> $HOME/.bashrc
+echo "export PYSPARK_PYTHON=${HOME}/miniconda3/bin/python" >> $HOME/.bashrc
+echo "export PATH=$SPARK_HOME/bin:$HOME/bin:$PATH" >> $HOME/.bashrc
+source $HOME/.bashrc
+echo "export PATH=$pybin:$PATH" >> $HOME/.bashrc
+echo "alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'" >> ${HOME}/.bashrc
+# echo "alias e=nvim" >> ${HOME}/.bashrc
+echo "alias e=vim" >> ${HOME}/.bashrc
+echo "alias cpconf='sudo cp $HOME/spark-defaults.conf /usr/lib/spark/conf/'" >> ${HOME}/.bashrc
+echo "alias rejup='sudo initctl restart jupyter'" >> ${HOME}/.bashrc
+echo "alias ip='ipython --profile slime'" >> ${HOME}/.bashrc
+source $HOME/.bashrc
+
+$pybin/pip install --upgrade pip
+
+$pybin/pip install \
+    awscli==1.16.148 \
+    boto3==1.9.138 \
+    folium==0.8.3 \
+    h3==3.1.0 \
+    ipython==7.3.0 \
+    julia==0.5.0 \
+    jupyter==1.0.0 \
+    jupyterlab==1.0 \
+    matplotlib==3.0.3 \
+    hdbscan==0.8.22 \
+    networkx==2.3 \
+    numba==0.42.1 \
+    numpy==1.16.2 \
+    pandas==0.24.1 \
+    pyarrow==0.13.0 \
+    pyspark==2.4.3 \
+    scikit-learn==0.20.2 \
+    shapely==1.6.4 \
+    sympy==1.4 \
+    tldextract==2.2.1 \
+    xgboost==0.90
+
+$pybin/ipython profile create slime
+cat <<EOF > $HOME/.ipython/profile_slime/ipython_config.py
+c.InteractiveShell.autoindent = False
+c.TerminalInteractiveShell.editing_mode = 'vi'
+c.TerminalInteractiveShell.editor = 'vim'
+EOF
+
+# Julia
+
+cd $HOME
+mkdir -p tools
+cd tools
+wget https://julialang-s3.julialang.org/bin/linux/x64/1.3/julia-1.3.0-linux-x86_64.tar.gz
+mkdir julia && tar zxvf julia-1.2.0-linux-x86_64.tar.gz -C julia --strip-components 1
+echo "export PATH=$HOME/tools/julia/bin:$PATH" >> $HOME/.bashrc
+$HOME/tools/julia/bin/julia -e 'using Pkg; Pkg.add("IJulia");'
+
+
+if grep isMaster /mnt/var/lib/info/instance.json | grep true; then
+    # The following is from https://bytes.babbel.com/en/articles/2017-07-04-spark-with-jupyter-inside-vpc.html
+    # with slight modifications
+
+    ### install dependencies for s3fs-fuse to access and store notebooks
+    # curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+    # sudo yum install -y sbt
+    sudo yum install -y libcurl libcurl-devel graphviz cyrus-sasl cyrus-sasl-devel readline readline-devel gnuplot
+    sudo yum install -y automake fuse fuse-devel libxml2-devel
+
+    cd /mnt
+    git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+    cd s3fs-fuse/
+    git checkout v1.85
+    ls -alrt
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+    sudo su -c 'echo user_allow_other >> /etc/fuse.conf'
+    mkdir -p /mnt/s3fs-cache
+    mkdir -p /mnt/notebooks
+    /usr/local/bin/s3fs \
+        -o allow_other \
+        -o iam_role=auto \
+        -o umask=0 \
+        -o url=https://s3.amazonaws.com  \
+        -o no_check_certificate \
+        -o enable_noobj_cache \
+        -o use_cache=/mnt/s3fs-cache lsdkjf-dev-notebooks /mnt/notebooks
+
+    cd $HOME
+
+    mkdir -p ~/.jupyter
+    touch ~/.jupyter/jupyter_notebook_config.py
+    HASHED_PASSWORD=$(python -c "from notebook.auth import passwd; print(passwd('$BIG_SECRET_PASSWORD'))")
+    echo "c.NotebookApp.password = u'$HASHED_PASSWORD'" >> ~/.jupyter/jupyter_notebook_config.py
+    ipAddr=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+    echo "c.NotebookApp.open_browser = False" >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.NotebookApp.ip = '$ipAddr'" >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.NotebookApp.notebook_dir = '/mnt/notebooks/Dari'" >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.NotebookApp.iopub_data_rate_limit = 10000000000" >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.ContentsManager.checkpoints_kwargs = {'root_dir': '.checkpoints'}" >> ~/.jupyter/jupyter_notebook_config.py
+    echo "c.NotebookApp.port = 8889" >> ~/.jupyter/jupyter_notebook_config.py
+
+    ### Setup Jupyter deamon and launch it
+    cd ~
+    echo "Creating Jupyter Daemon"
+
+    sudo cat <<EOF > /home/hadoop/jupyter.conf
+description "Jupyter"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+respawn
+respawn limit 0 10
+
+chdir /mnt/notebooks/Dari
+
+script
+    sudo su - hadoop > /var/log/jupyter.log 2>&1 <<BASH_SCRIPT
+        export JAVA_HOME="/etc/alternatives/jre"
+        PYSPARK_DRIVER_PYTHON="/home/hadoop/miniconda3/bin/jupyter" PYSPARK_DRIVER_PYTHON_OPTS="lab --log-level=ERROR" PYSPARK_PYTHON=/home/hadoop/miniconda3/bin/python pyspark
+    BASH_SCRIPT
+
+end script
+EOF
+
+sudo mv /home/hadoop/jupyter.conf /etc/init/
+sudo chown root:root /etc/init/jupyter.conf
+
+sudo initctl reload-configuration
+
+    # start jupyter daemon
+    echo "Starting Jupyter Daemon"
+    sudo initctl start jupyter
+
+    cd $HOME
+
+    aws s3 cp s3://lkdljflsdkjf-dev-datascience/Dari/tools/4r8x-spark-defaults.conf spark-defaults.conf
+
+    # generate ctags for all modules accessible to the current python installation
+    cat <<EOF > ~/.inputrc
+# set the autocomplete of readline to ignore case when tab completing
+set completion-ignore-case On
+"\e[A": history-search-backward            # arrow up
+"\e[B": history-search-forward             # arrow down
+EOF
+
+sudo initctl restart jupyter
+
+fi

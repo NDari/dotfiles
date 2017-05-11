@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+iid=""
+ip=10.130.23.236
+pemfile=""
+aws ec2 start-instances --instance-ids $iid
+lsof -i tcp:8157 | awk 'NR!=1 {print $2}' | xargs kill
