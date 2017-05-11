@@ -1,55 +1,49 @@
-"Vundle settings. The command to install it is:
-"git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.local/share/nvim/plugged')
 
 "Add the needed bundles. Note that the first one must be vundle itself.
 " General
-Plugin 'gmarik/vundle'
-Plugin 'posva/vim-vue'
-Plugin 'justinmk/vim-sneak'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-endwise'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'w0rp/ale'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'tpope/vim-commentary'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'christoomey/vim-system-copy'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdtree'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'slashmili/alchemist.vim'
+Plug 'gmarik/vundle'
+Plug 'posva/vim-vue'
+Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-fugitive'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'w0rp/ale'
+Plug 'Lokaltog/vim-powerline'
+Plug 'tpope/vim-commentary'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-system-copy'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'jnurmine/Zenburn'
+Plug 'altercation/vim-colors-solarized'
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdtree'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
 
 " ctags
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " nofrills
-Plugin 'robertmeta/nofrils'
+Plug 'robertmeta/nofrils'
 
 " Go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " HTML/Handlebars
-Plugin 'mattn/emmet-vim'
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'mattn/emmet-vim'
+Plug 'mustache/vim-mustache-handlebars'
 
-" put filetype back on after all vundle stuff
+" Initialize plugin system
+call plug#end()
+
 filetype plugin indent on
 set exrc
 set secure
@@ -164,6 +158,21 @@ colorscheme solarized
 " Set mouse behavior to be more normal
 set mouse=a
 
+" deoplete.
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+set isfname-==
+" remove the scractch window automaticallly
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
 " Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -211,37 +220,6 @@ vnoremap < <gv
 
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
-
-" neoComplete
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" neoSnippets
-" expand snippet with control k, jump to next point with tab
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " ctrlP
 " ignore files in the .gitignore
