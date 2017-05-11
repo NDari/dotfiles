@@ -33,9 +33,6 @@ Plug 'slashmili/alchemist.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
-" nofrills
-Plug 'robertmeta/nofrils'
-
 " Go
 Plug 'fatih/vim-go'
 
@@ -137,11 +134,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-
-" nofrills settings
-" let g:nofrils_strbackgrounds=1
-" let g:nofrils_heavycomments=1
-" let g:nofrils_heavylinenumbers=1
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in."
