@@ -96,12 +96,12 @@ set showmode
 set showcmd
 
 " set one location for all the swap and backup files
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swp//
+set backupdir=~/.config/nvim/backup//
+set directory=~/.config/nvim/swp//
 
 " enable persistent undo
 set undofile
-set undodir=~/.vim/undodir//
+set undodir=~/.config/nvim/undodir//
 
 " add c++ includes to the path for automatic definition jumps
 set path +=/usr/include/c++/**
