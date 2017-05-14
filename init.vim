@@ -31,6 +31,9 @@ Plug 'slashmili/alchemist.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+
 " Go
 Plug 'fatih/vim-go'
 Plug 'jodosha/vim-godebug'
@@ -209,6 +212,7 @@ let g:ale_linters = {
 \   'go': ['goimports', 'go vet', 'golint', 'go build'],
 \   'ruby': ['rubocop'],
 \   'cpp': ['clang++'],
+\   'dart': ['dartanalyzer'],
 \}
 
 let g:ale_lint_on_save = 1

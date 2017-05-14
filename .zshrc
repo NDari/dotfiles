@@ -66,57 +66,38 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# manually set language environment
+export LANG=en_US.UTF-8
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 #### Go stuff
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/golib:$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=$GOBIN:$GOROOT/bin:$PATH
+
+# rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
+
+# Add cargo install path to $PATH
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# add personal bin to path
 export PATH=$HOME/bin:$PATH
+PATH=$HOME/google-cloud-sdk/bin:$PATH
 
-export EDITOR=/usr/local/bin/vim
-
-# turn dumb mode on for terminals in emacs
-if [[ $TERM = dumb ]]; then
-  unset zle_bracketed_paste
-fi
-
-# emacs with no window
-alias e="emacs --no-window-system"
+# set editor to neovim
+export EDITOR=`which nvim`
+alias e='nvim'
 
 alias python='python3'
 
-PATH=$HOME/google-cloud-sdk/bin:$PATH
-
 DEFAULT_USER=naseer
+
 # alias for lewis4
 LW=ndari@lewis4.rnet.missouri.edu
