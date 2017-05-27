@@ -101,3 +101,6 @@ DEFAULT_USER=naseer
 
 # alias for lewis4
 LW=ndari@lewis4.rnet.missouri.edu
+
+# kotlin native
+export PATH=$PATH:$HOME/src/kotlin-native/dist/bin

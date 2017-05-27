@@ -27,6 +27,7 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+Plug 'posva/vim-vue'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -74,6 +75,9 @@ set smartcase
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" use tags files
+set tags=./tags;/
 
 " make vim's clipboard to be the same as the system's clipboard
 set clipboard=unnamed
@@ -251,9 +255,8 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " quick buffer switching
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr>
+map <leader>n gb
+map <leader>p gB
 
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
