@@ -36,6 +36,9 @@ Plug 'xolox/vim-easytags'
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
 
+" Kotlin
+Plug 'udalov/kotlin-vim'
+
 " Go
 Plug 'fatih/vim-go'
 Plug 'jodosha/vim-godebug'
