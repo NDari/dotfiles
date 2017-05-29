@@ -1,0 +1,14 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "window.zoomLevel": 0,
+    "editor.lineNumbers": "relative",
+    "editor.tabCompletion": true,
+    "vim.leader": ",",
+    "vim.enableNeovim": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.easymotion": true,
+    "vim.easymotionMarkerBackgroundColor": "#FFFFFFF",
+    "workbench.colorTheme": "Solarized Light",
+}
