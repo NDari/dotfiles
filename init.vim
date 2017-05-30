@@ -257,7 +257,7 @@ let mapleader=","
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" quick buffer switching
+" quick buffer switching with buffergator
 map <leader>n gb
 map <leader>p gB
 

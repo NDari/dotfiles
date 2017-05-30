@@ -94,10 +94,11 @@ PATH=$HOME/google-cloud-sdk/bin:$PATH
 # set editor to neovim
 export EDITOR=`which nvim`
 alias e='nvim'
+alias vim='e'
 
 alias python='python3'
 
-DEFAULT_USER=naseer
+DEFAULT_USER=nadari
 
 # alias for lewis4
 LW=ndari@lewis4.rnet.missouri.edu
