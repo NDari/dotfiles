@@ -66,6 +66,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# vim mode
+bindkey -v
+
 export MANPATH="/usr/local/man:$MANPATH"
 
 # manually set language environment
