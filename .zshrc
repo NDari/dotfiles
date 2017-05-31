@@ -78,10 +78,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR=`which nvim`
 alias e='nvim'
 alias vim='e'
-
 alias python='python3'
+alias gpo='gp --set-upstream origin ${git_current_branch}'
 
 DEFAULT_USER=`whoami`
 
 # kotlin native
 export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
+
+
