@@ -28,6 +28,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'posva/vim-vue'
+Plug 'Numkil/ag.nvim'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -59,6 +60,10 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+
+"  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
+set timeoutlen=1000
+set ttimeoutlen=0
 
 " highlight current line
 set cursorline
@@ -161,6 +166,9 @@ colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
+
+" ag settings
+let g:ag_working_path_mode="r" "always go up to project root instead of cwdj
 
 " Terminal navigation function
 " Make ctrl-h/j/k/l move between windows and auto-insert in terminals

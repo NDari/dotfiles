@@ -55,6 +55,9 @@ export MANPATH="/usr/local/man:$MANPATH"
 # manually set language environment
 export LANG=en_US.UTF-8
 
+# 10ms for key sequences
+KEYTIMEOUT=1
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
