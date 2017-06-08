@@ -39,7 +39,6 @@ plugins=(git
          rake
          ruby
          osx
-         rails
          vim
          history-substring-search)
 
@@ -79,7 +78,7 @@ export EDITOR=`which nvim`
 alias e='nvim'
 alias vim='e'
 alias python='python3'
-alias gpo='gp --set-upstream origin ${git_current_branch}'
+alias gpo='gp --set-upstream origin `git_current_branch`'
 
 DEFAULT_USER=`whoami`
 

@@ -12,6 +12,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
+Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'w0rp/ale'
@@ -28,7 +29,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'posva/vim-vue'
-Plug 'Numkil/ag.nvim'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -160,15 +160,12 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=dark
+set background=light
 syntax on
 colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
-
-" ag settings
-let g:ag_working_path_mode="r" "always go up to project root instead of cwdj
 
 " Terminal navigation function
 " Make ctrl-h/j/k/l move between windows and auto-insert in terminals
@@ -191,6 +188,12 @@ endfunc
 for dir in ["h", "j", "l", "k"]
     call s:mapMoveToWindowInDirection(dir)
 endfor
+
+" ack.vim
+" Use ripgrep for ack.vim if exists
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
+endif
 
 " deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -253,8 +256,13 @@ let g:sneak#s_next = 1
 " ctrlP
 " ignore files in the .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-if executable("ack")
-  set grepprg=ack\ --nogroup\ --nocolor
+
+" use ripgrep for grepping (brew install ripgrep)
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
 endif
 let g:ctrlp_show_hidden = 1
 
