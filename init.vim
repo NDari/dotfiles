@@ -162,7 +162,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=light
 syntax on
-colorscheme solarized
+colorscheme morning
 
 " Set mouse behavior to be more normal
 set mouse=a
