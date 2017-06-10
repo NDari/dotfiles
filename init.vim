@@ -160,34 +160,12 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=light
+set background=dark
 syntax on
-colorscheme morning
+colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
-
-" Terminal navigation function
-" Make ctrl-h/j/k/l move between windows and auto-insert in terminals
-func! s:mapMoveToWindowInDirection(direction)
-    func! s:maybeInsertMode(direction)
-        stopinsert
-        execute "wincmd" a:direction
-
-        if &buftype == 'terminal'
-            startinsert!
-        endif
-    endfunc
-
-    execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
-                \ "<C-\\><C-n>"
-                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
-    execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
-                \ ":call <SID>maybeInsertMode(\"" . a:direction . "\")<CR>"
-endfunc
-for dir in ["h", "j", "l", "k"]
-    call s:mapMoveToWindowInDirection(dir)
-endfor
 
 " ack.vim
 " Use ripgrep for ack.vim if exists

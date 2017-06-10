@@ -85,4 +85,6 @@ DEFAULT_USER=`whoami`
 # kotlin native
 export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
 
-
+# cambrian stuff
+export CB=$HOME/Projects/cambrian/common-core
+export CBPLATFORM="$CB/build-system/scripts/cb-environment.sh"
