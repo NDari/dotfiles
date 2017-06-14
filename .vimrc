@@ -1,53 +1,57 @@
-"Vundle settings. The command to install it is:
-"git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
 "Add the needed bundles. Note that the first one must be vundle itself.
 " General
-Plugin 'gmarik/vundle'
-Plugin 'posva/vim-vue'
-Plugin 'justinmk/vim-sneak'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-endwise'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'w0rp/ale'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'tpope/vim-commentary'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'christoomey/vim-system-copy'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdtree'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'slashmili/alchemist.vim'
+Plug 'justinmk/vim-sneak'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-commentary'
+
+Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'w0rp/ale'
+
+Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-system-copy'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdtree'
+Plug 'Lokaltog/vim-powerline'
+Plug 'mileszs/ack.vim'
+
+Plug 'altercation/vim-colors-solarized'
 
 " ctags
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " nofrills
-Plugin 'robertmeta/nofrils'
+Plug 'robertmeta/nofrils'
 
 " Go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
+" Plug 'jodosha/vim-godebug'
 
 " HTML/Handlebars
-Plugin 'mattn/emmet-vim'
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'mattn/emmet-vim'
+Plug 'mustache/vim-mustache-handlebars'
+
+" end plugin definitions
+call plug#end()
 
 " put filetype back on after all vundle stuff
 filetype plugin indent on
@@ -59,6 +63,14 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+
+"  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" set font and size for macvim
+set guifont=Consolas:h14
+set guioptions=
 
 " highlight current line
 set cursorline
@@ -74,10 +86,13 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" when opening a file, to the the line from last session
+" when opening a file, to the line from last session
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" use tags files
+set tags=./.tags;/
 
 " make vim's clipboard to be the same as the system's clipboard
 set clipboard=unnamed
@@ -142,11 +157,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-" nofrills settings
-" let g:nofrils_strbackgrounds=1
-" let g:nofrils_heavycomments=1
-" let g:nofrils_heavylinenumbers=1
-
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in."
 nnoremap n nzzzv
@@ -157,12 +167,18 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=light
+set background=dark
 syntax on
 colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
+
+" ack.vim
+" Use ripgrep for ack.vim if exists
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
+endif
 
 " Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -246,8 +262,13 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " ctrlP
 " ignore files in the .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-if executable("ack")
-  set grepprg=ack\ --nogroup\ --nocolor
+
+" use ripgrep for grepping (brew install ripgrep)
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
 endif
 let g:ctrlp_show_hidden = 1
 
@@ -258,10 +279,9 @@ let mapleader=","
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" quick buffer switching
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr>
+" quick buffer switching with buffergator
+map <leader>n gb
+map <leader>p gB
 
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
