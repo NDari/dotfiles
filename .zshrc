@@ -85,6 +85,12 @@ DEFAULT_USER=`whoami`
 # kotlin native
 export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
 
+# MSTS stuff
+export rw=$HOME/Projects/red-wing
+export rwc=$rw/api/core
+export rwv=$rw/api/voucher
+export rwt=$rw/api/trx
+
 # cambrian stuff
 export CB=$HOME/Projects/cambrian/common-core
 export CBPLATFORM="$CB/build-system/scripts/cb-environment.sh"
