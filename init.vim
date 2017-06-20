@@ -3,7 +3,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 "Add the needed bundles. Note that the first one must be vundle itself.
 " General
 Plug 'gmarik/vundle'
-Plug 'posva/vim-vue'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -22,13 +21,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-system-copy'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'posva/vim-vue'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -48,6 +43,11 @@ Plug 'jodosha/vim-godebug'
 Plug 'mattn/emmet-vim'
 Plug 'mustache/vim-mustache-handlebars'
 
+" C/C++
+Plug 'osyo-manga/vim-snowdrop'
+Plug 'osyo-manga/vim-marching'
+Plug 'octol/vim-cpp-enhanced-highlight'
+
 " Initialize plugin system
 call plug#end()
 
@@ -56,9 +56,9 @@ set exrc
 set secure
 set autoindent
 set copyindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
@@ -121,6 +121,9 @@ set undodir=~/.config/nvim/undodir//
 
 " add c++ includes to the path for automatic definition jumps
 set path +=/usr/include/c++/**
+set path +=/usr/local/include/c++/**
+set path +=/usr/local/Cellar/boost/1.64.0_1/include/
+
 
 " dictionary settings
 set spell spelllang=en_us
@@ -190,10 +193,6 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-" and 4 for Go and Cpp
-autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType cpp setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
