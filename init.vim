@@ -11,6 +11,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-unimpaired'
 Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -24,6 +25,10 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
+Plug 'wellle/targets.vim'
+Plug 'mhinz/vim-grepper'
+Plug 'sheerun/vim-polyglot'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -152,6 +157,13 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+" vimgrepper
+let g:grepper = {}
+runtime autoload/grepper.vim
+let g:grepper.jump = 1
+let g:grepper.stop = 500
+noremap <leader>gr :GrepperRg<Space>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in."
