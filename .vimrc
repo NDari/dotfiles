@@ -78,8 +78,11 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " set font and size for macvim
-set guifont=Consolas:h14
-set guioptions=
+if has("gui")
+  set macligatures
+  set guifont=Fira\ Code:h12
+  set guioptions=
+endif
 
 " highlight current line
 set cursorline
