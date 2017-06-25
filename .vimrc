@@ -33,7 +33,6 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree'
 Plug 'Lokaltog/vim-powerline'
 Plug 'mileszs/ack.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'sheerun/vim-polyglot'
@@ -185,7 +184,7 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=dark
+set background=light
 syntax on
 colorscheme solarized
 
