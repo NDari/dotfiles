@@ -59,6 +59,9 @@ Plug 'osyo-manga/vim-snowdrop'
 Plug 'osyo-manga/vim-marching'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+" rust
+Plug 'rust-lang/rust.vim'
+
 " end plugin definitions
 call plug#end()
 
