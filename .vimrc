@@ -143,6 +143,8 @@ set undodir=~/.vim/undodir//
 
 " add c++ includes to the path for automatic definition jumps
 set path +=/usr/include/c++/**
+set path +=/usr/local/include/c++/**
+set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
 set spell spelllang=en_us
