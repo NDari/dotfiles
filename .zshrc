@@ -75,8 +75,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # set editor to neovim
 export EDITOR=`which nvim`
-alias e='mvim -v'
-alias vim='mvim'
+alias e='nvim'
+alias vim='e'
 alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 

@@ -177,8 +177,6 @@ let g:grepper = {}
 runtime autoload/grepper.vim
 let g:grepper.jump = 1
 let g:grepper.stop = 500
-noremap <leader>gr :GrepperRg<Space>
-
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in."
@@ -297,6 +295,9 @@ let g:ctrlp_show_hidden = 1
 
 " set leader,
 let mapleader=","
+
+" map the ripgrep grepper
+noremap <leader>gr :GrepperRg<Space>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>

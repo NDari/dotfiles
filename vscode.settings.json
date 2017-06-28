@@ -11,4 +11,8 @@
     "vim.easymotion": true,
     "vim.easymotionMarkerBackgroundColor": "#FFFFFFF",
     "workbench.colorTheme": "Solarized Light",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "Fire Code for powerline",
 }
