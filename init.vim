@@ -1,34 +1,42 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-"Add the needed bundles. Note that the first one must be vundle itself.
 " General
-Plug 'gmarik/vundle'
 Plug 'justinmk/vim-sneak'
-Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
-Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'w0rp/ale'
-Plug 'Lokaltog/vim-powerline'
 Plug 'tpope/vim-commentary'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-system-copy'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'sheerun/vim-polyglot'
+Plug 'Valloric/ListToggle'
+
+" linting
+Plug 'w0rp/ale'
+
+" looks
+Plug 'flazz/vim-colorschemes'
+Plug 'Lokaltog/vim-powerline'
+
+" nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
+
+" git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" searching
+Plug 'mileszs/ack.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " ctags
 Plug 'xolox/vim-misc'
@@ -174,7 +182,7 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=light
+set background=dark
 syntax on
 colorscheme solarized
 
@@ -212,22 +220,6 @@ autocmd VimEnter * source $MYVIMRC
 set splitbelow
 set splitright
 
-" Ale settings
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['pylint'],
-\   'go': ['goimports', 'go vet', 'golint', 'go build'],
-\   'ruby': ['rubocop'],
-\   'cpp': ['clang++'],
-\   'dart': ['dartanalyzer'],
-\}
-
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 1
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
-
 " better highlighting for c++ classes
 let g:cpp_class_scope_highlight = 1
 
@@ -254,12 +246,21 @@ if executable('rg')
 endif
 let g:ctrlp_show_hidden = 1
 
+" split term settings
+let g:split_term_vertical = 1
+let g:disable_key_mappings = 1
+
 " set leader,
 let mapleader=","
 
-
 " map the ripgrep grepper
 noremap <leader>gr :GrepperRg<Space>
+
+" toggle quick and location lists
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+" and set their height to 10
+let g:lt_height = 10
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
