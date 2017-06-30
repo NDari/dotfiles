@@ -200,13 +200,17 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>2382 222 756 94 1920 0 1920 1080 </string>
+	<string>142 402 756 94 0 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2609 582 796 473 1920 0 1920 1080 </string>
+	<string>2609 566 796 473 1920 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2035 75 1550 942 1920 0 1920 1058 </string>
+	<string>2 79 1340 799 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>488 289 570 452 0 0 1440 877 </string>
+	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -773,11 +777,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>UbuntuMonoDerivativePowerline-Bold 14</string>
+			<string>FiraMonoForPowerline-Medium 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>DejaVuSansMonoForPowerline 12</string>
+			<string>FiraMonoForPowerline-Medium 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -906,7 +910,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-19T14:00:25Z</date>
+	<date>2017-06-28T12:35:15Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
