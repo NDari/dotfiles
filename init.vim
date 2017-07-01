@@ -182,7 +182,7 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=dark
+set background=light
 syntax on
 colorscheme solarized
 

@@ -70,8 +70,10 @@ export PATH=$GOBIN:$GOROOT/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 
-# Add cargo install path to $PATH
+# Rust stuff
 export PATH="$HOME/.cargo/bin:$PATH"
+# for racer to work. Must get rust source with "rustup component add rust-src"
+export RUST_SRC_PATH=`rustc --print sysroot`/lib/rustlib/src/rust/src
 
 # set editor to neovim
 export EDITOR=`which nvim`
