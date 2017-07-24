@@ -250,9 +250,6 @@ let g:ctrlp_show_hidden = 1
 let g:split_term_vertical = 1
 let g:disable_key_mappings = 1
 
-" set leader,
-let mapleader=","
-
 " map the ripgrep grepper
 noremap <leader>gr :GrepperRg<Space>
 
