@@ -25,6 +25,7 @@ Plug 'w0rp/ale'
 " looks
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
+Plug 'robertmeta/nofrils'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
@@ -184,7 +185,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme solarized
+colorscheme nofrils-dark
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -249,6 +250,9 @@ let g:ctrlp_show_hidden = 1
 " split term settings
 let g:split_term_vertical = 1
 let g:disable_key_mappings = 1
+
+" set leader,
+let mapleader=" "
 
 " map the ripgrep grepper
 noremap <leader>gr :GrepperRg<Space>
