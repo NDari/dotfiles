@@ -81,6 +81,7 @@ alias e='nvim'
 alias vim='e'
 alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
+alias c='clear'
 
 DEFAULT_USER=`whoami`
 

@@ -140,11 +140,11 @@ set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBad
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBad
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -183,9 +183,9 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=dark
+set background=light
 syntax on
-colorscheme nofrils-dark
+colorscheme nofrils-light
 
 " Set mouse behavior to be more normal
 set mouse=a
