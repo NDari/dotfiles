@@ -173,6 +173,11 @@ runtime autoload/grepper.vim
 let g:grepper.jump = 1
 let g:grepper.stop = 500
 
+" nofrils settings
+let g:nofrils_heavylinenumbers=1
+let g:nofrils_strbackgrounds=1
+let g:nofrils_heavycomments=0
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in."
 nnoremap n nzzzv
