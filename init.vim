@@ -31,6 +31,9 @@ Plug 'robertmeta/nofrils'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 
+" erb object viE == select in Erb
+Plug 'whatyouhide/vim-textobj-erb'
+
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -221,6 +224,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2

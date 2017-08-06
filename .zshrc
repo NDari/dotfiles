@@ -82,6 +82,7 @@ alias vim='e'
 alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
+alias enw='emacs -nw'
 
 DEFAULT_USER=`whoami`
 
@@ -106,4 +107,11 @@ export PATH=$PATH:$ANDROID_SDK/platform-tools
 export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
 export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
 
+# automatically add ssh agent on login.
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
 
+# and kill it on logout
+trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
