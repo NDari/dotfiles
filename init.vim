@@ -62,8 +62,14 @@ Plug 'osyo-manga/vim-snowdrop'
 Plug 'osyo-manga/vim-marching'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+" lisp
+Plug 'vim-scripts/Limp'
+
 " Initialize plugin system
 call plug#end()
+
+" source the file on init
+autocmd VimEnter * source $MYVIMRC
 
 filetype plugin indent on
 set exrc
@@ -219,9 +225,6 @@ autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
-" source the file on init
-autocmd VimEnter * source $MYVIMRC
-
 " Make splits open naturally
 set splitbelow
 set splitright
@@ -257,7 +260,7 @@ let g:split_term_vertical = 1
 let g:disable_key_mappings = 1
 
 " set leader,
-let mapleader=" "
+let mapleader=","
 
 " map the ripgrep grepper
 noremap <leader>gr :GrepperRg<Space>
