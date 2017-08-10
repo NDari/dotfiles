@@ -199,7 +199,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=light
 syntax on
-colorscheme nofrils-light
+colorscheme nofrils-dark
 
 " Set mouse behavior to be more normal
 set mouse=a
