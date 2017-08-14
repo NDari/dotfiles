@@ -94,6 +94,8 @@ export rw=$HOME/Projects/red-wing
 export rwc=$rw/api/core
 export rwv=$rw/api/voucher
 export rwt=$rw/api/trx
+export uat1="nadari@opwcs11.multiservice.com"
+export uat2="nadari@opwcs12.multiservice.com"
 
 # cambrian stuff
 export CB=$HOME/Projects/cambrian/common-core
