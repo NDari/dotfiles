@@ -18,6 +18,7 @@ Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'sheerun/vim-polyglot'
 Plug 'Valloric/ListToggle'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " linting
 Plug 'w0rp/ale'
@@ -26,13 +27,11 @@ Plug 'w0rp/ale'
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
 Plug 'robertmeta/nofrils'
+Plug 'liuchengxu/space-vim-dark'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
-
-" erb object viE == select in Erb
-Plug 'whatyouhide/vim-textobj-erb'
 
 " git
 Plug 'airblade/vim-gitgutter'
@@ -197,9 +196,10 @@ au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 set t_Co=256
-set background=light
+set background=dark
 syntax on
-colorscheme nofrils-dark
+colorscheme space-vim-dark
+hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a

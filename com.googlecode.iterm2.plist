@@ -165,7 +165,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Movies</string>
+	<string>~/tools/iterm</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -200,13 +200,19 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>142 402 756 94 0 0 1920 1080 </string>
+	<string>2632 167 850 206 1920 0 1920 1080 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>2189 139 606 456 1920 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2609 566 796 473 1920 0 1920 1080 </string>
+	<string>689 565 796 473 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2 79 1340 799 0 0 1440 878 </string>
+	<string>2119 94 1483 964 1920 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>488 289 570 452 0 0 1440 877 </string>
+	<string>1922 0 1915 1077 1920 0 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>2167 112 1550 942 1920 0 1920 1058 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>2188 80 1554 1000 1920 0 1920 1080 </string>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1_selection</key>
@@ -852,6 +858,10 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>A532B957-60BC-4CD8-8863-8343F81E15E1</string>
+	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux</key>
+	<true/>
+	<key>NoSyncNewWindowOrTabFromTmuxOpensTmux_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -910,19 +920,21 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-28T12:35:15Z</date>
+	<date>2017-08-15T20:48:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<true/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.59999999999999998</real>
 	<key>SwitchPaneModifier</key>
-	<integer>4</integer>
-	<key>SwitchTabModifier</key>
 	<integer>5</integer>
+	<key>SwitchTabModifier</key>
+	<integer>4</integer>
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>TabViewType</key>
