@@ -91,11 +91,14 @@ export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
 
 # MSTS stuff
 export rw=$HOME/Projects/red-wing
-export rwc=$rw/api/core
-export rwv=$rw/api/voucher
-export rwt=$rw/api/trx
+export rwa=$rw/api
+export rwc=$rwa/core
+export rwv=$rwa/voucher
+export rwt=$rwa/trx
 export uat1="nadari@opwcs11.multiservice.com"
 export uat2="nadari@opwcs12.multiservice.com"
+export prod1="nadari@opwcs21.multiservice.com"
+export prod2="nadari@opwcs22.multiservice.com"
 
 # cambrian stuff
 export CB=$HOME/Projects/cambrian/common-core

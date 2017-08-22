@@ -27,7 +27,6 @@ Plug 'w0rp/ale'
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
 Plug 'robertmeta/nofrils'
-Plug 'liuchengxu/space-vim-dark'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
@@ -198,8 +197,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme space-vim-dark
-hi Comment cterm=italic
+colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -273,7 +271,7 @@ noremap <leader>gr :GrepperRg<Space>
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 " and set their height to 10
-let g:lt_height = 10
+let g:lt_height = 15
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
