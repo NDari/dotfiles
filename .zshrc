@@ -99,6 +99,7 @@ export uat1="nadari@opwcs11.multiservice.com"
 export uat2="nadari@opwcs12.multiservice.com"
 export prod1="nadari@opwcs21.multiservice.com"
 export prod2="nadari@opwcs22.multiservice.com"
+export opdev="nadari@opdev04.multiservice.com"
 
 # cambrian stuff
 export CB=$HOME/Projects/cambrian/common-core

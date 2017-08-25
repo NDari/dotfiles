@@ -27,6 +27,7 @@ Plug 'w0rp/ale'
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
 Plug 'robertmeta/nofrils'
+Plug 'liuchengxu/space-vim-dark'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
@@ -197,7 +198,8 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme solarized
+colorscheme space-vim-dark
+hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a
