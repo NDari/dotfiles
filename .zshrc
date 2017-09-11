@@ -113,6 +113,9 @@ export PATH=$PATH:$ANDROID_SDK/platform-tools
 export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
 export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
 
+# UMKC stuff
+export lw='ndari@lewis4.rnet.missouri.edu'
+
 # automatically add ssh agent on login.
 # if [ -z "$SSH_AUTH_SOCK" ] ; then
 #   eval `ssh-agent -s`
