@@ -79,10 +79,13 @@ export RUST_SRC_PATH=`rustc --print sysroot`/lib/rustlib/src/rust/src
 export EDITOR=`which nvim`
 alias e='nvim'
 alias vim='e'
+
+# system aliases
 alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
 alias enw='emacs -nw'
+alias less='less -R' # pass escape chars through
 
 DEFAULT_USER=`whoami`
 
@@ -100,6 +103,9 @@ export uat2="nadari@opwcs12.multiservice.com"
 export prod1="nadari@opwcs21.multiservice.com"
 export prod2="nadari@opwcs22.multiservice.com"
 export opdev="nadari@opdev04.multiservice.com"
+export bundle='bundle _1.10.5_'
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/oracle/instantclient_12_1
+export ORACLE_HOME=/opt/oracle/instantclient_12_1
 
 # cambrian stuff
 export CB=$HOME/Projects/cambrian/common-core
