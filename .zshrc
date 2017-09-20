@@ -57,6 +57,9 @@ export LANG=en_US.UTF-8
 # 10ms for key sequences
 KEYTIMEOUT=1
 
+# do not save duplicate commands in history
+export HISTCONTROL=ignoreboth:erasedups
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
