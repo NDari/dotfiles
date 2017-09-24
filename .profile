@@ -245,3 +245,6 @@ source $HOME/.bash_profile
 
 # added by Anaconda3 4.3.1 installer
 export PATH="/Users/naseer/anaconda/bin:$PATH"
+
+# added by Anaconda3 4.4.0 installer
+export PATH="/Users/naseer/anaconda/bin:$PATH"

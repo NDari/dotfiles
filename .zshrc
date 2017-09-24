@@ -126,12 +126,15 @@ export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
 export lw='ndari@lewis4.rnet.missouri.edu'
 
 # automatically add ssh agent on login.
-# if [ -z "$SSH_AUTH_SOCK" ] ; then
-#   eval `ssh-agent -s`
-#   ssh-add
-# fi
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
 
 # and kill it on logout
-# trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
+trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# anaconda
+export PATH=$HOME/anaconda/bin:$PATH
