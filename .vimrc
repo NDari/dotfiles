@@ -3,52 +3,60 @@ call plug#begin('~/.vim/plugged')
 "Add the needed bundles. Note that the first one must be vundle itself.
 " General
 Plug 'justinmk/vim-sneak'
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-
-Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
-
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'w0rp/ale'
-
-Plug 'nathanaelkane/vim-indent-guides'
-
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-unimpaired'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-system-copy'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'godlygeek/tabular'
-Plug 'scrooloose/nerdtree'
-Plug 'Lokaltog/vim-powerline'
-Plug 'mileszs/ack.vim'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'sheerun/vim-polyglot'
+Plug 'Valloric/ListToggle'
 
-Plug 'altercation/vim-colors-solarized'
+
+" linting
+Plug 'w0rp/ale'
+
+" looks
+Plug 'flazz/vim-colorschemes'
+Plug 'Lokaltog/vim-powerline'
+Plug 'robertmeta/nofrils'
+Plug 'liuchengxu/space-vim-dark'
+
+" nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
+
+" git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" searching
+Plug 'mileszs/ack.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " ctags
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
-" nofrills
-Plug 'robertmeta/nofrils'
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+
+" Kotlin
+Plug 'udalov/kotlin-vim'
 
 " Go
 Plug 'fatih/vim-go'
-" Plug 'jodosha/vim-godebug'
+Plug 'jodosha/vim-godebug'
 
 " HTML/Handlebars
 Plug 'mattn/emmet-vim'
@@ -58,6 +66,9 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'osyo-manga/vim-snowdrop'
 Plug 'osyo-manga/vim-marching'
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+" lisp
+Plug 'vim-scripts/Limp'
 
 " rust
 Plug 'rust-lang/rust.vim'

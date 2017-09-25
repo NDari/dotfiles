@@ -67,6 +67,9 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " lisp
 Plug 'vim-scripts/Limp'
 
+" rust
+Plug 'rust-lang/rust.vim'
+
 " Initialize plugin system
 call plug#end()
 
