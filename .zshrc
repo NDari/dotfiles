@@ -106,7 +106,7 @@ export uat2="nadari@opwcs12.multiservice.com"
 export prod1="nadari@opwcs21.multiservice.com"
 export prod2="nadari@opwcs22.multiservice.com"
 export opdev="nadari@opdev04.multiservice.com"
-export bundle='bundle _1.10.5_'
+alias bundle='bundle _1.10.5_'
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/oracle/instantclient_12_1
 export ORACLE_HOME=/opt/oracle/instantclient_12_1
 
