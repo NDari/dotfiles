@@ -289,6 +289,9 @@ map <leader>p gB
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
 
+" fuzzyfinder
+nnoremap <leader>e :FZF<cr>
+
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v
 
