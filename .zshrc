@@ -46,9 +46,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# vim mode
-bindkey -v
-
 export MANPATH="/usr/local/man:$MANPATH"
 
 # manually set language environment
@@ -87,8 +84,21 @@ alias vim='e'
 alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
+alias t='tree -C'
+alias t1='tree -L 1 -C'
+alias t2='tree -L 2 -C'
 alias enw='emacs -nw'
 alias less='less -R' # pass escape chars through
+
+# color for manpages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;0;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
 
 DEFAULT_USER=`whoami`
 
@@ -121,6 +131,11 @@ export ANDROID_NDK_ROOT=$ANDROID_NDK
 export PATH=$PATH:$ANDROID_SDK/platform-tools
 export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
 export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
+
+# cuda and cudann stuff
+export CUDA_HOME="/usr/local/cuda"
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
+export PATH="$CUDA_HOME/bin:$PATH"
 
 # UMKC stuff
 export lw='ndari@lewis4.rnet.missouri.edu'
