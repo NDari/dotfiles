@@ -11,14 +11,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-system-copy'
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'godlygeek/tabular'
 Plug 'wellle/targets.vim'
-Plug 'mhinz/vim-grepper'
 Plug 'sheerun/vim-polyglot'
 Plug 'Valloric/ListToggle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " linting
 Plug 'w0rp/ale'
@@ -37,38 +35,15 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-" searching
-Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-
 " ctags
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
-
-" Kotlin
-Plug 'udalov/kotlin-vim'
-
 " Go
-Plug 'fatih/vim-go'
 Plug 'jodosha/vim-godebug'
 
 " HTML/Handlebars
 Plug 'mattn/emmet-vim'
-Plug 'mustache/vim-mustache-handlebars'
-
-" C/C++
-Plug 'osyo-manga/vim-snowdrop'
-Plug 'osyo-manga/vim-marching'
-Plug 'octol/vim-cpp-enhanced-highlight'
-
-" lisp
-Plug 'vim-scripts/Limp'
-
-" rust
-Plug 'rust-lang/rust.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -178,12 +153,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-" vimgrepper
-let g:grepper = {}
-runtime autoload/grepper.vim
-let g:grepper.jump = 1
-let g:grepper.stop = 500
-
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
@@ -206,12 +175,6 @@ hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a
-
-" ack.vim
-" Use ripgrep for ack.vim if exists
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --no-heading'
-endif
 
 " deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -249,28 +212,44 @@ vnoremap < <gv
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
 
-" ctrlP
-" ignore files in the .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" use ripgrep for grepping (brew install ripgrep)
-if executable('rg')
-  let g:ctrlp_user_command = 'rg --files %s'
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_switch_buffer = 'et'
-endif
-let g:ctrlp_show_hidden = 1
-
 " split term settings
 let g:split_term_vertical = 1
 let g:disable_key_mappings = 1
 
+" fzf.vim settings
+"
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
 " set leader,
 let mapleader=","
 
-" map the ripgrep grepper
-noremap <leader>gr :GrepperRg<Space>
+" grep things
+noremap <leader>g :Find<Space>
+
+" show my my buffers with fzf
+noremap <leader>b :Buffers<CR>
+
+" show commits with fxf
+noremap <leader>c :BCommits<CR>
+
+" search files with fuzzy finder
+nnoremap <leader>e :Files<cr>
+
+" search files with fuzzy finder
+nnoremap <leader>t :Tags<cr>
+
+" search vim's file history with fuzzy finder
+nnoremap <leader>h :History<cr>
 
 " toggle quick and location lists
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -288,9 +267,6 @@ map <leader>p gB
 
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
-
-" fuzzyfinder
-nnoremap <leader>e :FZF<cr>
 
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v

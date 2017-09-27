@@ -142,12 +142,10 @@ export lw='ndari@lewis4.rnet.missouri.edu'
 
 # automatically add ssh agent on login.
 if [ -z "$SSH_AUTH_SOCK" ] ; then
+  echo "Found ssh socket file"
   eval `ssh-agent -s`
   ssh-add
 fi
-
-# and kill it on logout
-trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -158,6 +156,3 @@ trap 'test -n "$SSH_AUTH_SOCK" && eval `/usr/bin/ssh-agent -k`' 0
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-
-# anaconda
-export PATH=$HOME/anaconda/bin:$PATH
