@@ -149,10 +149,7 @@ fi
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# make ripgrep the default searcher for fzf
-# --files: List files that would be searched but do not search
+# make fd the default searcher for fzf
 # --no-ignore: Do not respect .gitignore, etc...
 # --hidden: Search hidden files and folders
-# --follow: Follow symlinks
-# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='fd --no-ignore --hidden'
