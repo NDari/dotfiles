@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " General
 Plug 'justinmk/vim-sneak'
+Plug 'rhysd/clever-f.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -222,6 +223,11 @@ vnoremap < <gv
 
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
+
+" make clever f only search across one line
+let g:clever_f_across_no_line = 1
+" use smart case
+let g:clever_f_ignore_case = 1
 
 " split term settings
 let g:split_term_vertical = 1
