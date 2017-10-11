@@ -228,6 +228,8 @@ let g:sneak#s_next = 1
 let g:clever_f_across_no_line = 1
 " use smart case
 let g:clever_f_ignore_case = 1
+" let ; be {, ( " % etc
+let g:clever_f_chars_match_any_signs = ";"
 
 " split term settings
 let g:split_term_vertical = 1
@@ -279,8 +281,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 
 " dont use escape key
 imap kj <Esc>
-
-nmap ; :
 
 " space for scolling down
 nn <space>  <c-d>
