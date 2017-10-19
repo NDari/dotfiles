@@ -3,31 +3,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 " General
 " movement
 Plug 'justinmk/vim-sneak'
-" make vim-sneak repeat with s
-let g:sneak#s_next = 1
 
 Plug 'rhysd/clever-f.vim'
-" make clever f only search across one line
-let g:clever_f_across_no_line = 1
-" use smart case
-let g:clever_f_ignore_case = 1
-" let ; be {, ( " % etc
-let g:clever_f_chars_match_any_signs = ";"
-
 
 " autocompletion. Requires python 3 and pip3 install neovim
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" deoplete settings
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" remove the scractch window automaticallly
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -58,19 +38,7 @@ Plug 'Valloric/ListToggle'
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" fzf.vim settings
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-
+"
 " linting
 Plug 'w0rp/ale'
 
@@ -100,6 +68,53 @@ Plug 'mattn/emmet-vim'
 
 " Initialize plugin system
 call plug#end()
+
+" Plugin configs
+
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" remove the scractch window automaticallly
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" fzf.vim settings
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+" vim-go settings
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+
+" make vim-sneak repeat with s
+let g:sneak#s_next = 1
+
+" make clever f only search across one line
+let g:clever_f_across_no_line = 1
+" use smart case
+let g:clever_f_ignore_case = 1
+" let ; be {, ( " % etc
+let g:clever_f_chars_match_any_signs = ";"
+
+" Vim configs
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
@@ -273,7 +288,7 @@ nnoremap <leader>h :History<cr>
 " toggle quick and location lists
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-" and set their height to 10
+" and set their height to 15
 let g:lt_height = 15
 
 " Quickly edit/reload the vimrc file
