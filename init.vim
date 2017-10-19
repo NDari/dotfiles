@@ -1,24 +1,75 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " General
+" movement
 Plug 'justinmk/vim-sneak'
+" make vim-sneak repeat with s
+let g:sneak#s_next = 1
+
 Plug 'rhysd/clever-f.vim'
+" make clever f only search across one line
+let g:clever_f_across_no_line = 1
+" use smart case
+let g:clever_f_ignore_case = 1
+" let ; be {, ( " % etc
+let g:clever_f_chars_match_any_signs = ";"
+
+
+" autocompletion. Requires python 3 and pip3 install neovim
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" remove the scractch window automaticallly
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
+
+" get ability to repear more complex tasks with .
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
+
+" commenting lines. gcc for current line, gc10j to comment 10 lines down
 Plug 'tpope/vim-commentary'
+
+" navigate between vim splits and tmux splits using ctrl-direction
 Plug 'christoomey/vim-tmux-navigator'
+
+" align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
-Plug 'wellle/targets.vim'
+
+" bunch of language specific plugins in one
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go'
+
+" toggle loc list with leader-l and quickfix with leader-q
 Plug 'Valloric/ListToggle'
+
+" enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" fzf.vim settings
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " linting
 Plug 'w0rp/ale'
@@ -123,7 +174,6 @@ set path +=/usr/include/c++/**
 set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
-
 " dictionary settings
 " set spell spelllang=en_us
 " hi clear SpellBad
@@ -144,14 +194,6 @@ set encoding=utf-8
 " set the number of lines when scrolling above displayed page
 set scrolloff=10
 
-" go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
-
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
@@ -162,6 +204,14 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'go': ['gometalinter', 'gofmt'],
 \}
+
+" vim-go settings
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 
 " Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
@@ -181,18 +231,6 @@ hi Comment cterm=italic
 " Set mouse behavior to be more normal
 set mouse=a
 
-" deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" remove the scractch window automaticallly
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 " Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -204,40 +242,12 @@ autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 set splitbelow
 set splitright
 
-" fzf.vim settings
-"
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-
 " allow transparency
 highlight Normal ctermbg=none
 
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
-
-" make vim-sneak repeat with s
-let g:sneak#s_next = 1
-
-" make clever f only search across one line
-let g:clever_f_across_no_line = 1
-" use smart case
-let g:clever_f_ignore_case = 1
-" let ; be {, ( " % etc
-let g:clever_f_chars_match_any_signs = ";"
-
-" split term settings
-let g:split_term_vertical = 1
-let g:disable_key_mappings = 1
 
 " set leader,
 let mapleader=","

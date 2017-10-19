@@ -28,6 +28,7 @@ Plug 'ajh17/VimCompletesMe'
 " looks
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
+Plug 'edkolev/tmuxline.vim'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 
