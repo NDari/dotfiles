@@ -1,9 +1,8 @@
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rails'
@@ -41,9 +40,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
-" Go
-Plug 'jodosha/vim-godebug'
-
 " HTML/Handlebars
 Plug 'mattn/emmet-vim'
 
@@ -59,6 +55,9 @@ set secure
 set autoindent
 set copyindent
 set expandtab
+
+" disable visual and audible bell
+set vb t_vb=
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -111,12 +110,12 @@ set showmode
 set showcmd
 
 " set one location for all the swap and backup files
-set backupdir=~/.config/nvim/backup//
-set directory=~/.config/nvim/swp//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swp//
 
 " enable persistent undo
 set undofile
-set undodir=~/.config/nvim/undodir//
+set undodir=~/.vim/undodir//
 
 " add c++ includes to the path for automatic definition jumps
 set path +=/usr/include/c++/**
@@ -175,23 +174,10 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme space-vim-dark
-hi Comment cterm=italic
+colorscheme solarized
 
 " Set mouse behavior to be more normal
 set mouse=a
-
-" deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" remove the scractch window automaticallly
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -205,7 +191,6 @@ set splitbelow
 set splitright
 
 " fzf.vim settings
-"
 " --column: Show column number
 " --line-number: Show line number
 " --no-heading: Do not show file headings in results
