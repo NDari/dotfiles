@@ -75,9 +75,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # for racer to work. Must get rust source with "rustup component add rust-src"
 export RUST_SRC_PATH=`rustc --print sysroot`/lib/rustlib/src/rust/src
 
-# set editor to neovim
-export EDITOR=`which nvim`
-alias e='nvim'
+# set editor stuff
+export EDITOR=`which vim`
+alias nv='nvim'
+alias e='vim'
 
 # system aliases
 alias python='python3'

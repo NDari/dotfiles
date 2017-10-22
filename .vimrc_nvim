@@ -22,6 +22,9 @@ Plug 'junegunn/fzf.vim'
 " linting
 Plug 'w0rp/ale'
 
+" completion using vim only
+Plug 'ajh17/VimCompletesMe'
+
 " looks
 Plug 'flazz/vim-colorschemes'
 Plug 'Lokaltog/vim-powerline'
