@@ -86,6 +86,12 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" settings for speed improvements
+set nocursorcolumn       " do not highlight column
+syntax sync minlines=100 " start highlighting from this many lines backwards
+set synmaxcol=120        " do not highlight very long lines
+set re=1                 " use explicit old regexpengine, seems to be more "
+
 " use tags files
 set tags=./tags;/
 
@@ -109,9 +115,6 @@ set autowrite
 
 " show the current mode
 set showmode
-
-" show me the command i am typing
-set showcmd
 
 " set one location for all the swap and backup files
 set backupdir=~/.vim/backup//
@@ -162,7 +165,6 @@ let g:nofrils_heavycomments=0
 
 " set up ale linters
 let g:ale_linters = {
-\   'javascript': ['eslint'],
 \   'go': ['gometalinter', 'gofmt'],
 \}
 
