@@ -165,7 +165,6 @@ let g:nofrils_heavycomments=0
 
 " set up ale linters
 let g:ale_linters = {
-\   'go': ['gometalinter', 'gofmt'],
 \}
 
 " Search mappings: These will make it so that going to the next item in a
@@ -191,6 +190,7 @@ autocmd FileType erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " Make splits open naturally
 set splitbelow
