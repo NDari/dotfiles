@@ -1,9 +1,13 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " General
-" movement
+
+" s + 2 characters to jump to anything with those two characters.
+" press s repeatedly to jump to next.
 Plug 'justinmk/vim-sneak'
 
+" replace normal f. now, pressing f repeatedly after a match will
+" take you to the next match in the line. matches are highlighted.
 Plug 'rhysd/clever-f.vim'
 
 " autocompletion. Requires python 3 and pip3 install neovim
@@ -14,9 +18,14 @@ Plug 'tpope/vim-surround'
 
 " get ability to repear more complex tasks with .
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
+
+" add "end" to things like ruby and fortran after a do and if.
 Plug 'tpope/vim-endwise'
+
+" navigate errors with ]q and [q, buffers with ]b and [b and much more.
 Plug 'tpope/vim-unimpaired'
+
+" auto-add closing braces of all kinds, and matching qoutes.
 Plug 'jiangmiao/auto-pairs'
 
 " commenting lines. gcc for current line, gc10j to comment 10 lines down
@@ -28,12 +37,19 @@ Plug 'christoomey/vim-tmux-navigator'
 " align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
 
-" bunch of language specific plugins in one
-Plug 'sheerun/vim-polyglot'
+" Go plugin. Do :GoInstallBinaries after this to install everything it needs.
 Plug 'fatih/vim-go'
 
-" toggle loc list with leader-l and quickfix with leader-q
-Plug 'Valloric/ListToggle'
+" Rust plugin. Use rustup. then
+" `rustup update` to get the latest.
+" `rustup toolchain install nightly` to install nightly
+" `rustup run nightly cargo install clippy` our linter
+" `cargo install rustfmt` for formatting
+" `cargo install racer` to get the docs
+Plug 'rust-lang/rust.vim'
+
+" enable web apis. Currently needed for rust's playpen
+Plug 'mattn/webapi-vim'
 
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -50,20 +66,23 @@ Plug 'liuchengxu/space-vim-dark'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
+
+" show the changed files in git in the nerdtree panel
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 
-" git
+" See git changes on the gutter
 Plug 'airblade/vim-gitgutter'
+
+" awesome git management with :G*
 Plug 'tpope/vim-fugitive'
 
-" ctags
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
-
-" Go
+" Debug go. Only works in neovim. Set breakpoints with :GoToggleBreakpoint and
+" debug with :GoDebug. Needs dlv installed.
 Plug 'jodosha/vim-godebug'
 
-" HTML/Handlebars
+" HTML/Handlebars. Generate things with writing the commands, then c-y , to
+" generate. For example li*5<c-y> , will generate 5 li for you with closing
+" tags.
 Plug 'mattn/emmet-vim'
 
 " Initialize plugin system
@@ -149,8 +168,15 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" use tags files
-set tags=./tags;/
+" settings for speed improvements
+set nocursorcolumn       " do not highlight column
+syntax sync minlines=100 " start highlighting from this many lines backwards
+set synmaxcol=120        " do not highlight very long lines
+set re=1                 " use explicit old regexpengine, seems to be more "
+
+" use tags files. search "tags" file in the current directory where vim was
+" opened, and if not found, keep going up until $HOME.
+set tags+=./tags,tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
 set clipboard=unnamed
@@ -190,11 +216,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBad
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+set spell spelllang=en_us
+hi clear SpellBad
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -214,12 +240,6 @@ let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
 let g:nofrils_heavycomments=0
 
-" set up ale linters
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'go': ['gometalinter', 'gofmt'],
-\}
-
 " vim-go settings
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -227,6 +247,10 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+" vim-rust settings
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'pbcopy'
 
 " Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
@@ -240,7 +264,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme space-vim-dark
+colorscheme gruvbox
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -252,6 +276,8 @@ autocmd FileType erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType rust setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " Make splits open naturally
 set splitbelow
@@ -285,19 +311,9 @@ nnoremap <leader>t :Tags<cr>
 " search vim's file history with fuzzy finder
 nnoremap <leader>h :History<cr>
 
-" toggle quick and location lists
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-" and set their height to 15
-let g:lt_height = 15
-
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" quick buffer switching with buffergator
-map <leader>n gb
-map <leader>p gB
 
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
