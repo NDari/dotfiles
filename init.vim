@@ -258,7 +258,8 @@ nnoremap N Nzzzv
 au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
-set t_Co=256
+" set t_Co=256
+set termguicolors
 set background=dark
 syntax on
 colorscheme gruvbox
