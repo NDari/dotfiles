@@ -42,8 +42,6 @@ Plug 'fatih/vim-go'
 
 " Rust plugin. Use rustup. then
 " `rustup update` to get the latest.
-" `rustup toolchain install nightly` to install nightly
-" `rustup run nightly cargo install clippy` our linter
 " `cargo install rustfmt` for formatting
 " `cargo install racer` to get the docs
 Plug 'rust-lang/rust.vim'
@@ -109,11 +107,10 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " --fixed-strings: Search term as a literal string
 " --ignore-case: Case insensitive search
 " --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " vim-go settings
 let g:go_highlight_functions = 1
@@ -176,7 +173,7 @@ set re=1                 " use explicit old regexpengine, seems to be more "
 
 " use tags files. search "tags" file in the current directory where vim was
 " opened, and if not found, keep going up until $HOME.
-set tags+=./tags,tags;$HOME
+set tags+=./.tags,.tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
 set clipboard=unnamed
