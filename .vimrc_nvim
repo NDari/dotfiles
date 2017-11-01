@@ -19,16 +19,17 @@ Plug 'Valloric/ListToggle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" deoplete
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/deoplete.nvim'
+
 " linting
 Plug 'w0rp/ale'
 
-" completion using vim only
-Plug 'ajh17/VimCompletesMe'
-
 " looks
 Plug 'flazz/vim-colorschemes'
-Plug 'Lokaltog/vim-powerline'
-Plug 'edkolev/tmuxline.vim'
+Plug 'powerline/powerline'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 
@@ -207,6 +208,18 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 
 " allow transparency
 highlight Normal ctermbg=none
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+" remove the scractch window automaticallly
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " retain highlighted section after indentation
 vnoremap > >gv

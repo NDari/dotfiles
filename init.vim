@@ -58,7 +58,7 @@ Plug 'w0rp/ale'
 
 " looks
 Plug 'flazz/vim-colorschemes'
-Plug 'Lokaltog/vim-powerline'
+Plug 'powerline/powerline'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 
@@ -226,8 +226,10 @@ set wildmode=list:longest
 set visualbell
 set ttyfast
 set backspace=indent,eol,start
-set laststatus=2
 set encoding=utf-8
+set laststatus=2 " Always display the statusline in all windows
+set showtabline=2 " Always display the tabline, even if there is only one tab
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
 set scrolloff=10
