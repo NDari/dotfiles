@@ -58,7 +58,9 @@ Plug 'w0rp/ale'
 
 " looks
 Plug 'flazz/vim-colorschemes'
-Plug 'powerline/powerline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 
