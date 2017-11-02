@@ -45,6 +45,7 @@ Plug 'fatih/vim-go'
 " `cargo install rustfmt` for formatting
 " `cargo install racer` to get the docs
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -141,7 +142,17 @@ let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 let g:lt_height = 15
 
+" vim-racer configs
+let g:racer_cmd = "$HOME/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+
 " Vim configs
+
+" rust specific key commands
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
