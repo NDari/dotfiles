@@ -22,11 +22,11 @@ Plug 'tpope/vim-repeat'
 " add "end" to things like ruby and fortran after a do and if.
 Plug 'tpope/vim-endwise'
 
-" navigate errors with ]q and [q, buffers with ]b and [b and much more.
-Plug 'tpope/vim-unimpaired'
-
 " auto-add closing braces of all kinds, and matching qoutes.
 Plug 'jiangmiao/auto-pairs'
+
+" open locationlist and quickfix with leader l and q
+Plug 'Valloric/ListToggle'
 
 " commenting lines. gcc for current line, gc10j to comment 10 lines down
 Plug 'tpope/vim-commentary'
@@ -45,9 +45,6 @@ Plug 'fatih/vim-go'
 " `cargo install rustfmt` for formatting
 " `cargo install racer` to get the docs
 Plug 'rust-lang/rust.vim'
-
-" enable web apis. Currently needed for rust's playpen
-Plug 'mattn/webapi-vim'
 
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -113,6 +110,8 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" tags command
+let g:fzf_tags_command = 'ctags -R'
 
 " vim-go settings
 let g:go_highlight_functions = 1
@@ -131,6 +130,16 @@ let g:clever_f_across_no_line = 1
 let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
 let g:clever_f_chars_match_any_signs = ";"
+
+" ale linters
+let g:ale_linters = {
+\  'rust': ['cargo']
+\}
+
+" configure loclist and quickfix list
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 15
 
 " Vim configs
 
@@ -230,7 +239,7 @@ set ttyfast
 set backspace=indent,eol,start
 set encoding=utf-8
 set laststatus=2 " Always display the statusline in all windows
-set showtabline=2 " Always display the tabline, even if there is only one tab
+" set showtabline=2 " Always display the tabline, even if there is only one tab
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
@@ -251,7 +260,6 @@ let g:go_fmt_command = "goimports"
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
-let g:rust_clip_command = 'pbcopy'
 
 " Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
