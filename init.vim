@@ -31,6 +31,9 @@ Plug 'Valloric/ListToggle'
 " commenting lines. gcc for current line, gc10j to comment 10 lines down
 Plug 'tpope/vim-commentary'
 
+" Dash integration (Mac only)
+Plug 'rizzatti/dash.vim'
+
 " navigate between vim splits and tmux splits using ctrl-direction
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -46,6 +49,7 @@ Plug 'fatih/vim-go'
 " `cargo install racer` to get the docs
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'timonv/vim-cargo'
 
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -112,7 +116,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 " tags command
-let g:fzf_tags_command = 'ctags -R'
+let g:fzf_tags_command = 'ctags -R -f .tags'
 
 " vim-go settings
 let g:go_highlight_functions = 1
@@ -331,6 +335,9 @@ nnoremap <leader>t :Tags<cr>
 
 " search vim's file history with fuzzy finder
 nnoremap <leader>h :History<cr>
+
+" search the thing under cursor with dash
+nnoremap <leader>d :Dash<cr>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
