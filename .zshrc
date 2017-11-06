@@ -149,7 +149,4 @@ fi
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# make fd the default searcher for fzf
-# --no-ignore: Do not respect .gitignore, etc...
-# --hidden: Search hidden files and folders
-export FZF_DEFAULT_COMMAND='fd --no-ignore --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --glob \!.git'
