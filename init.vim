@@ -56,7 +56,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "
 " linting
-Plug 'w0rp/ale'
+Plug 'vim-syntastic/syntastic'
 
 " looks
 Plug 'flazz/vim-colorschemes'
@@ -105,18 +105,12 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " fzf.vim settings
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_layout = { 'window': 'enew' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
 " vim-go settings
 let g:go_highlight_functions = 1
@@ -136,15 +130,23 @@ let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
 let g:clever_f_chars_match_any_signs = ";"
 
-" ale linters
-let g:ale_linters = {
-\  'rust': ['cargo']
-\}
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+" checkers
+let g:syntastic_rust_checkers = ['cargo']
+let g:syntastic_go_checkers = ['go', 'govet', 'golint', 'errcheck']
 
 " configure loclist and quickfix list
 let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-let g:lt_height = 15
+let g:lt_height = 10
 
 " vim-racer configs
 let g:racer_cmd = "$HOME/.cargo/bin/racer"
@@ -157,6 +159,8 @@ au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
@@ -319,7 +323,7 @@ vnoremap < <gv
 let mapleader=","
 
 " grep things
-noremap <leader>g :Find<Space>
+noremap <leader>g :Ag<CR>
 
 " show my my buffers with fzf
 noremap <leader>b :Buffers<CR>
