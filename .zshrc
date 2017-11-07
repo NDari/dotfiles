@@ -81,14 +81,19 @@ export EDITOR=`which nvim`
 alias e='nvim'
 
 # system aliases
-alias python='python3'
+# alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
-alias t='tree -C'
-alias t1='tree -L 1 -C'
-alias t2='tree -L 2 -C'
 alias enw='emacs -nw'
 alias less='less -R' # pass escape chars through
+alias tns='tmux new-session -s'
+s() {
+        rg -ip "$1" | less
+}
+
+t() {
+        tree -Caf -L ${1:-1} | less
+}
 
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
