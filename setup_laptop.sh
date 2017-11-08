@@ -32,15 +32,15 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
 set -e
 
-if [ ! -d "$HOME/.bin/" ]; then
-  mkdir "$HOME/.bin"
+if [ ! -d "$HOME/bin/" ]; then
+  mkdir "$HOME/bin"
 fi
 
 if [ ! -f "$HOME/.zshrc" ]; then
   touch "$HOME/.zshrc"
 fi
 
-append_to_zshrc 'export PATH="$HOME/.bin:$PATH"'
+append_to_zshrc 'export PATH="$HOME/bin:$PATH"'
 
 HOMEBREW_PREFIX="/usr/local"
 

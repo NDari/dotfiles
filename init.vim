@@ -322,10 +322,7 @@ vnoremap < <gv
 " set leader,
 let mapleader=","
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --no-heading '.shellescape(<q-args>), 1)
-noremap <leader>g :Rg<space>
+noremap <leader>g :Ag<space>
 
 " show my my buffers with fzf
 noremap <leader>b :Buffers<CR>
