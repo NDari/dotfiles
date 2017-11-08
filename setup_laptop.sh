@@ -72,12 +72,13 @@ if [ ! -d ".config/nvim" ]; then
   mkdir -p ".config/nvim"
 fi
 
-ln -s dotfiles/init.vim .config/nvim/
 ln -s dotfiles/.ctags
 ln -s dotfiles/.tmux.conf
 ln -s dotfiles/.zshrc
 ln -s dotfiles/.zlogout
 ln -s dotfiles/.inputrc
+cd .config/nvim
+ln -s ~/dotfiles/init.vim .
 
 
 
