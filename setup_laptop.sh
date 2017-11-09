@@ -68,6 +68,8 @@ esac
 
 cd $HOME
 
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
 if [ ! -d ".config/nvim" ]; then
   mkdir -p ".config/nvim"
 fi
