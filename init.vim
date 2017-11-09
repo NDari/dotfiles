@@ -1,7 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " General
-
 " s + 2 characters to jump to anything with those two characters.
 " press s repeatedly to jump to next.
 Plug 'justinmk/vim-sneak'
