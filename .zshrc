@@ -27,6 +27,10 @@ COMPLETION_WAITING_DOTS="true"
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# If a new command line being added to the history list duplicates an older one,
+# the older command is removed from the list (even if it is not the previous event).
+setopt HIST_IGNORE_ALL_DUPS
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -94,6 +98,8 @@ s() {
 t() {
         tree -Caf -L ${1:-1} | less
 }
+
+alias h='history | fzf'
 
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
