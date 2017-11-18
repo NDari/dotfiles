@@ -82,8 +82,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 #### Go stuff
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/golib:$HOME/go
-export GOBIN=$HOME/go/bin
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$GOROOT/bin:$PATH
 
 # rbenv

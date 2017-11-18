@@ -195,10 +195,10 @@ if has("autocmd")
 endif
 
 " settings for speed improvements
-set nocursorcolumn       " do not highlight column
-syntax sync minlines=100 " start highlighting from this many lines backwards
-set synmaxcol=120        " do not highlight very long lines
-set re=1                 " use explicit old regexpengine, seems to be more "
+" set nocursorcolumn       " do not highlight column
+" syntax sync minlines=100 " start highlighting from this many lines backwards
+" set synmaxcol=120        " do not highlight very long lines
+" set re=1                 " use explicit old regexpengine, seems to be more "
 
 " use tags files. search "tags" file in the current directory where vim was
 " opened, and if not found, keep going up until $HOME.
@@ -285,14 +285,14 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Delete trailing whitespace on save
-au BufWritePre *.* :%s/\s\+$//e
+" au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
-colorscheme gruvbox
+colorscheme solarized
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
