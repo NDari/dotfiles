@@ -242,11 +242,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBad
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBad
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -292,7 +292,7 @@ nnoremap N Nzzzv
 set termguicolors
 set background=light
 syntax on
-colorscheme solarized
+colorscheme space-vim-dark
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -338,6 +338,9 @@ nnoremap <leader>t :Tags<cr>
 " search vim's file history with fuzzy finder
 nnoremap <leader>h :History<cr>
 
+" search all marked locations
+nnoremap <leader>m :Marks<cr>
+
 " search the thing under cursor with dash
 nnoremap <leader>d :Dash<cr>
 
@@ -370,3 +373,6 @@ if has("unix")
     " Do Linux stuff here
   endif
 endif
+
+" abbriviations
+ab dbg import ipdb; ipdb.set_trace

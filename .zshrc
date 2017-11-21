@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="modrobby"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -115,6 +115,7 @@ t() {
 }
 
 alias h='history | fzf'
+alias ip='ipython'
 
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -132,31 +133,43 @@ DEFAULT_USER=`whoami`
 export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
 
 # MSTS stuff
-export rw=$HOME/Projects/red-wing
-export rwa=$rw/api
-export rwc=$rwa/core
-export rwv=$rwa/voucher
-export rwt=$rwa/trx
-export uat1="nadari@opwcs11.multiservice.com"
-export uat2="nadari@opwcs12.multiservice.com"
-export prod1="nadari@opwcs21.multiservice.com"
-export prod2="nadari@opwcs22.multiservice.com"
-export opdev="nadari@opdev04.multiservice.com"
-alias bundle='bundle _1.10.5_'
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/oracle/instantclient_12_1
-export ORACLE_HOME=/opt/oracle/instantclient_12_1
+# export rw=$HOME/Projects/red-wing
+# export rwa=$rw/api
+# export rwc=$rwa/core
+# export rwv=$rwa/voucher
+# export rwt=$rwa/trx
+# export uat1="nadari@opwcs11.multiservice.com"
+# export uat2="nadari@opwcs12.multiservice.com"
+# export prod1="nadari@opwcs21.multiservice.com"
+# export prod2="nadari@opwcs22.multiservice.com"
+# export opdev="nadari@opdev04.multiservice.com"
+# alias bundle='bundle _1.10.5_'
+# export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/oracle/instantclient_12_1
+# export ORACLE_HOME=/opt/oracle/instantclient_12_1
 
 # cambrian stuff
-export CB=$HOME/Projects/cambrian/common-core
-export CBPLATFORM="$CB/build-system/scripts/cb-environment.sh"
-export PATH=$CB/bin:$PATH
-export ANDROID_SDK=~/Library/Android/sdk
-export ANDROID_NDK=~/Library/Android/android-ndk-r15b
-export ANDROID_SDK_ROOT=$ANDROID_SDK
-export ANDROID_NDK_ROOT=$ANDROID_NDK
-export PATH=$PATH:$ANDROID_SDK/platform-tools
-export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
-export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
+# export CB=$HOME/Projects/cambrian/common-core
+# export CBPLATFORM="$CB/build-system/scripts/cb-environment.sh"
+# export PATH=$CB/bin:$PATH
+# export ANDROID_SDK=~/Library/Android/sdk
+# export ANDROID_NDK=~/Library/Android/android-ndk-r15b
+# export ANDROID_SDK_ROOT=$ANDROID_SDK
+# export ANDROID_NDK_ROOT=$ANDROID_NDK
+# export PATH=$PATH:$ANDROID_SDK/platform-tools
+# export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
+# export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
+
+# pinsight stuff
+export PATH=/Users/ndari/miniconda2/bin:$PATH
+export ds5="datascience05.pc01.cls04"
+export ds6="datascience06.pc01.cls04"
+export ds7="datascience07.pc01.cls04"
+export ds8="datascience08.pc01.cls04"
+export SPARK_HOME="/usr/hdp/2.6.1.0-129/spark/"
+export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
+export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH
 
 # cuda and cudann stuff
 export CUDA_HOME="/usr/local/cuda"
@@ -167,11 +180,12 @@ export PATH="$CUDA_HOME/bin:$PATH"
 export lw='ndari@lewis4.rnet.missouri.edu'
 
 # automatically add ssh agent on login.
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  echo "Found ssh socket file"
-  eval `ssh-agent -s`
-  ssh-add
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
