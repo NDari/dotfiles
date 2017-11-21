@@ -170,6 +170,7 @@ export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
 export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
 export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH
+export PYSPARK_DRIVER_PYTHON=ipython
 
 # cuda and cudann stuff
 export CUDA_HOME="/usr/local/cuda"
