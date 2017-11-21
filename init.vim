@@ -375,4 +375,4 @@ if has("unix")
 endif
 
 " abbriviations
-ab dbg import ipdb; ipdb.set_trace
+ab dbg import ipdb; ipdb.set_trace()
