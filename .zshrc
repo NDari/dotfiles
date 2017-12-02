@@ -106,6 +106,8 @@ alias c='clear'
 alias enw='emacs -nw'
 alias less='less -R' # pass escape chars through
 alias tns='tmux new-session -s'
+
+# pip rg to less. -ip => case-insensitive, colored
 s() {
         rg -ip "$1" | less
 }
@@ -160,17 +162,22 @@ export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
 # export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
 
 # pinsight stuff
-export PATH=/Users/ndari/miniconda2/bin:$PATH
-export ds5="datascience05.pc01.cls04"
-export ds6="datascience06.pc01.cls04"
-export ds7="datascience07.pc01.cls04"
-export ds8="datascience08.pc01.cls04"
-export SPARK_HOME="/usr/hdp/2.6.1.0-129/spark/"
-export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
-export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
-export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
-export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH
+export PATH=$PATH:$HOME/miniconda2/bin
+export ds5="10.128.23.115"
+export ds6="10.128.23.120"
+export ds7="10.128.23.129"
+export ds8="10.128.23.130"
+export cl4="10.128.21.200"
+# export SPARK_HOME=$HOME/tools/spark-2.2.0-bin-without-hadoop
+# export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
+# export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
+# export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+# export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
+# export SPARK_HOME="/usr/local/Cellar/apache-spark/2.2.0/libexec/"
+# export PYTHONPATH=$SPARK_HOME/libexec/python/pyspark.zip:$PYTHONPATH
+# export PYTHONPATH=$SPARK_HOME/libexec/python/lib/py4j-0.9-src.zip:$PYTHONPATH
 export PYSPARK_DRIVER_PYTHON=ipython
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 # cuda and cudann stuff
 export CUDA_HOME="/usr/local/cuda"
