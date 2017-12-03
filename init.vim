@@ -136,7 +136,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " checkers
 let g:syntastic_rust_checkers = ['cargo']
@@ -278,6 +278,9 @@ let g:go_fmt_command = "goimports"
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
+
+" disable tmux-navigator when zoomed
+let g:tmux_navigator_disable_when_zoomed = 1
 
 " Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
