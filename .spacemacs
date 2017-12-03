@@ -314,6 +314,10 @@ you should place your code here."
 
   ; Always follow symlinks
   (setq vc-follow-symlinks t)
+
+  ; use ipython for repl
+  (setq python-shell-interpreter "/Users/ndari/miniconda2/bin/ipython"
+        python-shell-interpreter-args "--simple-prompt -i")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

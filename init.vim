@@ -290,9 +290,9 @@ nnoremap N Nzzzv
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=light
+set background=dark
 syntax on
-colorscheme space-vim-dark
+colorscheme gruvbox
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
