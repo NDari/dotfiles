@@ -65,7 +65,6 @@ plugins=(bundler
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 export MANPATH="/usr/local/man:$MANPATH"
 
 # manually set language environment
@@ -100,12 +99,14 @@ export EDITOR=`which nvim`
 alias e='nvim'
 
 # system aliases
-# alias python='python3'
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
 alias enw='emacs -nw'
 alias less='less -R' # pass escape chars through
 alias tns='tmux new-session -s'
+alias h='history | fzf'
+alias ip='ipython'
+
 
 # pip rg to less. -ip => case-insensitive, colored
 s() {
@@ -116,9 +117,6 @@ t() {
         tree -Caf -L ${1:-1} | less
 }
 
-alias h='history | fzf'
-alias ip='ipython'
-
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -128,64 +126,26 @@ export LESS_TERMCAP_so=$'\E[01;0;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-
 DEFAULT_USER=`whoami`
 
-# kotlin native
-export PATH=$PATH:$HOME/src/kotlin-native/dist/bin
+declare -a zshrc_files=(
+        # ".cambrian.zshrc" 
+        ".psm.zshrc"
+        ".personal.zshrc"
+)
 
-# MSTS stuff
-# export rw=$HOME/Projects/red-wing
-# export rwa=$rw/api
-# export rwc=$rwa/core
-# export rwv=$rwa/voucher
-# export rwt=$rwa/trx
-# export uat1="nadari@opwcs11.multiservice.com"
-# export uat2="nadari@opwcs12.multiservice.com"
-# export prod1="nadari@opwcs21.multiservice.com"
-# export prod2="nadari@opwcs22.multiservice.com"
-# export opdev="nadari@opdev04.multiservice.com"
-# alias bundle='bundle _1.10.5_'
-# export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/oracle/instantclient_12_1
-# export ORACLE_HOME=/opt/oracle/instantclient_12_1
-
-# cambrian stuff
-# export CB=$HOME/Projects/cambrian/common-core
-# export CBPLATFORM="$CB/build-system/scripts/cb-environment.sh"
-# export PATH=$CB/bin:$PATH
-# export ANDROID_SDK=~/Library/Android/sdk
-# export ANDROID_NDK=~/Library/Android/android-ndk-r15b
-# export ANDROID_SDK_ROOT=$ANDROID_SDK
-# export ANDROID_NDK_ROOT=$ANDROID_NDK
-# export PATH=$PATH:$ANDROID_SDK/platform-tools
-# export ANDROID_NDK_ARM=$ANDROID_NDK/toolchains/aarch64-linux-androideabi-4.9/prebuilt/darwin-x86_64
-# export ANDROID_NDK_CLANG=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
-
-# pinsight stuff
-export PATH=$PATH:$HOME/miniconda2/bin
-export ds5="10.128.23.115"
-export ds6="10.128.23.120"
-export ds7="10.128.23.129"
-export ds8="10.128.23.130"
-export cl4="10.128.21.200"
-# export SPARK_HOME=$HOME/tools/spark-2.2.0-bin-without-hadoop
-# export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
-# export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
-# export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
-# export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
-# export SPARK_HOME="/usr/local/Cellar/apache-spark/2.2.0/libexec/"
-# export PYTHONPATH=$SPARK_HOME/libexec/python/pyspark.zip:$PYTHONPATH
-# export PYTHONPATH=$SPARK_HOME/libexec/python/lib/py4j-0.9-src.zip:$PYTHONPATH
-export PYSPARK_DRIVER_PYTHON=ipython
-export JAVA_HOME=$(/usr/libexec/java_home)
+# source all the special files if they exist.
+for f in "${zshrc_files[@]}" 
+do
+        if [ -L "$f" ]; then
+                source "$f"
+        fi
+done
 
 # cuda and cudann stuff
 export CUDA_HOME="/usr/local/cuda"
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
-
-# UMKC stuff
-export lw='ndari@lewis4.rnet.missouri.edu'
 
 # automatically add ssh agent on login.
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
