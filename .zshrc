@@ -101,6 +101,7 @@ alias e='nvim'
 # system aliases
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
+alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 alias enw='emacs -nw'
 alias less='less -R' # pass escape chars through
 alias tns='tmux new-session -s'
@@ -131,6 +132,7 @@ DEFAULT_USER=`whoami`
 declare -a zshrc_files=(
         ".cambrian.zshrc" 
         ".psm.zshrc"
+        ".psm.ds.zshrc"
         ".personal.zshrc"
 )
 
@@ -159,3 +161,7 @@ ssh-add -l > /dev/null || ssh-add
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
+
+# source the main conda env
+# source activate main
+alias jn="jupyter notebook --no-browser --ip=10.128.23.129 --port=9191"
