@@ -129,7 +129,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 DEFAULT_USER=`whoami`
 
 declare -a zshrc_files=(
-        # ".cambrian.zshrc" 
+        ".cambrian.zshrc" 
         ".psm.zshrc"
         ".personal.zshrc"
 )
