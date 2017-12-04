@@ -1,5 +1,5 @@
 # pinsight stuff
-export PATH=$HOME/miniconda2/bin:$PATH
+export PATH="$HOME/miniconda2/bin":"$PATH"
 export ds5="10.128.23.115"
 export ds6="10.128.23.120"
 export ds7="10.128.23.129"

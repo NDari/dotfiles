@@ -138,6 +138,7 @@ declare -a zshrc_files=(
 for f in "${zshrc_files[@]}" 
 do
         if [ -L "$f" ]; then
+                echo "loading $f"
                 source "$f"
         fi
 done
