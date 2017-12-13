@@ -86,21 +86,28 @@ Plug 'jodosha/vim-godebug'
 " tags.
 Plug 'mattn/emmet-vim'
 
+" python
+" Jedi for static analysis and completion
+Plug 'davidhalter/jedi-vim'
+" make deoplete use jedi
+Plug 'zchee/deoplete-jedi'
+
 " Initialize plugin system
 call plug#end()
 
 " Plugin configs
 
 " deoplete settings
+let g:python3_host_prog = '/home/ndari/miniconda2/envs/nvim/bin/python'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 1
 call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" remove the scractch window automaticallly
+" " remove the scractch window automaticallly
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" deoplete tab-complete
+" " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " fzf.vim settings
@@ -136,8 +143,8 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 " checkers
 let g:syntastic_rust_checkers = ['cargo']
 let g:syntastic_go_checkers = ['go', 'govet', 'golint', 'errcheck']
@@ -288,7 +295,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 " Delete trailing whitespace on save
-" au BufWritePre *.* :%s/\s\+$//e
+au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
 " set t_Co=256
