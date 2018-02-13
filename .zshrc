@@ -50,7 +50,8 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bundler
+plugins=(aws
+         bundler
          docker
          docker-compose
          elixir
@@ -130,18 +131,18 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 DEFAULT_USER=`whoami`
 
 declare -a zshrc_files=(
-        ".cambrian.zshrc" 
+        ".cambrian.zshrc"
         ".psm.zshrc"
         ".psm.ds.zshrc"
         ".personal.zshrc"
 )
 
 # source all the special files if they exist.
-for f in "${zshrc_files[@]}" 
+for f in "${zshrc_files[@]}"
 do
-        if [ -L "$f" ]; then
-                echo "loading $f"
-                source "$f"
+        if [ -L "${HOME}/${f}" ]; then
+                echo "loading $HOME/$f"
+                source "${HOME}/${f}"
         fi
 done
 
@@ -165,3 +166,5 @@ export FZF_DEFAULT_COMMAND='rg --files'
 # source the main conda env
 # source activate main
 alias jn="jupyter notebook --no-browser --ip=10.128.23.129 --port=9191"
+
+eval $(opam config env)

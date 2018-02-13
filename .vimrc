@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 "Add the needed bundles. Note that the first one must be vundle itself.
@@ -56,7 +62,6 @@ Plug 'udalov/kotlin-vim'
 
 " Go
 Plug 'fatih/vim-go'
-Plug 'jodosha/vim-godebug'
 
 " HTML/Handlebars
 Plug 'mattn/emmet-vim'
@@ -158,24 +163,23 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBad
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBad
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
 set wildmode=list:longest
 
-set visualbell
 set ttyfast
 set backspace=indent,eol,start
 set laststatus=2
 set encoding=utf-8
 
 " set the number of lines when scrolling above displayed page
-set scrolloff=10
+set scrolloff=15
 
 " go settings
 let g:go_highlight_functions = 1
@@ -203,7 +207,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set t_Co=256
 set background=dark
 syntax on
-colorscheme solarized
+colorscheme nofrils-dark
 
 " Set mouse behavior to be more normal
 set mouse=a

@@ -10,9 +10,9 @@ export cl4="10.128.21.200"
 # export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 # export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
 # export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
-# export SPARK_HOME="/usr/local/Cellar/apache-spark/2.2.0/libexec/"
-# export PYTHONPATH=$SPARK_HOME/libexec/python/pyspark.zip:$PYTHONPATH
-# export PYTHONPATH=$SPARK_HOME/libexec/python/lib/py4j-0.9-src.zip:$PYTHONPATH
+export SPARK_HOME="/usr/local/Cellar/apache-spark/2.2.0/libexec/"
+export PYTHONPATH=$SPARK_HOME/libexec/python/pyspark.zip:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/libexec/python/lib/py4j-0.9-src.zip:$PYTHONPATH
 export PYSPARK_DRIVER_PYTHON=ipython
 export JAVA_HOME=$(/usr/libexec/java_home)
 

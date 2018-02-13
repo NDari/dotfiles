@@ -9,8 +9,8 @@ Plug 'justinmk/vim-sneak'
 " take you to the next match in the line. matches are highlighted.
 Plug 'rhysd/clever-f.vim'
 
-" autocompletion. Requires python 3 and pip3 install neovim
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" vim completion with ease of using tabs
+Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -55,7 +55,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "
 " linting
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 
 " looks
 Plug 'flazz/vim-colorschemes'
@@ -64,6 +65,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
+Plug 'rakr/vim-one'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
@@ -86,29 +88,28 @@ Plug 'jodosha/vim-godebug'
 " tags.
 Plug 'mattn/emmet-vim'
 
+" scala
+Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
+Plug 'derekwyatt/vim-scala'
+
 " python
 " Jedi for static analysis and completion
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 " make deoplete use jedi
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 
 " Initialize plugin system
 call plug#end()
 
 " Plugin configs
 
-" deoplete settings
-let g:python3_host_prog = '/home/ndari/miniconda2/envs/nvim/bin/python'
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" " remove the scractch window automaticallly
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" " deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" airline
+let g:airline_theme='one'
+
+" vim-jedi settings
+" force usage of python 3
+let g:jedi#force_py_version = 3
+let g:jedi#use_splits_not_buffers = "right"
 
 " fzf.vim settings
 " tags command
@@ -136,18 +137,18 @@ let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
 let g:clever_f_chars_match_any_signs = ";"
 
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" " Syntastic settings
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-" checkers
-let g:syntastic_rust_checkers = ['cargo']
-let g:syntastic_go_checkers = ['go', 'govet', 'golint', 'errcheck']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
+" " checkers
+" let g:syntastic_rust_checkers = ['cargo']
+" let g:syntastic_go_checkers = ['go', 'govet', 'golint', 'errcheck']
 
 " configure loclist and quickfix list
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -249,11 +250,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBad
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+set spell spelllang=en_us
+hi clear SpellBad
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -268,7 +269,7 @@ set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
-set scrolloff=10
+set scrolloff=40
 
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
@@ -302,7 +303,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme gruvbox
+colorscheme one
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -316,6 +317,8 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType rust setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType scala setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType sbt setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Make splits open naturally
 set splitbelow
