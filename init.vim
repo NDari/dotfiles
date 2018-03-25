@@ -10,7 +10,11 @@ Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
 
 " vim completion with ease of using tabs
-Plug 'ajh17/VimCompletesMe'
+" Plug 'ajh17/VimCompletesMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" and add jedi since its so nice
+Plug 'davidhalter/jedi-vim'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -102,6 +106,12 @@ Plug 'derekwyatt/vim-scala'
 call plug#end()
 
 " Plugin configs
+
+"deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"<Paste>
+
 
 " airline
 let g:airline_theme='one'
