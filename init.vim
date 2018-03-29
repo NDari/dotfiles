@@ -45,6 +45,11 @@ Plug 'godlygeek/tabular'
 
 " Go plugin. Do :GoInstallBinaries after this to install everything it needs.
 Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Debug go. Only works in neovim. Set breakpoints with :GoToggleBreakpoint and
+" debug with :GoDebug. Needs dlv installed.
+Plug 'jodosha/vim-godebug'
+
 
 " Rust plugin. Use rustup. then
 " `rustup update` to get the latest.
@@ -83,24 +88,20 @@ Plug 'airblade/vim-gitgutter'
 " awesome git management with :G*
 Plug 'tpope/vim-fugitive'
 
-" Debug go. Only works in neovim. Set breakpoints with :GoToggleBreakpoint and
-" debug with :GoDebug. Needs dlv installed.
-Plug 'jodosha/vim-godebug'
-
 " HTML/Handlebars. Generate things with writing the commands, then c-y , to
 " generate. For example li*5<c-y> , will generate 5 li for you with closing
 " tags.
 Plug 'mattn/emmet-vim'
 
 " scala
-Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-Plug 'derekwyatt/vim-scala'
+" Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'derekwyatt/vim-scala'
 
 " python
 " Jedi for static analysis and completion
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 " make deoplete use jedi
-" Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi'
 
 " Initialize plugin system
 call plug#end()
@@ -114,12 +115,15 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"<Paste>
 
 
 " airline
-let g:airline_theme='one'
+let g:airline_theme='onedark'
 
 " vim-jedi settings
 " force usage of python 3
 let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "right"
+
+" tell neovim where python is
+let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
 
 " fzf.vim settings
 " tags command
