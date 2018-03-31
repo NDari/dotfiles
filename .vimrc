@@ -6,105 +6,174 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Add the needed bundles. Note that the first one must be vundle itself.
 " General
+" s + 2 characters to jump to anything with those two characters.
+" press s repeatedly to jump to next.
 Plug 'justinmk/vim-sneak'
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+
+" replace normal f. now, pressing f repeatedly after a match will
+" take you to the next match in the line. matches are highlighted.
+Plug 'rhysd/clever-f.vim'
+
+" deoplete and its requirements
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+" ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
+
+" get ability to repear more complex tasks with .
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-unimpaired'
+
+" auto-add closing braces of all kinds, and matching qoutes.
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-system-copy'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'godlygeek/tabular'
-Plug 'wellle/targets.vim'
-Plug 'mhinz/vim-grepper'
-Plug 'sheerun/vim-polyglot'
+
+" open locationlist and quickfix with leader l and q
 Plug 'Valloric/ListToggle'
 
+" commenting lines. gcc for current line, gc10j to comment 10 lines down
+Plug 'tpope/vim-commentary'
+
+" navigate between vim splits and tmux splits using ctrl-direction
+Plug 'christoomey/vim-tmux-navigator'
+
+" align things. Visual selection -> :Tabularize /{pattern}
+Plug 'godlygeek/tabular'
+
+" Go plugin. Do :GoInstallBinaries after this to install everything it needs.
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+" enable using fzf for most things. Probably install first.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" awesome mappings with [  and ]
+Plug 'tpope/vim-unimpaired'
 
 " linting
+" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 
 " looks
 Plug 'flazz/vim-colorschemes'
-Plug 'Lokaltog/vim-powerline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
+Plug 'rakr/vim-one'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
+
+" show the changed files in git in the nerdtree panel
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 
-" git
+" See git changes on the gutter
 Plug 'airblade/vim-gitgutter'
+
+" awesome git management with :G*
 Plug 'tpope/vim-fugitive'
 
-" searching
-Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+" python
+" Jedi for static analysis and completion
+Plug 'davidhalter/jedi-vim'
+" make deoplete use jedi
+Plug 'zchee/deoplete-jedi'
+" better syntax
+Plug 'vim-python/python-syntax'
 
-" ctags
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
-
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
-
-" Kotlin
-Plug 'udalov/kotlin-vim'
-
-" Go
-Plug 'fatih/vim-go'
-
-" HTML/Handlebars
-Plug 'mattn/emmet-vim'
-Plug 'mustache/vim-mustache-handlebars'
-
-" C/C++
-Plug 'osyo-manga/vim-snowdrop'
-Plug 'osyo-manga/vim-marching'
-Plug 'octol/vim-cpp-enhanced-highlight'
-
-" lisp
-Plug 'vim-scripts/Limp'
-
-" rust
-Plug 'rust-lang/rust.vim'
-
-" end plugin definitions
+" Initialize plugin system
 call plug#end()
 
-" put filetype back on after all vundle stuff
+" Plugin configs
+
+"deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Ale settings
+let g:ale_linters = {
+\   'python': ['pylint'],
+\   'go': ['goimports', 'go vet', 'golint', 'go build'],
+\   'cpp': ['clang++'],
+\}
+
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 1
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+
+" airline
+let g:airline_theme='onedark'
+
+" enable all python syntax
+let g:python_highlight_all = 1
+
+" vim-jedi settings
+" force usage of python 3
+let g:jedi#force_py_version = 3
+let g:jedi#use_splits_not_buffers = "right"
+
+" fzf.vim settings
+" tags command
+let g:fzf_tags_command = 'ctags -R -f .tags'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_layout = { 'window': 'enew' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" vim-go settings
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+
+" make vim-sneak repeat with s
+let g:sneak#s_next = 1
+
+" make clever f only search across one line
+let g:clever_f_across_no_line = 1
+" use smart case
+let g:clever_f_ignore_case = 1
+" let ; be {, ( " % etc
+let g:clever_f_chars_match_any_signs = ";"
+
+" configure loclist and quickfix list
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 10
+
+" nofrils settings
+let g:nofrils_heavylinenumbers=1
+let g:nofrils_strbackgrounds=1
+let g:nofrils_heavycomments=1
+
+" disable tmux-navigator when zoomed
+let g:tmux_navigator_disable_when_zoomed = 1
+
+" source the file on init
+autocmd VimEnter * source $MYVIMRC
+
 filetype plugin indent on
 set exrc
 set secure
 set autoindent
 set copyindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
 set expandtab
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
 set ttimeoutlen=0
 
-" set font and size for macvim
-if has("gui")
-  set macligatures
-  set guifont=Fira\ Code:h12
-  set guioptions=
-endif
-
 " highlight current line
-set cursorline
+" set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 set relativenumber
@@ -117,13 +186,20 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" when opening a file, to the line from last session
+" when opening a file, to the the line from last session
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" use tags files
-set tags=./.tags;/
+" settings for speed improvements
+set nocursorcolumn       " do not highlight column
+syntax sync minlines=100 " start highlighting from this many lines backwards
+set synmaxcol=120        " do not highlight very long lines
+set re=1                 " use explicit old regexpengine, seems to be more "
+
+" use tags files. search "tags" file in the current directory where vim was
+" opened, and if not found, keep going up until $HOME.
+set tags+=./.tags,.tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
 set clipboard=unnamed
@@ -175,27 +251,16 @@ set wildmode=list:longest
 
 set ttyfast
 set backspace=indent,eol,start
-set laststatus=2
 set encoding=utf-8
+set laststatus=2 " Always display the statusline in all windows
+" set showtabline=2 " Always display the tabline, even if there is only one tab
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
-set scrolloff=15
+set scrolloff=10
 
-" go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
 
-" vimgrepper
-let g:grepper = {}
-runtime autoload/grepper.vim
-let g:grepper.jump = 1
-let g:grepper.stop = 500
-
-" Search mappings: These will make it so that going to the next one in a
+" Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -204,57 +269,24 @@ nnoremap N Nzzzv
 au BufWritePre *.* :%s/\s\+$//e
 
 "Set color scheme
-set t_Co=256
+" set t_Co=256
+set termguicolors
 set background=dark
 syntax on
-colorscheme nofrils-dark
+colorscheme one
+" hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a
 
-" ack.vim
-" Use ripgrep for ack.vim if exists
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --no-heading'
-endif
-
-" Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-" and 4 for Go and Cpp
-autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType cpp setlocal shiftwidth=4 tabstop=4 softtabstop=4
-
-" Move around in splits natuarally
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" tabs to spaces
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " Make splits open naturally
 set splitbelow
 set splitright
-
-" Ale settings
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['pylint'],
-\   'go': ['goimports', 'go vet', 'golint', 'go build'],
-\   'ruby': ['rubocop'],
-\   'cpp': ['clang++'],
-\}
-
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 1
-" You can disable this option too
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 0
-
-" better highlighting for c++ classes
-let g:cpp_class_scope_highlight = 1
 
 " allow transparency
 highlight Normal ctermbg=none
@@ -263,66 +295,35 @@ highlight Normal ctermbg=none
 vnoremap > >gv
 vnoremap < <gv
 
-" make vim-sneak repeat with s
-let g:sneak#s_next = 1
-
-" neoComplete
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" neoSnippets
-" expand snippet with control k, jump to next point with tab
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" ctrlP
-" ignore files in the .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" use ripgrep for grepping (brew install ripgrep)
-if executable('rg')
-  let g:ctrlp_user_command = 'rg --files %s'
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_switch_buffer = 'et'
-endif
-let g:ctrlp_show_hidden = 1
-
 " set leader,
 let mapleader=","
 
-" map the ripgrep grepper
-noremap <leader>gr :GrepperRg<Space>
+noremap <leader>g :Ag<space>
+
+" show my my buffers with fzf
+noremap <leader>b :Buffers<CR>
+
+" show commits with fxf
+noremap <leader>c :BCommits<CR>
+
+" search files with fuzzy finder
+nnoremap <leader>e :Files<cr>
+
+" search files with fuzzy finder
+nnoremap <leader>t :Tags<cr>
+
+" search vim's file history with fuzzy finder
+nnoremap <leader>h :History<cr>
+
+" search all marked locations
+nnoremap <leader>m :Marks<cr>
+
+" search the thing under cursor with dash
+nnoremap <leader>d :Dash<cr>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" quick buffer switching with buffergator
-map <leader>n gb
-map <leader>p gB
 
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
@@ -336,8 +337,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 " dont use escape key
 imap kj <Esc>
 
-nmap ; :
-
 " space for scolling down
 nn <space>  <c-d>
 
@@ -345,9 +344,14 @@ nn <space>  <c-d>
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin"
-    " Do Mac stuff here
+    " tell neovim where python is
+    let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
   endif
   if s:uname == "Linux"
-    " Do Linux stuff here
+    " tell neovim where python is
+    let g:python3_host_prog = '/home/ndari/miniconda3/bin/python'
   endif
 endif
+
+" abbriviations
+ab dbg import ipdb; ipdb.set_trace()

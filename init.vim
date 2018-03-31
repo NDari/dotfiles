@@ -13,9 +13,6 @@ Plug 'rhysd/clever-f.vim'
 " Plug 'ajh17/VimCompletesMe'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" and add jedi since its so nice
-Plug 'davidhalter/jedi-vim'
-
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
 
@@ -102,6 +99,8 @@ Plug 'mattn/emmet-vim'
 Plug 'davidhalter/jedi-vim'
 " make deoplete use jedi
 Plug 'zchee/deoplete-jedi'
+" better syntax
+Plug 'vim-python/python-syntax'
 
 " Initialize plugin system
 call plug#end()
@@ -111,19 +110,20 @@ call plug#end()
 "deoplete
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"<Paste>
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " airline
 let g:airline_theme='onedark'
+
+" enable all python syntax
+let g:python_highlight_all = 1
 
 " vim-jedi settings
 " force usage of python 3
 let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "right"
 
-" tell neovim where python is
-let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
 
 " fzf.vim settings
 " tags command
@@ -134,10 +134,6 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_buffers_jump = 1
 
 " vim-go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
@@ -150,19 +146,6 @@ let g:clever_f_across_no_line = 1
 let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
 let g:clever_f_chars_match_any_signs = ";"
-
-" " Syntastic settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 1
-" " checkers
-" let g:syntastic_rust_checkers = ['cargo']
-" let g:syntastic_go_checkers = ['go', 'govet', 'golint', 'errcheck']
 
 " configure loclist and quickfix list
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -198,7 +181,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-set cursorline
+" set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 set relativenumber
@@ -217,10 +200,10 @@ if has("autocmd")
 endif
 
 " settings for speed improvements
-" set nocursorcolumn       " do not highlight column
-" syntax sync minlines=100 " start highlighting from this many lines backwards
-" set synmaxcol=120        " do not highlight very long lines
-" set re=1                 " use explicit old regexpengine, seems to be more "
+set nocursorcolumn       " do not highlight column
+syntax sync minlines=100 " start highlighting from this many lines backwards
+set synmaxcol=120        " do not highlight very long lines
+set re=1                 " use explicit old regexpengine, seems to be more "
 
 " use tags files. search "tags" file in the current directory where vim was
 " opened, and if not found, keep going up until $HOME.
@@ -264,11 +247,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBad
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBad
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -289,14 +272,6 @@ set scrolloff=40
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
 let g:nofrils_heavycomments=0
-
-" vim-go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
@@ -394,10 +369,12 @@ nn <space>  <c-d>
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin"
-    " Do Mac stuff here
+    " tell neovim where python is
+    let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
   endif
   if s:uname == "Linux"
-    " Do Linux stuff here
+    " tell neovim where python is
+    let g:python3_host_prog = '/home/ndari/miniconda3/bin/python'
   endif
 endif
 
