@@ -168,3 +168,8 @@ export FZF_DEFAULT_COMMAND='rg --files'
 alias jn="jupyter notebook --no-browser --ip=10.128.23.129 --port=9191"
 
 eval $(opam config env)
+
+# itermplot settings to show plots in iterm. install with pip3 install itermplots
+export ITERMPLOT=rv # for dark themes
+export MPLBACKEND="module://itermplot"
+export ITERMPLOT_LINES=10

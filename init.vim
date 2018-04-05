@@ -298,16 +298,11 @@ hi Comment cterm=italic
 " Set mouse behavior to be more normal
 set mouse=a
 
-" Set tabwidth to 2 for HTML and Ruby, ECMAScript, and handlebars
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType rust setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType scala setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType sbt setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" set tabs to 4 spaces
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " Make splits open naturally
 set splitbelow
