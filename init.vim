@@ -47,6 +47,9 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " debug with :GoDebug. Needs dlv installed.
 Plug 'jodosha/vim-godebug'
 
+" repl. ctr3j to send 4 lines to repl.
+" Start repl with :IronRepl. cp => call previous command
+Plug 'hkupty/iron.nvim'
 
 " Rust plugin. Use rustup. then
 " `rustup update` to get the latest.
