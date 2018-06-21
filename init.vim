@@ -31,6 +31,9 @@ Plug 'Valloric/ListToggle'
 " commenting lines. gcc for current line, gc10j to comment 10 lines down
 Plug 'tpope/vim-commentary'
 
+" Add terminal usage wrappers using :Term
+Plug 'mklabs/split-term.vim'
+
 " Dash integration (Mac only)
 Plug 'rizzatti/dash.vim'
 
@@ -117,7 +120,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 " airline
-let g:airline_theme='onedark'
+let g:airline_theme='simple'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -184,11 +187,11 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-" set cursorline
+set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
-set relativenumber
-set number
+" set relativenumber
+" set number
 
 " highlight searches
 set hlsearch
@@ -317,6 +320,14 @@ highlight Normal ctermbg=none
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" switch in and out of terminal mode in nvim
+if has("nvim")
+  tnoremap <C-h> <c-\><c-n><c-w>h
+  tnoremap <C-j> <c-\><c-n><c-w>j
+  tnoremap <C-k> <c-\><c-n><c-w>k
+  tnoremap <C-l> <c-\><c-n><c-w>l
+endif
 
 " set leader,
 let mapleader=","
