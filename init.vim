@@ -50,9 +50,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " debug with :GoDebug. Needs dlv installed.
 Plug 'jodosha/vim-godebug'
 
-" repl. ctr3j to send 4 lines to repl.
-" Start repl with :IronRepl. cp => call previous command
-Plug 'hkupty/iron.nvim'
+Plug 'https://gitlab.com/HiPhish/repl.nvim.git'
 
 " Rust plugin. Use rustup. then
 " `rustup update` to get the latest.
@@ -331,6 +329,13 @@ endif
 
 " set leader,
 let mapleader=","
+
+" repl configs.
+" send highlight to repl
+vmap <leader>rs <Plug>(ReplSend)
+" send text motion to repl
+nmap <leader>rs <Plug>(ReplSendLine)
+nmap <leader>rl <Plug>(ReplSendLine)
 
 noremap <leader>g :Ag<space>
 
