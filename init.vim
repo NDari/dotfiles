@@ -80,6 +80,9 @@ Plug 'rakr/vim-one'
 " nerdtree
 Plug 'scrooloose/nerdtree'
 
+" racket and other lisps
+Plug 'wlangstroth/vim-racket'
+
 " show the changed files in git in the nerdtree panel
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 
@@ -116,9 +119,8 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-
 " airline
-let g:airline_theme='simple'
+let g:airline_theme='base16_flat'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -275,7 +277,7 @@ set scrolloff=40
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
-let g:nofrils_heavycomments=0
+let g:nofrils_heavycomments=1
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
@@ -319,6 +321,10 @@ highlight Normal ctermbg=none
 vnoremap > >gv
 vnoremap < <gv
 
+" jedi configs
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#rename_command = ""
+
 " switch in and out of terminal mode in nvim
 if has("nvim")
   tnoremap <C-h> <c-\><c-n><c-w>h
@@ -359,6 +365,9 @@ nnoremap <leader>m :Marks<cr>
 
 " search the thing under cursor with dash
 nnoremap <leader>d :Dash<cr>
+
+" open repl on vertical split
+nnoremap <leader>r :vert Repl<cr>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
