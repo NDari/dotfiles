@@ -142,6 +142,11 @@ let g:fzf_buffers_jump = 1
 " vim-go settings
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_doc_keywordprg_enabled = 1 "run godoc for word under cursor with K
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+
 
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
