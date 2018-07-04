@@ -19,11 +19,16 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
-;; the color scheme
-; (load-theme 'solarized t)
-
 ;; disable initial screen
 (setq inhibit-startup-screen t)
+
+;; always follow symlinks
+(setq vc-follow-symlinks t)
+
+;; nice scrolling
+(setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
 
 ;; set scrolling to be one line at a time
 (setq scroll-step 1)
@@ -40,25 +45,24 @@
 ;; show matching parns/braces/etc
 (electric-pair-mode t)
 
-;; show matching parens without delay
-(setq show-paren-delay 0)
 
-;; indent to 2 spaces
+;; indent to 4 spaces
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
-
-; Always follow symlinks
-(setq vc-follow-symlinks t)
 
 ; font
 (add-to-list 'default-frame-alist '(font . "Consolas-12"))
 (set-face-attribute 'default t :font "Consolas-12")
 
 ;; change paren highlight color
-(use-package paren :ensure t)
-(set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "red")
-(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(use-package paren
+  :ensure t
+  :config
+  (setq show-paren-delay 0)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-foreground 'show-paren-match "red")
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (show-paren-mode +1))
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -78,7 +82,8 @@
 (setq linum-format (lambda (line) (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max)))))) (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
 
 ; highlight current line
-(global-hl-line-mode +1)
+(global-hl-line-mode 1)
+
 ;;;;;;;;;;;;;;;;; Package settings
 
 ;; evil-mode
@@ -112,21 +117,19 @@
   "e" 'new-eshell
   "k" 'kill-buffer)
 
-;; Theme
-(use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-one t))
+;; theme
+(use-package atom-one-dark-theme :ensure t)
+(load-theme 'atom-one-dark t)
 
-;; snipe mode allows motion with "s" and two chars. A better version of
+;; snipe mode allows motion with "s" and two chars. a better version of
 ;; easymotion, and a clone of vim-seek
 (use-package evil-snipe
   :ensure t
   :init
   (setq evil-snipe-scope 'whole-visible)
   :config
-  (evil-snipe-mode 1)
-  (evil-snipe-override-mode 1))
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1))
 
 ;; same as vim surround
 (use-package evil-surround
@@ -135,17 +138,17 @@
   (global-evil-surround-mode 1))
 
 ;; kinda like nerd tree
-;; All The Icons
+;; all the icons
 (use-package all-the-icons :ensure t)
 
-;; NeoTree
+;; neotree
 (use-package neotree
   :ensure t
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;; make neotree keybinding work when in that buffer
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "ret") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
 (evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
@@ -154,28 +157,59 @@
 (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
 (evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
 
-;; Helm
+;; helm
 (use-package helm
   :ensure t
   :init
-  (setq helm-M-x-fuzzy-match t
-	helm-mode-fuzzy-match t
-	helm-buffers-fuzzy-matching t
-	helm-recentf-fuzzy-match t
-	helm-locate-fuzzy-match t
-	helm-semantic-fuzzy-match t
-	helm-imenu-fuzzy-match t
-	helm-completion-in-region-fuzzy-match t
-	helm-candidate-number-list 150
-	helm-split-window-in-side-p t
-	helm-move-to-line-cycle-in-source t
-	helm-echo-input-in-header-line t
-	helm-autoresize-max-height 0
-	helm-autoresize-min-height 20)
+  (setq helm-m-x-fuzzy-match t
+	    helm-mode-fuzzy-match t
+	    helm-buffers-fuzzy-matching t
+	    helm-recentf-fuzzy-match t
+	    helm-locate-fuzzy-match t
+	    helm-semantic-fuzzy-match t
+	    helm-imenu-fuzzy-match t
+	    helm-completion-in-region-fuzzy-match t
+	    helm-candidate-number-list 150
+	    helm-split-window-in-side-p t
+	    helm-move-to-line-cycle-in-source t
+	    helm-echo-input-in-header-line t
+	    helm-autoresize-max-height 0
+	    helm-autoresize-min-height 20)
   :config
   (helm-mode +1))
 
-;; Fancy titlebar for MacOS
+;; enable company mode (for auto complete)
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0.5)
+  (setq company-show-numbers t)
+  (setq company-tooltip-limit 10)
+  (setq company-minimum-prefix-length 2)
+  (setq company-tooltip-align-annotations t)
+  ;; invert the navigation direction if the the completion popup-isearch-match
+  ;; is displayed on top (happens near the bottom of windows)
+  (setq company-tooltip-flip-when-above t)
+  (global-company-mode))
+
+;; clojure stuff
+(use-package clojure-mode
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'subword-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+
+(use-package cider
+  :ensure t
+  :config
+  (setq nrepl-log-messages t)
+  (add-hook 'cider-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+
+;; fancy titlebar for macos
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
 (setq ns-use-proxy-icon  nil)
@@ -184,9 +218,9 @@
 ;; goimports on save
 (defun my-go-mode-hook ()
   (setq gofmt-command "goimports")
-  ; Call Gofmt before saving
+  ; call gofmt before saving
   (add-hook 'before-save-hook 'gofmt-before-save)
-  ; Customize compile command to run go build
+  ; customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
            "go build -v && go test -v && go vet")))
@@ -205,11 +239,11 @@
   ; (highlight-current-line-on t)
   ; )
 
-;; To customize the line-highlight color
+;; to customize the line-highlight color
 ; (set-face-background 'highlight-current-line-face "light grey")
 
 ;; golang snippets from https://github.com/atotto/yasnippet-golang
-; (add-to-list 'yas-snippet-dirs "/Users/naseer/.emacs.d/plugins/yasnippet-golang")
+; (add-to-list 'yas-snippet-dirs "/users/naseer/.emacs.d/plugins/yasnippet-golang")
 
 
 ;; spell checking. Emacs 24.2+ has flyspell, but we need
@@ -234,14 +268,14 @@
    ["#1B2229" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#DFDFDF"])
  '(custom-safe-themes
    (quote
-    ("d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
+    ("a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "78496062ff095da640c6bb59711973c7c66f392e3ac0127e611221d541850de2" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
  '(fci-rule-color "#5B6268")
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
  '(package-selected-packages
    (quote
-    (use-package neotree helm flycheck evil-surround evil-snipe doom-themes)))
+    (use-package neotree helm flycheck evil-surround evil-snipe)))
  '(show-paren-mode t)
  '(vc-annotate-background "#282c34")
  '(vc-annotate-color-map
@@ -269,7 +303,7 @@
 ;;;;;;;;;;;; Custom functions
 
 (defun new-eshell ()
- "function to split a window horizontally, switch to it, and open eshell in it."
+ "Function to split a window horizontally, switch to it, and open eshell in it."
   (interactive)
     (let* ((new-window (split-window-horizontally)))
            (select-window new-window)
