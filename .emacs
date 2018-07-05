@@ -86,9 +86,13 @@
 (eval-after-load "evil"
   '(progn
      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)))
+     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
 
 ;; and enable the <leader> key binding
 (use-package evil-leader
@@ -195,7 +199,7 @@
   :config
   (setq company-idle-delay 0.5)
   (setq company-show-numbers t)
-  (setq company-tooltip-limit 10)
+  (setq company-tooltip-limit 20)
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
   ;; invert the navigation direction if the the completion popup-isearch-match
