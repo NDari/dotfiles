@@ -51,18 +51,8 @@
 (setq default-tab-width 4)
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas-12"))
-(set-face-attribute 'default t :font "Consolas-12")
-
-;; change paren highlight color
-(use-package paren
-  :ensure t
-  :config
-  (setq show-paren-delay 0)
-  (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "red")
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (show-paren-mode +1))
+(add-to-list 'default-frame-alist '(font . "Consolas-14"))
+(set-face-attribute 'default t :font "Consolas-14")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -106,7 +96,7 @@
   :init
   (global-evil-leader-mode))
 
-(evil-leader/set-leader ",")
+(evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "t" 'helm-projectile
   "f" 'neotree-toggle
@@ -118,8 +108,11 @@
   "k" 'kill-buffer)
 
 ;; theme
-(use-package atom-one-dark-theme :ensure t)
-(load-theme 'atom-one-dark t)
+(use-package atom-one-dark-theme
+  :ensure t
+  :init
+  (load-theme 'atom-one-dark t))
+
 
 ;; snipe mode allows motion with "s" and two chars. a better version of
 ;; easymotion, and a clone of vim-seek
@@ -137,11 +130,29 @@
   :init
   (global-evil-surround-mode 1))
 
-;; kinda like nerd tree
+;; Which Key
+(use-package which-key
+  :ensure t
+  :init
+  (setq which-key-separator "<SPC>")
+  (setq which-key-prefix-prefix "+")
+  :config
+  (which-key-mode 1))
+
+;; change paren highlight color
+(use-package paren
+  :ensure t
+  :config
+  (setq show-paren-delay 0)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-foreground 'show-paren-match "red")
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (show-paren-mode +1))
+
 ;; all the icons
 (use-package all-the-icons :ensure t)
 
-;; neotree
+;; kinda like nerd tree
 (use-package neotree
   :ensure t
   :init
