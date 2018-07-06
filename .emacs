@@ -1,3 +1,4 @@
+
 ;; package management
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
@@ -51,9 +52,8 @@
 (setq default-tab-width 4)
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas-14"))
-(set-face-attribute 'default t :font "Consolas-14")
-
+(add-to-list 'default-frame-alist '(font . "Consolas-10"))
+(set-face-attribute 'default t :font "Consolas-10")
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t) ; slow but safest bet
@@ -100,7 +100,7 @@
   :init
   (global-evil-leader-mode))
 
-(evil-leader/set-leader "<SPC>")
+(evil-leader/set-leader "SPC")
 (evil-leader/set-key
   "t" 'helm-projectile
   "f" 'neotree-toggle
@@ -149,9 +149,10 @@
   :config
   (setq show-paren-delay 0)
   (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "red")
+  (set-face-foreground 'show-paren-match "green")
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (show-paren-mode +1))
+  (show-paren-mode +1)
+  (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
 (use-package all-the-icons :ensure t)
