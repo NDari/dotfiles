@@ -1,4 +1,3 @@
-
 ;; package management
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
@@ -26,16 +25,24 @@
 ;; always follow symlinks
 (setq vc-follow-symlinks t)
 
-;; nice scrolling
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
+;; keep line location between reopening of a file
+(setq scroll-preserve-screen-position 1)
 
 ;; set scrolling to be one line at a time
 (setq scroll-step 1)
 
 ;; set the scrolling to leave 10 lines above or below the highest or lowest line
 (setq scroll-margin 10)
+
+;; Mac Emacs settings
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
+;; fancy titlebar for macos
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(setq ns-use-proxy-icon  nil)
+(setq frame-title-format nil)
+
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -46,14 +53,15 @@
 ;; show matching parns/braces/etc
 (electric-pair-mode t)
 
-
-;; indent to 4 spaces
+;; indent to 2 spaces
 (setq-default indent-tabs-mode nil)
-(setq default-tab-width 4)
+(setq default-tab-width 2)
+
+(setq initial-frame-alist '((top . 50) (left . 50) (width . 200) (height . 80)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas-10"))
-(set-face-attribute 'default t :font "Consolas-10")
+(add-to-list 'default-frame-alist '(font . "Consolas-12"))
+(set-face-attribute 'default t :font "Consolas-12")
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t) ; slow but safest bet
@@ -64,7 +72,7 @@
   version-control t)
 ;; and put all auto saved files (#filename# in that folder too
 (setq auto-save-file-name-transforms
-                `((".*" ,temporary-file-directory t)))
+  `((".*" ,temporary-file-directory t)))
 
 ;; line nums
 (global-linum-mode t)
@@ -164,7 +172,7 @@
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;; make neotree keybinding work when in that buffer
-(evil-define-key 'normal neotree-mode-map (kbd "ret") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
 (evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
@@ -177,20 +185,20 @@
 (use-package helm
   :ensure t
   :init
-  (setq helm-m-x-fuzzy-match t
-	    helm-mode-fuzzy-match t
-	    helm-buffers-fuzzy-matching t
-	    helm-recentf-fuzzy-match t
-	    helm-locate-fuzzy-match t
-	    helm-semantic-fuzzy-match t
-	    helm-imenu-fuzzy-match t
-	    helm-completion-in-region-fuzzy-match t
-	    helm-candidate-number-list 150
-	    helm-split-window-in-side-p t
-	    helm-move-to-line-cycle-in-source t
-	    helm-echo-input-in-header-line t
-	    helm-autoresize-max-height 0
-	    helm-autoresize-min-height 20)
+  (setq helm-m-x-fuzzy-match t)
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-recentf-fuzzy-match t)
+  (setq helm-locate-fuzzy-match t)
+  (setq helm-semantic-fuzzy-match t)
+  (setq helm-imenu-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-list 150)
+  (setq helm-split-window-in-side-p t)
+  (setq helm-move-to-line-cycle-in-source t)
+  (setq helm-echo-input-in-header-line t)
+  (setq helm-autoresize-max-height 0)
+  (setq helm-autoresize-min-height 20)
   :config
   (helm-mode +1))
 
@@ -225,11 +233,11 @@
   (add-hook 'cider-repl-mode-hook #'paredit-mode)
   (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 
-;; fancy titlebar for macos
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
-(setq ns-use-proxy-icon  nil)
-(setq frame-title-format nil)
+;; linting settings
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode t))
 
 ;; goimports on save
 (defun my-go-mode-hook ()
@@ -269,11 +277,6 @@
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 (add-hook 'find-file-hooks 'turn-on-flyspell)
 
-;; linting settings
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -291,7 +294,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
  '(package-selected-packages
    (quote
-    (use-package neotree helm flycheck evil-surround evil-snipe)))
+    (go-projectile go-imports company-go go-guru go-mode use-package neotree helm flycheck evil-surround evil-snipe)))
  '(show-paren-mode t)
  '(vc-annotate-background "#282c34")
  '(vc-annotate-color-map
