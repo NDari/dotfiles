@@ -27,7 +27,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
 " auto-add closing braces of all kinds, and matching qoutes.
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " open locationlist and quickfix with leader l and q
 Plug 'Valloric/ListToggle'
@@ -51,6 +51,9 @@ Plug 'junegunn/fzf.vim'
 
 " awesome mappings with [  and ]
 Plug 'tpope/vim-unimpaired'
+
+" slime repl
+Plug 'jpalardy/vim-slime'
 
 " linting
 " Plug 'vim-syntastic/syntastic'
@@ -107,6 +110,10 @@ let g:ale_lint_on_text_changed = 1
 " You can disable this option too
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
+
+" slime
+let g:slime_target = "vimterminal"
+let g:slime_python_ipython = 1
 
 " airline
 let g:airline_theme='onedark'
@@ -294,6 +301,13 @@ highlight Normal ctermbg=none
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" get in and out of terminal easily
+tnoremap <C-h> <c-\><c-n><c-w>h
+tnoremap <C-j> <c-\><c-n><c-w>j
+tnoremap <C-k> <c-\><c-n><c-w>k
+tnoremap <C-l> <c-\><c-n><c-w>l
+
 
 " set leader,
 let mapleader=","
