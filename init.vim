@@ -16,6 +16,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
 
+" []q quickfix, []b buffer, []a file,
+Plug 'tpope/vim-unimpaired'
+
 " get ability to repear more complex tasks with .
 Plug 'tpope/vim-repeat'
 
@@ -69,25 +72,28 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 
 " looks
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
+Plug 'trevordmiller/nova-vim'
+Plug 'morhetz/gruvbox'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
 
 " racket and other lisps
 Plug 'wlangstroth/vim-racket'
+Plug 'MicahElliott/vrod'
 
 " show the changed files in git in the nerdtree panel
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
 
 " See git changes on the gutter
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " awesome git management with :G*
 Plug 'tpope/vim-fugitive'
@@ -126,10 +132,8 @@ let g:airline_theme='base16_flat'
 let g:python_highlight_all = 1
 
 " vim-jedi settings
-" force usage of python 3
 let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "right"
-
 
 " fzf.vim settings
 " tags command
@@ -277,12 +281,12 @@ set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
-set scrolloff=40
+set scrolloff=15
 
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
-let g:nofrils_heavycomments=1
+let g:nofrils_heavycomments=0
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
@@ -303,8 +307,9 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme gruvbox
 hi Comment cterm=italic
+let g:gruvbox_contrast_dark = 'hard'
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -331,12 +336,10 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#rename_command = ""
 
 " switch in and out of terminal mode in nvim
-if has("nvim")
-  tnoremap <C-h> <c-\><c-n><c-w>h
-  tnoremap <C-j> <c-\><c-n><c-w>j
-  tnoremap <C-k> <c-\><c-n><c-w>k
-  tnoremap <C-l> <c-\><c-n><c-w>l
-endif
+tnoremap <C-h> <c-\><c-n><c-w>h
+tnoremap <C-j> <c-\><c-n><c-w>j
+tnoremap <C-k> <c-\><c-n><c-w>k
+tnoremap <C-l> <c-\><c-n><c-w>l
 
 " set leader,
 let mapleader=","
@@ -386,12 +389,6 @@ set pastetoggle=<leader>v
 
 " set vim to ignore these files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
-
-" dont use escape key
-imap kj <Esc>
-
-" space for scolling down
-nn <space>  <c-d>
 
 " OSX/Linux specific stuff
 if has("unix")
