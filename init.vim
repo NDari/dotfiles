@@ -126,7 +126,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='base16_flat'
+let g:airline_theme='gruvbox'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -196,11 +196,11 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-set cursorline
+" set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
-" set relativenumber
-" set number
+set relativenumber
+set number
 
 " highlight searches
 set hlsearch
@@ -309,7 +309,6 @@ set background=dark
 syntax on
 colorscheme gruvbox
 hi Comment cterm=italic
-let g:gruvbox_contrast_dark = 'hard'
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -405,3 +404,25 @@ endif
 
 " abbriviations
 ab dbg import ipdb; ipdb.set_trace()
+
+" Color theme
+
+hi clear
+
+hi Normal     guifg=#FFFFFF guibg=#000000 ctermfg=0
+
+hi Constant   guifg=#FFFFFF guibg=#333333 ctermfg=236
+hi String     guifg=#FFFF00 guibg=#000000 ctermfg=236  gui=italic   cterm=italic
+hi Number     guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Boolean    guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Comment    guifg=#666666 guibg=#000000 ctermfg=0
+
+hi Operator   guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Statement  guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Keyword    guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi LineNr     guifg=#FFFFFF guibg=#AAAAAA ctermfg=248
+hi Type       guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Identifier guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Function   guifg=#FFFFFF guibg=#000000 ctermfg=0
+
+hi MatchParen               guibg=#AAAAAA
