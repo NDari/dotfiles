@@ -424,5 +424,6 @@ hi LineNr     guifg=#FFFFFF guibg=#AAAAAA ctermfg=248
 hi Type       guifg=#FFFFFF guibg=#000000 ctermfg=0
 hi Identifier guifg=#FFFFFF guibg=#000000 ctermfg=0
 hi Function   guifg=#FFFFFF guibg=#000000 ctermfg=0
+hi Pmenu      guifg=#FFFFFF guibg=#AAAAAA ctermfg=0
 
 hi MatchParen               guibg=#AAAAAA
