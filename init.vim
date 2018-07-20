@@ -81,6 +81,7 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
 Plug 'trevordmiller/nova-vim'
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
@@ -126,7 +127,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16_mocha'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -263,7 +264,7 @@ set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
 " set spell spelllang=en_us
-" hi clear SpellBad
+" hi clear SpellBa
 " hi SpellBad cterm=undercurl
 " hi clear SpellCap
 " hi SpellCap cterm=underline
@@ -305,9 +306,9 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
-colorscheme gruvbox
+colorscheme nofrils-acme
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -324,7 +325,7 @@ set splitbelow
 set splitright
 
 " allow transparency
-highlight Normal ctermbg=none
+" highlight Normal ctermbg=none
 
 " retain highlighted section after indentation
 vnoremap > >gv
@@ -404,26 +405,3 @@ endif
 
 " abbriviations
 ab dbg import ipdb; ipdb.set_trace()
-
-" Color theme
-
-hi clear
-
-hi Normal     guifg=#FFFFFF guibg=#000000 ctermfg=0
-
-hi Constant   guifg=#FFFFFF guibg=#333333 ctermfg=236
-hi String     guifg=#FFFF00 guibg=#000000 ctermfg=236  gui=italic   cterm=italic
-hi Number     guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Boolean    guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Comment    guifg=#666666 guibg=#000000 ctermfg=0
-
-hi Operator   guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Statement  guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Keyword    guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi LineNr     guifg=#FFFFFF guibg=#AAAAAA ctermfg=248
-hi Type       guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Identifier guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Function   guifg=#FFFFFF guibg=#000000 ctermfg=0
-hi Pmenu      guifg=#FFFFFF guibg=#AAAAAA ctermfg=0
-
-hi MatchParen               guibg=#AAAAAA
