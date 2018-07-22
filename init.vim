@@ -192,6 +192,9 @@ set autoindent
 set copyindent
 set expandtab
 
+" set completions to only use menu, and not preview
+set completeopt=menu
+
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
 set ttimeoutlen=0
@@ -306,9 +309,9 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=light
+set background=dark
 syntax on
-colorscheme nofrils-acme
+colorscheme one
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
