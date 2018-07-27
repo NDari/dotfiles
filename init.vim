@@ -193,7 +193,7 @@ set copyindent
 set expandtab
 
 " set completions to only use menu, and not preview
-set completeopt=menu
+set completeopt=
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -266,11 +266,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBa
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+set spell spelllang=en_us
+hi clear SpellBa
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
