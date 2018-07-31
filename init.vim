@@ -102,11 +102,11 @@ Plug 'tpope/vim-fugitive'
 " HTML/Handlebars. Generate things with writing the commands, then c-y , to
 " generate. For example li*5<c-y> , will generate 5 li for you with closing
 " tags.
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 " scala
-" Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'derekwyatt/vim-scala'
+Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
+Plug 'derekwyatt/vim-scala'
 
 " python
 " Jedi for static analysis and completion
@@ -126,8 +126,12 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" ensime
+au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
+autocmd BufWritePost *.scala silent :EnTypeCheck
+
 " airline
-let g:airline_theme='base16_mocha'
+let g:airline_theme='base16_grayscale'
 
 " enable all python syntax
 let g:python_highlight_all = 1
