@@ -376,7 +376,7 @@ nnoremap <leader>t :Tags<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>d :Dash<cr>
-nnoremap <leader>r :vert Repl<cr>
+nnoremap <leader>r :vert Repl<space>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
