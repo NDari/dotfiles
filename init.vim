@@ -90,7 +90,6 @@ Plug 'tpope/vim-vinegar'
 " racket and other lisps
 Plug 'wlangstroth/vim-racket'
 Plug 'MicahElliott/vrod'
-Plug 'clojure-vim/acid.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " show the changed files in git in the nerdtree panel
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
