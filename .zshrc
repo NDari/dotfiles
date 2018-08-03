@@ -93,7 +93,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # Rust stuff
 export PATH="$HOME/.cargo/bin:$PATH"
 # for racer to work. Must get rust source with "rustup component add rust-src"
-export RUST_SRC_PATH=`rustc --print sysroot`/lib/rustlib/src/rust/src
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
 # set editor stuff
 export EDITOR=`which nvim`

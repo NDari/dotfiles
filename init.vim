@@ -155,6 +155,8 @@ let g:go_auto_type_info = 1
 let g:go_doc_keywordprg_enabled = 1 "run godoc for word under cursor with K
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 
 
 " make vim-sneak repeat with s
@@ -183,8 +185,8 @@ au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+" autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
@@ -204,7 +206,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-" set cursorline
+set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 set relativenumber
@@ -233,7 +235,7 @@ set re=1                 " use explicit old regexpengine, seems to be more "
 set tags+=./.tags,.tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " show match while typing
 set incsearch
@@ -284,7 +286,7 @@ set visualbell
 set ttyfast
 set backspace=indent,eol,start
 set encoding=utf-8
-set laststatus=2 " Always display the statusline in all windows
+" set laststatus=2 " Always display the statusline in all windows
 " set showtabline=2 " Always display the tabline, even if there is only one tab
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
@@ -332,7 +334,7 @@ set splitbelow
 set splitright
 
 " allow transparency
-" highlight Normal ctermbg=none
+highlight Normal ctermbg=none
 
 " retain highlighted section after indentation
 vnoremap > >gv
@@ -365,29 +367,15 @@ noremap <leader>b :Buffers<CR>
 
 " show commits with fxf
 noremap <leader>c :BCommits<CR>
-
-" search files with fuzzy finder
 nnoremap <leader>e :Files<cr>
-
-" search files with fuzzy finder
 nnoremap <leader>t :Tags<cr>
-
-" search vim's file history with fuzzy finder
 nnoremap <leader>h :History<cr>
-
-" search all marked locations
 nnoremap <leader>m :Marks<cr>
-
-" search the thing under cursor with dash
 nnoremap <leader>d :Dash<cr>
-
-" open repl on vertical split
 nnoremap <leader>r :vert Repl<cr>
-
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 " Toggle nerdtree on and off
 map <leader>f :NERDTreeToggle<CR>
 
@@ -396,6 +384,18 @@ set pastetoggle=<leader>v
 
 " set vim to ignore these files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
+
+" replace silver searcher (AG) with ripgrep
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " OSX/Linux specific stuff
 if has("unix")
