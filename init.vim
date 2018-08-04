@@ -84,7 +84,8 @@ Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 
 " nerdtree
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 
 " racket and other lisps
 Plug 'wlangstroth/vim-racket'
@@ -135,6 +136,9 @@ let g:airline_theme='base16_grayscale'
 
 " enable all python syntax
 let g:python_highlight_all = 1
+
+" ale
+let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
 
 " vim-jedi settings
 let g:jedi#force_py_version = 3
@@ -372,7 +376,7 @@ nnoremap <leader>t :Tags<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>d :Dash<cr>
-nnoremap <leader>r :vert Repl<cr>
+nnoremap <leader>r :vert Repl<space>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
