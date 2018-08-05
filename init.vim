@@ -353,6 +353,7 @@ tnoremap <C-h> <c-\><c-n><c-w>h
 tnoremap <C-j> <c-\><c-n><c-w>j
 tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
+tnoremap <Esc> <C-\><C-n>
 
 " set leader,
 let mapleader=","
@@ -363,6 +364,11 @@ vmap <leader>rs <Plug>(ReplSend)
 " send text motion to repl
 nmap <leader>rs <Plug>(ReplSendLine)
 nmap <leader>rl <Plug>(ReplSendLine)
+let g:repl['clojure'] = {
+    \ 'bin': 'lein',
+    \ 'args': ["repl"],
+    \ 'syntax': 'clojure',
+\ }
 
 noremap <leader>g :Ag<space>
 
@@ -376,7 +382,7 @@ nnoremap <leader>t :Tags<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>d :Dash<cr>
-nnoremap <leader>r :vert Repl<space>
+nnoremap <leader>r :vert Repl<cr>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
