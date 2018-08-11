@@ -184,6 +184,9 @@ let g:racer_experimental_completer = 1
 
 " Vim configs
 
+" instead of :q use :close. prevents closing of last window
+cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
+
 " rust specific key commands
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
@@ -276,11 +279,11 @@ set path +=/usr/local/include/c++/**
 set path +=/usr/local/Cellar/boost/1.64.0_1/include/
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBa
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBa
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -364,11 +367,6 @@ vmap <leader>rs <Plug>(ReplSend)
 " send text motion to repl
 nmap <leader>rs <Plug>(ReplSendLine)
 nmap <leader>rl <Plug>(ReplSendLine)
-let g:repl['clojure'] = {
-    \ 'bin': 'lein',
-    \ 'args': ["repl"],
-    \ 'syntax': 'clojure',
-\ }
 
 noremap <leader>g :Ag<space>
 
@@ -378,7 +376,7 @@ noremap <leader>b :Buffers<CR>
 " show commits with fxf
 noremap <leader>c :BCommits<CR>
 nnoremap <leader>e :Files<cr>
-nnoremap <leader>t :Tags<cr>
+nnoremap <leader>t :VTerm<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>d :Dash<cr>
