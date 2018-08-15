@@ -37,9 +37,6 @@ Plug 'tpope/vim-commentary'
 " Add terminal usage wrappers using :Term
 Plug 'mklabs/split-term.vim'
 
-" Dash integration (Mac only)
-Plug 'rizzatti/dash.vim'
-
 " navigate between vim splits and tmux splits using ctrl-direction
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -358,6 +355,10 @@ tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
 tnoremap <Esc> <C-\><C-n>
 
+" switch buffers fast
+noremap <C-]> :bnext<CR>
+noremap <C-[> :bprev<CR>
+
 " set leader,
 let mapleader=","
 
@@ -369,17 +370,12 @@ nmap <leader>rs <Plug>(ReplSendLine)
 nmap <leader>rl <Plug>(ReplSendLine)
 
 noremap <leader>g :Ag<space>
-
-" show my my buffers with fzf
-noremap <leader>b :Buffers<CR>
-
-" show commits with fxf
 noremap <leader>c :BCommits<CR>
+noremap <leader>b :Buffers<CR>
 nnoremap <leader>e :Files<cr>
 nnoremap <leader>t :VTerm<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
-nnoremap <leader>d :Dash<cr>
 nnoremap <leader>r :vert Repl<cr>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>

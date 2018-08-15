@@ -57,11 +57,11 @@
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 2)
 
-(setq initial-frame-alist '((top . 50) (left . 50) (width . 200) (height . 80)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 200) (height . 80)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas-12"))
-(set-face-attribute 'default t :font "Consolas-12")
+(add-to-list 'default-frame-alist '(font . "Hasklig-14:medium:italic"))
+(set-face-attribute 'default t :font "Hasklig-14:medium:italic")
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t) ; slow but safest bet
@@ -217,21 +217,21 @@
   (global-company-mode))
 
 ;; clojure stuff
-(use-package clojure-mode
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
-
-(use-package cider
-  :ensure t
-  :config
-  (setq nrepl-log-messages t)
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+;(use-package clojure-mode
+  ;:ensure t
+  ;:config
+  ;(add-hook 'clojure-mode-hook #'paredit-mode)
+  ;(add-hook 'clojure-mode-hook #'subword-mode)
+  ;(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+;
+;(use-package cider
+  ;:ensure t
+  ;:config
+  ;(setq nrepl-log-messages t)
+  ;(add-hook 'cider-mode-hook #'eldoc-mode)
+  ;(add-hook 'cider-repl-mode-hook #'eldoc-mode)
+  ;(add-hook 'cider-repl-mode-hook #'paredit-mode)
+  ;(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 
 ;; linting settings
 (use-package flycheck
