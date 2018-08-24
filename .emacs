@@ -256,20 +256,6 @@
             (setq tab-width 4)
             (setq indent-tabs-mode 1)))
 
-;; highlight current line
-; (use-package highlight-current-line
-  ; :ensure t
-  ; :config
-  ; (highlight-current-line-on t)
-  ; )
-
-;; to customize the line-highlight color
-; (set-face-background 'highlight-current-line-face "light grey")
-
-;; golang snippets from https://github.com/atotto/yasnippet-golang
-; (add-to-list 'yas-snippet-dirs "/users/naseer/.emacs.d/plugins/yasnippet-golang")
-
-
 ;; spell checking. Emacs 24.2+ has flyspell, but we need
 ;; to do brew install aspell --with-lang-en to add a spell-checker
 ;; for it. to make it work in a buffer, do M-x flyspell-buffer

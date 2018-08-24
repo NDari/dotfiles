@@ -81,6 +81,3 @@ ln -s dotfiles/.zlogout
 ln -s dotfiles/.inputrc
 cd .config/nvim
 ln -s ~/dotfiles/init.vim .
-
-
-
