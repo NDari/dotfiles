@@ -10,3 +10,4 @@ export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
 export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
 export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+alias jl="jupyter lab --no-browser --ip=10.128.23.129 --port=9191"

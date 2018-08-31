@@ -35,8 +35,9 @@
 (setq scroll-margin 10)
 
 ;; Mac Emacs settings
-(setq mac-option-modifier 'meta)
-(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
+
 ;; fancy titlebar for macos
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
@@ -60,8 +61,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 200) (height . 80)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Hasklig-14:medium:italic"))
-(set-face-attribute 'default t :font "Hasklig-14:medium:italic")
+(add-to-list 'default-frame-alist '(font . "Hasklig-14:medium"))
+(set-face-attribute 'default t :font "Hasklig-14:medium")
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t) ; slow but safest bet
@@ -108,14 +109,12 @@
   :init
   (global-evil-leader-mode))
 
-(evil-leader/set-leader "SPC")
+(evil-leader/set-leader ";")
 (evil-leader/set-key
   "t" 'helm-projectile
-  "f" 'neotree-toggle
+  "g" 'helm-find
   "b" 'helm-buffers-list
-  "p" 'evil-prev-buffer
-  "n" 'evil-next-buffer
-  "x" 'execute-extended-command
+  "x" 'helm-M-x
   "e" 'new-eshell
   "k" 'kill-buffer)
 

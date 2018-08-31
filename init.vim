@@ -74,7 +74,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
-Plug 'trevordmiller/nova-vim'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 
@@ -89,11 +88,6 @@ Plug 'MicahElliott/vrod'
 " awesome git management with :G*
 Plug 'tpope/vim-fugitive'
 
-" HTML/Handlebars. Generate things with writing the commands, then c-y , to
-" generate. For example li*5<c-y> , will generate 5 li for you with closing
-" tags.
-" Plug 'mattn/emmet-vim'
-
 " scala
 Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
 Plug 'derekwyatt/vim-scala'
@@ -106,6 +100,11 @@ Plug 'zchee/deoplete-jedi'
 " better syntax
 Plug 'vim-python/python-syntax'
 
+" Julia
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+Plug 'roxma/nvim-completion-manager'
+
 " Initialize plugin system
 call plug#end()
 
@@ -115,6 +114,18 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" julia language server
+" language server
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+\       using LanguageServer;
+\       server = LanguageServer.LanguageServerInstance(STDIN, STDOUT, false);
+\       server.runlinter = true;
+\       run(server);
+\   '],
+\ }
 
 " ensime
 au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
@@ -194,9 +205,6 @@ au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
 " autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 " autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
-
-" source the file on init
-autocmd VimEnter * source $MYVIMRC
 
 filetype plugin indent on
 set exrc
@@ -340,17 +348,24 @@ tnoremap <C-h> <c-\><c-n><c-w>h
 tnoremap <C-j> <c-\><c-n><c-w>j
 tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
-tnoremap <ESC> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " set leader,
 let mapleader=";"
 
 inoremap kj <Esc>
 
+" repl configs.
+" send highlight to repl
+vmap <leader>rs <Plug>(ReplSend)
+" send text motion to repl
+nmap <leader>rs <Plug>(ReplSendLine)
+nmap <leader>rl <Plug>(ReplSendLine)
+
 nnoremap <leader>g :Rg<space>
-nnoremap <leader>c :BCommits<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>e :Files<cr>
+noremap <leader>c :BCommits<CR>
+noremap <leader>b :Buffers<CR>
+nnoremap <leader>f :Files<cr>
 nnoremap <leader>t :VTerm<cr>
 nnoremap <leader>g :Ag<space>
 nnoremap <leader>b :Buffers<CR>

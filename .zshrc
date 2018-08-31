@@ -53,18 +53,13 @@ set -o vi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws
-         bundler
-         docker
-         docker-compose
-         elixir
-         git
-         history-substring-search
-         osx
-         rake
-         ruby
-         tmux
-         vim)
+plugins=(
+    git
+    history-substring-search
+)
+
+# use vim keybinds in the terminal
+set -o vi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -80,33 +75,15 @@ KEYTIMEOUT=1
 # do not save duplicate commands in history
 export HISTCONTROL=ignoreboth:erasedups
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-#### Go stuff
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$GOROOT/bin:$PATH
-
-# rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-# Rust stuff
-export PATH="$HOME/.cargo/bin:$PATH"
-# for racer to work. Must get rust source with "rustup component add rust-src"
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
-
 # set editor stuff
 export EDITOR=`which nvim`
-alias e='nvim'
 
 # system aliases
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
 alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 alias enw='emacs -nw'
+alias e='nvim'
 alias less='less -R' # pass escape chars through
 alias tns='tmux new-session -s'
 alias h='history | fzf'
@@ -134,25 +111,23 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 DEFAULT_USER=`whoami`
 
 declare -a zshrc_files=(
-        ".cambrian.zshrc"
-        ".psm.zshrc"
-        ".psm.ds.zshrc"
-        ".personal.zshrc"
+    ".cambrian.zshrc"
+    ".psm.zshrc"
+    ".psm.ds.zshrc"
+    ".personal.zshrc"
 )
 
 # source all the special files if they exist.
 for f in "${zshrc_files[@]}"
 do
-        if [ -L "${HOME}/${f}" ]; then
-                echo "loading $HOME/$f"
-                source "${HOME}/${f}"
-        fi
+    if [ -L "${HOME}/${f}" ]; then
+        echo "loading $HOME/$f"
+        source "${HOME}/${f}"
+    fi
 done
 
-# cuda and cudann stuff
-export CUDA_HOME="/usr/local/cuda"
-export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-export PATH="$CUDA_HOME/bin:$PATH"
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # automatically add ssh agent on login.
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
@@ -168,9 +143,6 @@ export FZF_DEFAULT_COMMAND='rg --files'
 
 # source the main conda env
 # source activate main
-alias jl="jupyter lab --no-browser --ip=10.128.23.129 --port=9191"
-
-eval $(opam config env)
 
 # itermplot settings to show plots in iterm. install with pip3 install itermplot
 export ITERMPLOT=rv # for dark themes
