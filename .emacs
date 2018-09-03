@@ -56,13 +56,14 @@
 
 ;; indent to 2 spaces
 (setq-default indent-tabs-mode nil)
-(setq default-tab-width 2)
+(setq-default tab-width 2)
 
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 200) (height . 80)))
 
 ; font
 (add-to-list 'default-frame-alist '(font . "Hasklig-14:medium"))
 (set-face-attribute 'default t :font "Hasklig-14:medium")
+
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 (setq backup-by-copying t) ; slow but safest bet
@@ -82,6 +83,9 @@
 
 ; highlight current line
 (global-hl-line-mode 1)
+
+; set default home. Mostly for windows
+(setq default-directory (getenv "HOME"))
 
 ;;;;;;;;;;;;;;;;; Package settings
 
@@ -113,6 +117,7 @@
 (evil-leader/set-key
   "t" 'helm-projectile
   "g" 'helm-find
+  "f" 'helm-find-files
   "b" 'helm-buffers-list
   "x" 'helm-M-x
   "e" 'new-eshell
@@ -123,7 +128,6 @@
   :ensure t
   :init
   (load-theme 'atom-one-dark t))
-
 
 ;; snipe mode allows motion with "s" and two chars. a better version of
 ;; easymotion, and a clone of vim-seek
@@ -140,6 +144,14 @@
   :ensure t
   :init
   (global-evil-surround-mode 1))
+
+;; same as vim surround
+(use-package evil-escape
+  :ensure t
+  :init
+  (evil-escape-mode 1)
+  :config
+  (setq-default evil-escape-key-sequence "kj"))
 
 ;; Which Key
 (use-package which-key
