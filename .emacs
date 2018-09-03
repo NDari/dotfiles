@@ -44,7 +44,6 @@
 (setq ns-use-proxy-icon  nil)
 (setq frame-title-format nil)
 
-
 ;; show matching parens
 (show-paren-mode 1)
 
@@ -54,11 +53,11 @@
 ;; show matching parns/braces/etc
 (electric-pair-mode t)
 
-;; indent to 2 spaces
+;; indent to 4 spaces
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 200) (height . 80)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 80)))
 
 ; font
 (add-to-list 'default-frame-alist '(font . "Hasklig-14:medium"))
@@ -118,16 +117,19 @@
   "t" 'helm-projectile
   "g" 'helm-find
   "f" 'helm-find-files
+  "e" 'shell
   "b" 'helm-buffers-list
   "x" 'helm-M-x
-  "e" 'new-eshell
   "k" 'kill-buffer)
 
-;; theme
-(use-package atom-one-dark-theme
+;; allow escape to be remapped
+(use-package evil-escape
   :ensure t
   :init
-  (load-theme 'atom-one-dark t))
+  (evil-escape-mode +1)
+  :config
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-delay 0.1))
 
 ;; snipe mode allows motion with "s" and two chars. a better version of
 ;; easymotion, and a clone of vim-seek
@@ -145,13 +147,11 @@
   :init
   (global-evil-surround-mode 1))
 
-;; same as vim surround
-(use-package evil-escape
+;; theme
+(use-package atom-one-dark-theme
   :ensure t
   :init
-  (evil-escape-mode 1)
-  :config
-  (setq-default evil-escape-key-sequence "kj"))
+  (load-theme 'atom-one-dark t))
 
 ;; Which Key
 (use-package which-key
@@ -196,7 +196,7 @@
 (use-package helm
   :ensure t
   :init
-  (setq helm-m-x-fuzzy-match t)
+  (setq helm-M-x-fuzzy-match t)
   (setq helm-mode-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-recentf-fuzzy-match t)
@@ -250,23 +250,6 @@
   :init
   (global-flycheck-mode t))
 
-;; goimports on save
-(defun my-go-mode-hook ()
-  (setq gofmt-command "goimports")
-  ; call gofmt before saving
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  ; customize compile command to run go build
-  (if (not (string-match "go" compile-command))
-      (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet")))
-(add-hook 'go-mode-hook 'my-go-mode-hook)
-
-;; set go mode to tab == 4 spaces
-(add-hook 'go-mode-hook
-          (lambda ()
-            (setq tab-width 4)
-            (setq indent-tabs-mode 1)))
-
 ;; spell checking. Emacs 24.2+ has flyspell, but we need
 ;; to do brew install aspell --with-lang-en to add a spell-checker
 ;; for it. to make it work in a buffer, do M-x flyspell-buffer
@@ -291,7 +274,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
  '(package-selected-packages
    (quote
-    (go-projectile go-imports company-go go-guru go-mode use-package neotree helm flycheck evil-surround evil-snipe)))
+    (evil-escape use-package neotree helm flycheck evil-surround evil-snipe)))
  '(show-paren-mode t)
  '(vc-annotate-background "#282c34")
  '(vc-annotate-color-map
