@@ -1,8 +1,8 @@
 ;; package management
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
-			 ("gnu"   . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+			             ("gnu"   . "http://elpa.gnu.org/packages/")
+			             ("melpa" . "https://melpa.org/packages/")))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -78,7 +78,15 @@
 ;; line nums
 (global-linum-mode t)
 ;; use customized linum-format: add a addition space after the line number
-(setq linum-format (lambda (line) (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max)))))) (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
+(setq linum-format
+      (lambda (line)
+        (propertize (format (let
+                                ((w (length (number-to-string (count-lines (point-min)
+                                                                           (point-max))))))
+                              (concat "%" (number-to-string w) "d "))
+                            line)
+                    'face
+                    'linum)))
 
 ; highlight current line
 (global-hl-line-mode 1)
@@ -86,66 +94,67 @@
 ; set default home. Mostly for windows
 (setq default-directory (getenv "HOME"))
 
+(define-key global-map (kbd "C-;") 'helm-M-x)
 ;;;;;;;;;;;;;;;;; Package settings
 
 ;; evil-mode
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
-
-;; evil mode custom key binds.
-(eval-after-load "evil"
-  '(progn
-     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
-     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
-
+;(use-package evil
+  ;:ensure t
+  ;:config
+  ;(evil-mode 1))
+;
+;;; evil mode custom key binds.
+;(eval-after-load "evil"
+  ;'(progn
+     ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     ;(define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+     ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     ;(define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
+     ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+     ;(define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+     ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+     ;(define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+;
 ;; and enable the <leader> key binding
-(use-package evil-leader
-  :ensure t
-  :init
-  (global-evil-leader-mode))
-
-(evil-leader/set-leader ";")
-(evil-leader/set-key
-  "t" 'helm-projectile
-  "g" 'helm-find
-  "f" 'helm-find-files
-  "e" 'shell
-  "b" 'helm-buffers-list
-  "x" 'helm-M-x
-  "k" 'kill-buffer)
-
-;; allow escape to be remapped
-(use-package evil-escape
-  :ensure t
-  :init
-  (evil-escape-mode +1)
-  :config
-  (setq-default evil-escape-key-sequence "kj")
-  (setq-default evil-escape-delay 0.1))
-
-;; snipe mode allows motion with "s" and two chars. a better version of
-;; easymotion, and a clone of vim-seek
-(use-package evil-snipe
-  :ensure t
-  :init
-  (setq evil-snipe-scope 'whole-visible)
-  :config
-  (evil-snipe-mode +1)
-  (evil-snipe-override-mode +1))
-
-;; same as vim surround
-(use-package evil-surround
-  :ensure t
-  :init
-  (global-evil-surround-mode 1))
+;(use-package evil-leader
+  ;:ensure t
+  ;:init
+  ;(global-evil-leader-mode))
+;
+;(evil-leader/set-leader ";")
+;(evil-leader/set-key
+  ;"t" 'helm-projectile
+  ;"g" 'helm-find
+  ;"f" 'helm-find-files
+  ;"e" 'new-shell
+  ;"b" 'helm-buffers-list
+  ;"x" 'helm-M-x
+  ;"k" 'kill-buffer)
+;
+;;; allow escape to be remapped
+;(use-package evil-escape
+  ;:ensure t
+  ;:init
+  ;(evil-escape-mode +1)
+  ;:config
+  ;(setq-default evil-escape-key-sequence "kj")
+  ;(setq-default evil-escape-delay 0.1))
+;
+;;; snipe mode allows motion with "s" and two chars. a better version of
+;;; easymotion, and a clone of vim-seek
+;(use-package evil-snipe
+  ;:ensure t
+  ;:init
+  ;(setq evil-snipe-scope 'whole-visible)
+  ;:config
+  ;(evil-snipe-mode +1)
+  ;(evil-snipe-override-mode +1))
+;
+;;; same as vim surround
+;(use-package evil-surround
+  ;:ensure t
+  ;:init
+  ;(global-evil-surround-mode 1))
 
 ;; theme
 (use-package atom-one-dark-theme
@@ -157,7 +166,7 @@
 (use-package which-key
   :ensure t
   :init
-  (setq which-key-separator "<SPC>")
+  (setq which-key-separator " ")
   (setq which-key-prefix-prefix "+")
   :config
   (which-key-mode 1))
@@ -183,14 +192,14 @@
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;; make neotree keybinding work when in that buffer
-(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
-(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
-(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
-(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
+;(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
+;(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+;(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
+;(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
+;(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+;(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
+;(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
+;(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
 
 ;; helm
 (use-package helm
@@ -301,12 +310,12 @@
 
 ;;;;;;;;;;;; Custom functions
 
-(defun new-eshell ()
- "Function to split a window horizontally, switch to it, and open eshell in it."
+(defun new-shell ()
+ "Function to split a window horizontally, switch to it, and open shell in it."
   (interactive)
     (let* ((new-window (split-window-horizontally)))
            (select-window new-window)
-           (eshell "eshell")))
+           (shell "shell")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
