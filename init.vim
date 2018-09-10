@@ -64,7 +64,8 @@ Plug 'junegunn/fzf.vim'
 "
 " linting
 " Plug 'vim-syntastic/syntastic'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
+Plug 'neomake/neomake'
 
 " looks
 " Plug 'flazz/vim-colorschemes'
@@ -133,13 +134,18 @@ au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
 autocmd BufWritePost *.scala silent :EnTypeCheck
 
 " airline
-let g:airline_theme='onedark'
+let g:airline_theme='base16_grayscale'
 
 " enable all python syntax
 let g:python_highlight_all = 1
 
 " ale
-let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
+" let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
+
+" neomake
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 1s; no delay when writing).
+call neomake#configure#automake('nrwi', 500)
 
 " vim-jedi settings
 let g:jedi#force_py_version = 3
