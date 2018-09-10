@@ -74,6 +74,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
+Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 
@@ -132,7 +133,7 @@ au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
 autocmd BufWritePost *.scala silent :EnTypeCheck
 
 " airline
-let g:airline_theme='base16_grayscale'
+let g:airline_theme='onedark'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -182,7 +183,7 @@ let g:racer_cmd = "$HOME/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 
 " nofrils settings
-let g:nofrils_heavylinenumbers=1
+let g:nofrils_heavylinenumbers=0
 let g:nofrils_strbackgrounds=1
 let g:nofrils_heavycomments=0
 
@@ -211,7 +212,6 @@ set exrc
 set secure
 set autoindent
 set copyindent
-set expandtab
 
 " set completions to only use menu, and not preview
 set completeopt=
@@ -320,7 +320,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme nofrils-dark
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -339,6 +339,8 @@ set splitright
 " allow transparency
 highlight Normal ctermbg=none
 
+" keymaps
+
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
@@ -351,29 +353,22 @@ tnoremap <C-l> <c-\><c-n><c-w>l
 tnoremap <Esc> <C-\><C-n>
 
 " set leader,
-let mapleader=";"
+let mapleader=" "
 
-inoremap kj <Esc>
-
-" repl configs.
-" send highlight to repl
-vmap <leader>rs <Plug>(ReplSend)
-" send text motion to repl
-nmap <leader>rs <Plug>(ReplSendLine)
-nmap <leader>rl <Plug>(ReplSendLine)
-
-nnoremap <leader>g :Rg<space>
-noremap <leader>c :BCommits<CR>
-noremap <leader>b :Buffers<CR>
+map! kj <Esc>
+nnoremap <leader>r :Rg<space>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :VTerm<cr>
-nnoremap <leader>g :Ag<space>
+nnoremap <leader>t :terminal<cr>
+nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>c :BCommits<CR>
+nnoremap <leader>g :BCommits<CR>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :Tags<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
+nnoremap <leader>x :q<cr>
+nnoremap <leader><leader> :
+vnoremap <leader><leader> :
+tnoremap <leader><leader> :
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>

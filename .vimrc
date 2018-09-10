@@ -23,6 +23,9 @@ Plug 'roxma/vim-hug-neovim-rpc'
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
 
+" []q quickfix, []b buffer, []a file,
+Plug 'tpope/vim-unimpaired'
+
 " get ability to repear more complex tasks with .
 Plug 'tpope/vim-repeat'
 
@@ -45,12 +48,17 @@ Plug 'godlygeek/tabular'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+" Rust plugin. Use rustup. then
+" `rustup update` to get the latest.
+" `cargo install rustfmt` for formatting
+" `cargo install racer` to get the docs
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'timonv/vim-cargo'
+
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
-" awesome mappings with [  and ]
-Plug 'tpope/vim-unimpaired'
 
 " slime repl
 Plug 'jpalardy/vim-slime'
@@ -68,17 +76,22 @@ Plug 'robertmeta/nofrils'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
 
+
+
 " nerdtree
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 
-" show the changed files in git in the nerdtree panel
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle'  }
-
-" See git changes on the gutter
-Plug 'airblade/vim-gitgutter'
+" racket and other lisps
+Plug 'wlangstroth/vim-racket'
+Plug 'MicahElliott/vrod'
 
 " awesome git management with :G*
 Plug 'tpope/vim-fugitive'
+
+" scala
+Plug 'ensime/ensime-vim'
+Plug 'derekwyatt/vim-scala'
 
 " python
 " Jedi for static analysis and completion
@@ -103,12 +116,10 @@ let g:ale_linters = {
 \   'python': ['pylint'],
 \   'go': ['goimports', 'go vet', 'golint', 'go build'],
 \   'cpp': ['clang++'],
+\   'scala': ['scalac'],
 \}
-
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 1
-" You can disable this option too
-" if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
 
 " slime
@@ -122,7 +133,6 @@ let g:airline_theme='onedark'
 let g:python_highlight_all = 1
 
 " vim-jedi settings
-" force usage of python 3
 let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "right"
 
@@ -135,19 +145,22 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_buffers_jump = 1
 
 " vim-go settings
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_doc_keywordprg_enabled = 1 "run godoc for word under cursor with K
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
 
+" vimsneak
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
 
+" cleaver-f
 " make clever f only search across one line
 let g:clever_f_across_no_line = 1
-" use smart case
 let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
 let g:clever_f_chars_match_any_signs = ";"
@@ -157,13 +170,37 @@ let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 let g:lt_height = 10
 
+" vim-racer configs
+let g:racer_cmd = "$HOME/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+
 " nofrils settings
 let g:nofrils_heavylinenumbers=1
 let g:nofrils_strbackgrounds=1
-let g:nofrils_heavycomments=1
+let g:nofrils_heavycomments=0
+
+" vim-rust settings
+let g:rustfmt_autosave = 1
 
 " disable tmux-navigator when zoomed
 let g:tmux_navigator_disable_when_zoomed = 1
+
+" jedi configs
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#rename_command = ""
+
+" filetype specific commands
+au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
+autocmd BufWritePost *.scala silent :EnTypeCheck
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+" autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
+
+
+" vim settings
 
 " source the file on init
 autocmd VimEnter * source $MYVIMRC
@@ -173,7 +210,9 @@ set exrc
 set secure
 set autoindent
 set copyindent
-set expandtab
+
+" set completions to only use menu, and not preview
+set completeopt=
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -209,7 +248,7 @@ set re=1                 " use explicit old regexpengine, seems to be more "
 set tags+=./.tags,.tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " show match while typing
 set incsearch
@@ -280,8 +319,8 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
-" hi Comment cterm=italic
+colorscheme solarized8
+hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -290,6 +329,7 @@ set mouse=a
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+set expandtab
 
 " Make splits open naturally
 set splitbelow
@@ -307,40 +347,24 @@ tnoremap <C-h> <c-\><c-n><c-w>h
 tnoremap <C-j> <c-\><c-n><c-w>j
 tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
-
+tnoremap <Esc> <C-\><C-n>
 
 " set leader,
-let mapleader=","
+let mapleader=";"
 
-noremap <leader>g :Ag<space>
-
-" show my my buffers with fzf
-noremap <leader>b :Buffers<CR>
-
-" show commits with fxf
-noremap <leader>c :BCommits<CR>
-
-" search files with fuzzy finder
-nnoremap <leader>e :Files<cr>
-
-" search files with fuzzy finder
-nnoremap <leader>t :Tags<cr>
-
-" search vim's file history with fuzzy finder
+inoremap kj <Esc>
+nnoremap <leader>g :Rg<space>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>t :VTerm<cr>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>c :BCommits<CR>
+nnoremap <leader>f :Files<cr>
 nnoremap <leader>h :History<cr>
-
-" search all marked locations
 nnoremap <leader>m :Marks<cr>
-
-" search the thing under cursor with dash
-nnoremap <leader>d :Dash<cr>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" Toggle nerdtree on and off
-map <leader>f :NERDTreeToggle<CR>
 
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v
@@ -348,11 +372,17 @@ set pastetoggle=<leader>v
 " set vim to ignore these files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
 
-" dont use escape key
-imap kj <Esc>
+" replace silver searcher (AG) with ripgrep
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
-" space for scolling down
-nn <space>  <c-d>
+" Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " OSX/Linux specific stuff
 if has("unix")

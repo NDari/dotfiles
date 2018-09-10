@@ -46,20 +46,18 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-# use vim mode
-set -o vi
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
     git
-    history-substring-search
+    vi-mode
 )
-
-# use vim keybinds in the terminal
-set -o vi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,9 +66,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 # manually set language environment
 export LANG=en_US.UTF-8
-
-# 10ms for key sequences
-KEYTIMEOUT=1
 
 # do not save duplicate commands in history
 export HISTCONTROL=ignoreboth:erasedups
@@ -86,6 +81,8 @@ alias enw='emacs -nw'
 alias e='nvim'
 alias less='less -R' # pass escape chars through
 alias tns='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias ta='tmux attach -t'
 alias h='history | fzf'
 alias ip='ipython'
 

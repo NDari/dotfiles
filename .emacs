@@ -98,65 +98,65 @@
 ;;;;;;;;;;;;;;;;; Package settings
 
 ;; evil-mode
-;(use-package evil
-  ;:ensure t
-  ;:config
-  ;(evil-mode 1))
-;
-;;; evil mode custom key binds.
-;(eval-after-load "evil"
-  ;'(progn
-     ;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-     ;(define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-     ;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-     ;(define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
-     ;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     ;(define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-     ;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-     ;(define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
-;
-;; and enable the <leader> key binding
-;(use-package evil-leader
-  ;:ensure t
-  ;:init
-  ;(global-evil-leader-mode))
-;
-;(evil-leader/set-leader ";")
-;(evil-leader/set-key
-  ;"t" 'helm-projectile
-  ;"g" 'helm-find
-  ;"f" 'helm-find-files
-  ;"e" 'new-shell
-  ;"b" 'helm-buffers-list
-  ;"x" 'helm-M-x
-  ;"k" 'kill-buffer)
-;
-;;; allow escape to be remapped
-;(use-package evil-escape
-  ;:ensure t
-  ;:init
-  ;(evil-escape-mode +1)
-  ;:config
-  ;(setq-default evil-escape-key-sequence "kj")
-  ;(setq-default evil-escape-delay 0.1))
-;
-;;; snipe mode allows motion with "s" and two chars. a better version of
-;;; easymotion, and a clone of vim-seek
-;(use-package evil-snipe
-  ;:ensure t
-  ;:init
-  ;(setq evil-snipe-scope 'whole-visible)
-  ;:config
-  ;(evil-snipe-mode +1)
-  ;(evil-snipe-override-mode +1))
-;
-;;; same as vim surround
-;(use-package evil-surround
-  ;:ensure t
-  ;:init
-  ;(global-evil-surround-mode 1))
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
 
-;; theme
+;; evil mode custom key binds.
+(eval-after-load "evil"
+  '(progn
+     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+
+; and enable the <leader> key binding
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode))
+
+(evil-leader/set-leader ";")
+(evil-leader/set-key
+  "t" 'helm-projectile
+  "g" 'helm-find
+  "f" 'helm-find-files
+  "e" 'new-shell
+  "b" 'helm-buffers-list
+  "x" 'helm-M-x
+  "k" 'kill-buffer)
+
+;; allow escape to be remapped
+(use-package evil-escape
+  :ensure t
+  :init
+  (evil-escape-mode +1)
+  :config
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-delay 0.1))
+
+;; snipe mode allows motion with "s" and two chars. a better version of
+;; easymotion, and a clone of vim-seek
+(use-package evil-snipe
+  :ensure t
+  :init
+  (setq evil-snipe-scope 'whole-visible)
+  :config
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1))
+
+;; same as vim surround
+(use-package evil-surround
+  :ensure t
+  :init
+  (global-evil-surround-mode 1))
+
+; theme
 (use-package atom-one-dark-theme
   :ensure t
   :init
@@ -192,14 +192,14 @@
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;; make neotree keybinding work when in that buffer
-;(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
-;(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-;(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-;(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
-;(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-;(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
-;(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
-;(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
+(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
+(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
+(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
+(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
 
 ;; helm
 (use-package helm
@@ -276,7 +276,7 @@
    ["#1B2229" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#DFDFDF"])
  '(custom-safe-themes
    (quote
-    ("a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "78496062ff095da640c6bb59711973c7c66f392e3ac0127e611221d541850de2" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
+    ("0dd2666921bd4c651c7f8a724b3416e95228a13fca1aa27dc0022f4e023bf197" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "78496062ff095da640c6bb59711973c7c66f392e3ac0127e611221d541850de2" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
  '(fci-rule-color "#5B6268")
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
