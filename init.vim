@@ -134,7 +134,7 @@ au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
 autocmd BufWritePost *.scala silent :EnTypeCheck
 
 " airline
-let g:airline_theme='base16_grayscale'
+let g:airline_theme='base16_chalk'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -227,11 +227,11 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-set cursorline
+" set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
-set relativenumber
-set number
+" set relativenumber
+" set number
 
 " highlight searches
 set hlsearch
@@ -247,7 +247,7 @@ endif
 
 " settings for speed improvements
 set nocursorcolumn       " do not highlight column
-syntax sync minlines=100 " start highlighting from this many lines backwards
+syntax sync minlines=200 " start highlighting from this many lines backwards
 set synmaxcol=120        " do not highlight very long lines
 set re=1                 " use explicit old regexpengine, seems to be more "
 
@@ -326,7 +326,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme nofrils-dark
+colorscheme gruvbox
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal

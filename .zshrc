@@ -96,6 +96,14 @@ t() {
         tree -Caf -L ${1:-1} | less
 }
 
+function rebel-clj() {
+  clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $@}}" -m rebel-readline.main
+}
+
+function rebel-cljs() {
+  clojure -Sdeps "{:deps {com.bhauman/figwheel-main {:mvn/version \"0.1.7\"} com.bhauman/rebel-readline-cljs {:mvn/version \"0.1.4\"} $@}}" -m figwheel.main
+}
+
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
