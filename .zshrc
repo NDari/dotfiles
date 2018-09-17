@@ -56,7 +56,7 @@ export KEYTIMEOUT=1
 # For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
     git
-    vi-mode
+    history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh

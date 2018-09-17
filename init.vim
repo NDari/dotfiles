@@ -34,6 +34,9 @@ Plug 'tpope/vim-commentary'
 " navigate between vim splits and tmux splits using ctrl-direction
 Plug 'christoomey/vim-tmux-navigator'
 
+" for easy copy and pasting to/from tmux buffer
+Plug 'roxma/vim-tmux-clipboard'
+
 " align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
 

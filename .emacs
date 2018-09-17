@@ -121,7 +121,7 @@
   :init
   (global-evil-leader-mode))
 
-(evil-leader/set-leader ";")
+(evil-leader/set-leader " ")
 (evil-leader/set-key
   "t" 'helm-projectile
   "g" 'helm-find
