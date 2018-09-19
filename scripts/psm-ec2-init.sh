@@ -1,18 +1,18 @@
 sudo yum -y update
 sudo yum -y install \
-        ninja-build \
-        libtool \
-        autoconf \
-        automake \
-        cmake \
-        gcc \
-        gcc-c++ \
-        make \
-        pkgconfig \
-        unzip \
-        git \
-        zsh \
-        util-linux-user.x86_64 \
+    ninja-build \
+    libtool \
+    autoconf \
+    automake \
+    cmake \
+    gcc \
+    gcc-c++ \
+    make \
+    pkgconfig \
+    unzip \
+    git \
+    zsh \
+    util-linux-user.x86_64 \
     java-1.8.0-openjdk-devel.x86_64
 
 mkdir -p $HOME/local/bin
@@ -23,12 +23,10 @@ wget "https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh"
 chmod +x Miniconda3-4.5.4-Linux-x86_64.sh
 ./Miniconda3-4.5.4-Linux-x86_64.sh -b -p $HOME/miniconda3
 export PATH=$PATH:$HOME/miniconda3/bin
-conda config --set always_yes yes --set changeps1 no
-conda config -f --add channels conda-forge
-conda config -f --add channels bioconda
-conda config -f --add channels default
 
-conda install \
+pip install --upgrade pip
+
+pip install \
     beautifulsoup4 \
     bokeh \
     cython \
@@ -61,7 +59,7 @@ conda install \
 ##### Scala
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 sudo yum install -y sbt
-cd tools
+cd $HOME/tools
 wget http://downloads.typesafe.com/scala/2.11.12/scala-2.11.12.tgz
 tar zxvf scala-2.11.12.tgz
 cd $HOME
@@ -75,7 +73,7 @@ cd $HOME
 ##### Install neovim
 ###########################################################################
 pip install sexpdata websocket-client jedi neovim
-cd tools
+cd $HOME/tools
 git clone https://github.com/neovim/neovim.git
 cd neovim
 make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/local/"

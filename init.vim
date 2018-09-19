@@ -67,8 +67,8 @@ Plug 'junegunn/fzf.vim'
 "
 " linting
 " Plug 'vim-syntastic/syntastic'
-" Plug 'w0rp/ale'
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
+" Plug 'neomake/neomake'
 
 " looks
 " Plug 'flazz/vim-colorschemes'
@@ -143,12 +143,12 @@ let g:airline_theme='base16_chalk'
 let g:python_highlight_all = 1
 
 " ale
-" let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
+let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
 
 " neomake
 " Full config: when writing or reading a buffer, and on changes in insert and
 " normal mode (after 1s; no delay when writing).
-call neomake#configure#automake('nrwi', 500)
+" call neomake#configure#automake('nrwi', 500)
 
 " vim-jedi settings
 let g:jedi#force_py_version = 3
@@ -402,17 +402,17 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " OSX/Linux specific stuff
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin"
-    " tell neovim where python is
-    let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
-  endif
-  if s:uname == "Linux"
-    " tell neovim where python is
-    let g:python3_host_prog = '/home/ndari/miniconda3/bin/python'
-  endif
-endif
+" if has("unix")
+"   let s:uname = system("uname -s")
+"   if s:uname == "Darwin"
+"     " tell neovim where python is
+"     let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
+"   endif
+"   if s:uname == "Linux"
+"     " tell neovim where python is
+"     let g:python3_host_prog = '/home/ndari/miniconda3/bin/python'
+"   endif
+" endif
 
 " abbriviations
 ab dbg import ipdb; ipdb.set_trace()
