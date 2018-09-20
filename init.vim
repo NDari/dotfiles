@@ -351,8 +351,12 @@ highlight Normal ctermbg=none
 " keymaps
 
 " retain highlighted section after indentation
-vnoremap > >gv
-vnoremap < <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" tab
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
 
 " switch in and out of terminal mode in nvim
 tnoremap <C-h> <c-\><c-n><c-w>h
@@ -393,8 +397,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0 ? fzf#vim#with_preview('up:20%')
   \   <bang>0)
 
 " Files command with preview window
