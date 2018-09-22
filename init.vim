@@ -7,7 +7,7 @@ Plug 'justinmk/vim-sneak'
 
 " replace normal f. now, pressing f repeatedly after a match will
 " take you to the next match in the line. matches are highlighted.
-Plug 'rhysd/clever-f.vim'
+" Plug 'rhysd/clever-f.vim'
 
 " vim completion with ease of using tabs
 " Plug 'ajh17/VimCompletesMe'
@@ -72,6 +72,7 @@ Plug 'w0rp/ale'
 
 " looks
 " Plug 'flazz/vim-colorschemes'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -110,6 +111,9 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'roxma/nvim-completion-manager'
 
+" terminal
+Plug 'mklabs/split-term.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -137,7 +141,7 @@ au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
 autocmd BufWritePost *.scala silent :EnTypeCheck
 
 " airline
-let g:airline_theme='base16_chalk'
+let g:airline_theme='papercolor'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -176,11 +180,11 @@ let g:go_highlight_function_calls = 1
 let g:sneak#s_next = 1
 
 " make clever f only search across one line
-let g:clever_f_across_no_line = 1
+" let g:clever_f_across_no_line = 1
 " use smart case
-let g:clever_f_ignore_case = 1
+" let g:clever_f_ignore_case = 1
 " let ; be {, ( " % etc
-let g:clever_f_chars_match_any_signs = ";"
+" let g:clever_f_chars_match_any_signs = ";"
 
 " configure loclist and quickfix list
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -223,7 +227,7 @@ set autoindent
 set copyindent
 
 " set completions to only use menu, and not preview
-set completeopt=
+" set completeopt=
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -316,11 +320,6 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 " set the number of lines when scrolling above displayed page
 set scrolloff=15
 
-" Search mappings: These will make it so that going to the next item in a
-" search will center on the line it's found in."
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
 " Delete trailing whitespace on save
 au BufWritePre *.* :%s/\s\+$//e
 
@@ -329,7 +328,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme gruvbox
+colorscheme Papercolor
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -349,6 +348,10 @@ set splitright
 highlight Normal ctermbg=none
 
 " keymaps
+" Search mappings: These will make it so that going to the next item in a
+" search will center on the line it's found in."
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " retain highlighted section after indentation
 vnoremap <Tab> >gv
@@ -357,6 +360,24 @@ vnoremap <S-Tab> <gv
 " tab
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
+
+" escape
+inoremap kj <Esc>
+tnoremap kj <Esc>
+
+" remap left/right
+nnoremap h b
+nnoremap b h
+nnoremap f w
+nnoremap w f
+vnoremap h b
+vnoremap b h
+vnoremap f w
+vnoremap w f
+
+" remap l to select current line
+nnoremap l <S-v>
+vnoremap l <S-v>
 
 " switch in and out of terminal mode in nvim
 tnoremap <C-h> <c-\><c-n><c-w>h
@@ -368,14 +389,12 @@ tnoremap <Esc> <C-\><C-n>
 " set leader,
 let mapleader=" "
 
-map! kj <Esc>
 nnoremap <leader>r :Rg<space>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :terminal<cr>
+nnoremap <leader>t :VTerm<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BCommits<CR>
-nnoremap <leader>f :Files<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
