@@ -328,7 +328,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme PaperColor
+colorscheme gruvbox
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
