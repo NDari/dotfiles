@@ -162,7 +162,7 @@ let g:jedi#use_splits_not_buffers = "right"
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '10split enew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -365,21 +365,16 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 " escape
-inoremap kj <Esc>
+noremap kj <Esc>
 
 " remap left/right
-nnoremap h b
-nnoremap b h
-nnoremap f w
-nnoremap w f
-vnoremap h b
-vnoremap b h
-vnoremap f w
-vnoremap w f
+noremap h b
+noremap b h
+noremap f w
+noremap w f
 
 " remap l to select current line
-nnoremap l <S-v>
-vnoremap l <S-v>
+noremap l <S-v>
 
 " set leader,
 let mapleader=" "
@@ -390,7 +385,7 @@ nnoremap <leader>t :terminal<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BCommits<CR>
-nnoremap <leader>h :History<cr>
+nnoremap <leader>h :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
