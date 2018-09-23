@@ -328,7 +328,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme Papercolor
+colorscheme PaperColor
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
@@ -353,17 +353,19 @@ highlight Normal ctermbg=none
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" switch in and out of terminal mode in nvim
+tnoremap <C-h> <c-\><c-n><c-w>h
+tnoremap <C-j> <c-\><c-n><c-w>j
+tnoremap <C-k> <c-\><c-n><c-w>k
+tnoremap <C-l> <c-\><c-n><c-w>l
+tnoremap kj <C-\><C-n>
+
 " retain highlighted section after indentation
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-" tab
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-
 " escape
 inoremap kj <Esc>
-tnoremap kj <Esc>
 
 " remap left/right
 nnoremap h b
@@ -379,19 +381,12 @@ vnoremap w f
 nnoremap l <S-v>
 vnoremap l <S-v>
 
-" switch in and out of terminal mode in nvim
-tnoremap <C-h> <c-\><c-n><c-w>h
-tnoremap <C-j> <c-\><c-n><c-w>j
-tnoremap <C-k> <c-\><c-n><c-w>k
-tnoremap <C-l> <c-\><c-n><c-w>l
-tnoremap <Esc> <C-\><C-n>
-
 " set leader,
 let mapleader=" "
 
 nnoremap <leader>r :Rg<space>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :VTerm<cr>
+nnoremap <leader>t :terminal<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BCommits<CR>
