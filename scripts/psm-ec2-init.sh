@@ -18,7 +18,6 @@ sudo yum -y install \
 mkdir -p $HOME/local/bin
 mkdir -p $HOME/tools
 
-# Python3 setup
 wget "https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh"
 chmod +x Miniconda3-4.5.4-Linux-x86_64.sh
 ./Miniconda3-4.5.4-Linux-x86_64.sh -b -p $HOME/miniconda3
@@ -97,3 +96,9 @@ echo "" >> $HOME/.bash_profile
 echo 'export SHELL=`which zsh`' >> $HOME/.bash_profile
 echo '[ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' >> $HOME/.bash_profile
 ############################################################################
+
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+wget "https://repo.continuum.io/miniconda/Miniconda2-4.5.4-Linux-x86_64.sh"
+chmod a+x Miniconda3-4.5.4-Linux-x86_64.sh
+./Miniconda3-4.5.4-Linux-x86_64.sh -b -p $HOME/miniconda3
+

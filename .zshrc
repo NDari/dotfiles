@@ -146,10 +146,14 @@ ssh-add -l > /dev/null || ssh-add
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
 
-# source the main conda env
-# source activate main
+alias jl="jupyter lab --no-browser --ip=10.130.23.236 --port=9191"
 
 # itermplot settings to show plots in iterm. install with pip3 install itermplot
 export ITERMPLOT=rv # for dark themes
 export MPLBACKEND="module://itermplot"
 export ITERMPLOT_LINES=10
+
+export PATH=$HOME/miniconda3/bin:$PATH
+
+export SCALA_HOME=/home/ec2-user/scala-2.11.12
+export PATH=/home/ec2-user/scala-2.11.12:$PATH

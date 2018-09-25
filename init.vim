@@ -35,7 +35,8 @@ Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-tmux-navigator'
 
 " for easy copy and pasting to/from tmux buffer
-Plug 'roxma/vim-tmux-clipboard'
+" easy copy-paste from tmux
+" Plug 'roxma/vim-tmux-clipboard'
 
 " align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
@@ -157,6 +158,7 @@ let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
 " vim-jedi settings
 let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#rename_command = ""
 
 " fzf.vim settings
 " tags command
@@ -207,8 +209,6 @@ let g:rustfmt_autosave = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 
 " jedi configs
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#rename_command = ""
 
 " Vim configs
 
@@ -328,7 +328,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme Papercolor
+colorscheme one
 hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
