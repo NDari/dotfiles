@@ -364,9 +364,6 @@ tnoremap kj <C-\><C-n>
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-" escape
-noremap kj <Esc>
-
 " remap left/right
 noremap h b
 noremap b h
@@ -374,7 +371,7 @@ noremap f w
 noremap w f
 
 " remap l to select current line
-noremap l <S-v>
+nnoremap l <S-v>
 
 " set leader,
 let mapleader=" "
@@ -391,6 +388,8 @@ nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
+noremap <leader>j <C-d>
+noremap <leader>k <C-u>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -406,7 +405,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:20%')
   \   <bang>0)
 
 " Files command with preview window
