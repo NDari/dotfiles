@@ -13,9 +13,10 @@ export PATH=/Users/naseer/.nimble/bin:$PATH
 
 #### Go stuff
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$GOROOT/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
+# export GOPATH=$HOME/go
+# export GOBIN=$GOPATH/bin
+# export PATH=$GOBIN:$GOROOT/bin:$PATH
 
 # Rust stuff
 export PATH="$HOME/.cargo/bin:$PATH"

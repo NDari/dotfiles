@@ -164,7 +164,7 @@ let g:jedi#rename_command = ""
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '10split enew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -353,49 +353,39 @@ highlight Normal ctermbg=none
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" retain highlighted section after indentation
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-" tab
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-
-" escape
-inoremap kj <Esc>
-tnoremap kj <Esc>
-
-" remap left/right
-nnoremap h b
-nnoremap b h
-nnoremap f w
-nnoremap w f
-vnoremap h b
-vnoremap b h
-vnoremap f w
-vnoremap w f
-
-" remap l to select current line
-nnoremap l <S-v>
-vnoremap l <S-v>
-
 " switch in and out of terminal mode in nvim
 tnoremap <C-h> <c-\><c-n><c-w>h
 tnoremap <C-j> <c-\><c-n><c-w>j
 tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
-tnoremap <Esc> <C-\><C-n>
+tnoremap kj <C-\><C-n>
+
+" retain highlighted section after indentation
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" escape
+noremap kj <Esc>
+
+" remap left/right
+noremap h b
+noremap b h
+noremap f w
+noremap w f
+
+" remap l to select current line
+noremap l <S-v>
 
 " set leader,
 let mapleader=" "
 
 nnoremap <leader>r :Rg<space>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :VTerm<cr>
+nnoremap <leader>t :terminal<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BCommits<CR>
-nnoremap <leader>h :History<cr>
+nnoremap <leader>h :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
