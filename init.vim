@@ -164,7 +164,7 @@ let g:jedi#rename_command = ""
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-let g:fzf_layout = { 'window': '10split enew' }
+let g:fzf_layout = { 'window': 'enew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 

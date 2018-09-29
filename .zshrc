@@ -85,7 +85,7 @@ alias tl='tmux list-sessions'
 alias ta='tmux attach -t'
 alias h='history | fzf'
 alias ip='ipython'
-alias vi="nvim -u NONE"
+alias vi="vim"
 
 # pip rg to less. -ip => case-insensitive, colored
 s() {
