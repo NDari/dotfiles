@@ -7,7 +7,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-vinegar'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'robertmeta/nofrils'
 Plug 'christoomey/vim-tmux-navigator'
@@ -74,10 +75,8 @@ set directory=~/.config/nvim/swp//
 set undofile
 set undodir=~/.config/nvim/undodir//
 
-" add c++ includes to the path for automatic definition jumps
-set path +=/usr/include/c++/**
-set path +=/usr/local/include/c++/**
-set path +=/usr/local/Cellar/boost/1.64.0_1/include/
+" allow vim to recurse through sub dirs in :find
+set path +=**
 
 " dictionary settings
 " set spell spelllang=en_us
