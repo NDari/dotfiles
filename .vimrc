@@ -15,6 +15,20 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
+" Plugin settings
+" fzf.vim settings
+" tags command
+let g:fzf_tags_command = 'ctags -R -f .tags'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_layout = { 'window': 'enew' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" vim settings
+
+" use tags files. search "tags" file in the current directory where vim was
+" opened, and if not found, keep going up until $HOME.
+set tags+=./.tags,.tags;$HOME
 
 syntax on
 colorscheme nofrils-dark
@@ -23,6 +37,13 @@ set exrc
 set secure
 set autoindent
 set copyindent
+
+" Set split separator to Unicode box drawing character
+set encoding=utf8
+set fillchars=vert:│
+
+" Override color scheme to make split the same color as tmux's default
+autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
 
 " set completions to only use menu, and not preview
 " set completeopt=
