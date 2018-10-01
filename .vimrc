@@ -142,7 +142,6 @@ highlight Normal ctermbg=none
 " keymaps
 
 inoremap kj <Esc>
-vnoremap kj <Esc>
 
 " Search mappings: These will make it so that going to the next item in a
 " search will center on the line it's found in."
@@ -171,8 +170,7 @@ noremap f w
 noremap w f
 
 " remap l to select current line
-nnoremap l <S-v>
-vnoremap l <S-v>
+noremap l <S-v>
 
 " set leader,
 let mapleader=" "

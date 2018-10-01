@@ -1,3 +1,10 @@
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !mkdir -p ~/.config/nvim/{backup,swp,undodir}
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " General
@@ -5,12 +12,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " press s repeatedly to jump to next.
 Plug 'justinmk/vim-sneak'
 
-" replace normal f. now, pressing f repeatedly after a match will
-" take you to the next match in the line. matches are highlighted.
-" Plug 'rhysd/clever-f.vim'
-
 " vim completion with ease of using tabs
-" Plug 'ajh17/VimCompletesMe'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
@@ -34,10 +36,6 @@ Plug 'tpope/vim-commentary'
 " navigate between vim splits and tmux splits using ctrl-direction
 Plug 'christoomey/vim-tmux-navigator'
 
-" for easy copy and pasting to/from tmux buffer
-" easy copy-paste from tmux
-" Plug 'roxma/vim-tmux-clipboard'
-
 " align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
 
@@ -56,48 +54,26 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'timonv/vim-cargo'
 
-" language servers
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
 " enable using fzf for most things. Probably install first.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "
 " linting
-" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
-" Plug 'neomake/neomake'
 
 " looks
-" Plug 'flazz/vim-colorschemes'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
-Plug 'liuchengxu/space-vim-dark'
 Plug 'rakr/vim-one'
-Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
 
 " nerdtree
-" Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-vinegar'
-
-" racket and other lisps
-Plug 'wlangstroth/vim-racket'
-Plug 'MicahElliott/vrod'
 
 " awesome git management with :G*
 Plug 'tpope/vim-fugitive'
-
-" scala
-Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
-Plug 'derekwyatt/vim-scala'
 
 " python
 " Jedi for static analysis and completion
@@ -106,11 +82,6 @@ Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 " better syntax
 Plug 'vim-python/python-syntax'
-
-" Julia
-Plug 'JuliaEditorSupport/julia-vim'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plug 'roxma/nvim-completion-manager'
 
 " terminal
 Plug 'mklabs/split-term.vim'
@@ -125,35 +96,11 @@ let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" julia language server
-" language server
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       server = LanguageServer.LanguageServerInstance(STDIN, STDOUT, false);
-\       server.runlinter = true;
-\       run(server);
-\   '],
-\ }
-
-" ensime
-au FileType scala nnoremap <localleader>gd :EnDeclarationSplit v<CR>
-autocmd BufWritePost *.scala silent :EnTypeCheck
-
 " airline
-let g:airline_theme='papercolor'
+let g:airline_theme='one'
 
 " enable all python syntax
 let g:python_highlight_all = 1
-
-" ale
-let g:ale_linters = {'scala': ['scalac']} " Enable only scalac instead
-
-" neomake
-" Full config: when writing or reading a buffer, and on changes in insert and
-" normal mode (after 1s; no delay when writing).
-" call neomake#configure#automake('nrwi', 500)
 
 " vim-jedi settings
 let g:jedi#force_py_version = 3
@@ -180,13 +127,6 @@ let g:go_highlight_function_calls = 1
 
 " make vim-sneak repeat with s
 let g:sneak#s_next = 1
-
-" make clever f only search across one line
-" let g:clever_f_across_no_line = 1
-" use smart case
-" let g:clever_f_ignore_case = 1
-" let ; be {, ( " % etc
-" let g:clever_f_chars_match_any_signs = ";"
 
 " configure loclist and quickfix list
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -252,12 +192,6 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" settings for speed improvements
-set nocursorcolumn       " do not highlight column
-syntax sync minlines=200 " start highlighting from this many lines backwards
-set synmaxcol=120        " do not highlight very long lines
-set re=1                 " use explicit old regexpengine, seems to be more "
-
 " use tags files. search "tags" file in the current directory where vim was
 " opened, and if not found, keep going up until $HOME.
 set tags+=./.tags,.tags;$HOME
@@ -280,9 +214,6 @@ set hidden
 " automatically write before things like :next
 set autowrite
 
-" show the current mode
-set showmode
-
 " show me the command i am typing
 set showcmd
 
@@ -294,17 +225,12 @@ set directory=~/.config/nvim/swp//
 set undofile
 set undodir=~/.config/nvim/undodir//
 
-" add c++ includes to the path for automatic definition jumps
-set path +=/usr/include/c++/**
-set path +=/usr/local/include/c++/**
-set path +=/usr/local/Cellar/boost/1.64.0_1/include/
-
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBa
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+set spell spelllang=en_us
+hi clear SpellBa
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -329,7 +255,6 @@ set termguicolors
 set background=dark
 syntax on
 colorscheme one
-hi Comment cterm=italic
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -343,9 +268,6 @@ set softtabstop=4
 " Make splits open naturally
 set splitbelow
 set splitright
-
-" allow transparency
-highlight Normal ctermbg=none
 
 " keymaps
 " Search mappings: These will make it so that going to the next item in a
@@ -372,6 +294,7 @@ noremap w f
 
 " remap l to select current line
 nnoremap l <S-v>
+vnoremap l <S-v>
 
 " set leader,
 let mapleader=" "
@@ -388,8 +311,7 @@ nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
-noremap <leader>j <C-d>
-noremap <leader>k <C-u>
+inoremap kj <Esc>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
