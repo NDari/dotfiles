@@ -86,6 +86,9 @@ Plug 'vim-python/python-syntax'
 " terminal
 Plug 'mklabs/split-term.vim'
 
+" repl
+Plug 'https://gitlab.com/HiPhish/repl.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -299,12 +302,12 @@ vnoremap l <S-v>
 " set leader,
 let mapleader=" "
 
-nnoremap <leader>r :Rg<space>
+nnoremap <leader>g :Rg<space>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :terminal<cr>
+nnoremap <leader>t :VTerm<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :BCommits<CR>
+" nnoremap <leader> :BCommits<CR>
 nnoremap <leader>h :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
@@ -319,6 +322,11 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v
+
+" Send the text of a motion to the REPL
+nmap <leader>rs  <Plug>(ReplSend)
+" Send the selected text to the REPL
+vmap <leader>rs  <Plug>(ReplSend)
 
 " set vim to ignore these files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
