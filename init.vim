@@ -89,6 +89,10 @@ Plug 'mklabs/split-term.vim'
 " repl
 Plug 'https://gitlab.com/HiPhish/repl.nvim'
 
+
+" writing
+Plug 'junegunn/goyo.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -100,7 +104,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='one'
+let g:airline_theme='base16_flat'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -151,8 +155,6 @@ let g:rustfmt_autosave = 1
 " disable tmux-navigator when zoomed
 let g:tmux_navigator_disable_when_zoomed = 1
 
-" jedi configs
-
 " Vim configs
 
 " rust specific key commands
@@ -177,7 +179,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-" set cursorline
+set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 " set relativenumber
@@ -323,11 +325,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v
 
-" Send the text of a motion to the REPL
-nmap <leader>rs  <Plug>(ReplSend)
-" Send the selected text to the REPL
-vmap <leader>rs  <Plug>(ReplSend)
-
 " set vim to ignore these files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.tmp/*,*/.sass-cache/*,*/node_modules/*,*.keep,*.DS_Store,*/.git/*
 
@@ -340,19 +337,3 @@ command! -bang -nargs=* Rg
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" OSX/Linux specific stuff
-" if has("unix")
-"   let s:uname = system("uname -s")
-"   if s:uname == "Darwin"
-"     " tell neovim where python is
-"     let g:python3_host_prog = '/Users/ndari/miniconda3/bin/python'
-"   endif
-"   if s:uname == "Linux"
-"     " tell neovim where python is
-"     let g:python3_host_prog = '/home/ndari/miniconda3/bin/python'
-"   endif
-" endif
-
-" abbriviations
-ab dbg import ipdb; ipdb.set_trace()
