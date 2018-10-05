@@ -285,7 +285,7 @@ tnoremap <C-h> <c-\><c-n><c-w>h
 tnoremap <C-j> <c-\><c-n><c-w>j
 tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
-tnoremap kj <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " retain highlighted section after indentation
 vnoremap <Tab> >gv
@@ -316,7 +316,6 @@ nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
-inoremap kj <Esc>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
