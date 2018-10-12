@@ -62,6 +62,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 
 " looks
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -104,7 +105,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='base16_flat'
+let g:airline_theme='gruvbox'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -202,7 +203,7 @@ endif
 set tags+=./.tags,.tags;$HOME
 
 " make vim's clipboard to be the same as the system's clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " show match while typing
 set incsearch
@@ -231,11 +232,11 @@ set undofile
 set undodir=~/.config/nvim/undodir//
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBa
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBa
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -259,7 +260,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme gruvbox
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -288,14 +289,8 @@ tnoremap <C-l> <c-\><c-n><c-w>l
 tnoremap <Esc> <C-\><C-n>
 
 " retain highlighted section after indentation
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-" remap left/right
-noremap h b
-noremap b h
-noremap f w
-noremap w f
+vnoremap > >gv
+vnoremap < <gv
 
 " remap l to select current line
 nnoremap l <S-v>

@@ -13,5 +13,5 @@ export PATH=$SPARK_HOME:$SPARK_HOME/bin:$PATH
 export PYSPARK_DRIVER_PYTHON=ipython
 export JAVA_HOME=$(/usr/libexec/java_home)
 alias goec2="ssh -i ~/AWS-datascience-EMR.pem -X ec2-user@10.130.23.236"
-
+export PATH=$HOME/go/bin:$PATH
 
