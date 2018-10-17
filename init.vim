@@ -232,11 +232,11 @@ set undofile
 set undodir=~/.config/nvim/undodir//
 
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBa
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+set spell spelllang=en_us
+hi clear SpellBa
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
