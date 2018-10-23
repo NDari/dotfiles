@@ -105,7 +105,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='gruvbox'
+let g:airline_theme='papercolor'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -147,7 +147,7 @@ let g:racer_experimental_completer = 1
 
 " nofrils settings
 let g:nofrils_heavylinenumbers=0
-let g:nofrils_strbackgrounds=1
+let g:nofrils_strbackgrounds=0
 let g:nofrils_heavycomments=0
 
 " vim-rust settings
@@ -232,11 +232,11 @@ set undofile
 set undodir=~/.config/nvim/undodir//
 
 " dictionary settings
-set spell spelllang=en_us
-hi clear SpellBa
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBa
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -258,9 +258,9 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
-colorscheme gruvbox
+colorscheme PaperColor
 
 " Set mouse behavior to be more normal
 set mouse=a
