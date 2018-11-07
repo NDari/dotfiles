@@ -94,6 +94,9 @@ Plug 'https://gitlab.com/HiPhish/repl.nvim'
 " writing
 Plug 'junegunn/goyo.vim'
 
+" Julia
+Plug 'JuliaEditorSupport/julia-vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -105,7 +108,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " airline
-let g:airline_theme='papercolor'
+let g:airline_theme='one'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -260,7 +263,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme PaperColor
+colorscheme one
 
 " Set mouse behavior to be more normal
 set mouse=a
@@ -311,6 +314,9 @@ nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
+nmap <leader>rs  <Plug>(ReplSend)
+nmap <leader>rsl <Plug>(ReplSendLine)
+vmap <leader>rs  <Plug>(ReplSend)
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
