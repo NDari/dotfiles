@@ -62,10 +62,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 
 " looks
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'edkolev/tmuxline.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'robertmeta/nofrils'
 Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
@@ -106,9 +102,6 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" airline
-let g:airline_theme='one'
 
 " enable all python syntax
 let g:python_highlight_all = 1
@@ -261,7 +254,7 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
 colorscheme one
 
