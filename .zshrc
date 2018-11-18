@@ -86,6 +86,7 @@ alias ta='tmux attach -t'
 alias h='history | fzf'
 alias ip='ipython'
 alias vi="vim"
+alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 
 # pip rg to less. -ip => case-insensitive, colored
 s() {

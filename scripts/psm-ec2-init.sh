@@ -83,28 +83,26 @@ $HOME/tools/apache-maven-3.6.0/bin/mvn dependency:get -Dartifact=org.apache.hado
 cp $HOME/.m2/repository/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar $HOME/tools/spark-2.3.1-bin-hadoop2.7/jars/
 cp $HOME/.m2/repository/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar $HOME/tools/spark-2.3.1-bin-hadoop2.7/jars/
 cd $HOME
-echo "alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'" >> $HOME/.bash_profile
-echo "alias e=nvim" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 ##### ZSH and Neovim set up
 ############################################################################
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cd $HOME
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed '/\s*env\s\s*zsh\s*/d')"
+rm .zshrc && ln -s dotfiles/.zshrc && ln -s dotfiles/.zlogout
 echo "" >> $HOME/.bash_profile
 echo 'export SHELL=`which zsh`' >> $HOME/.bash_profile
 echo '[ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' >> $HOME/.bash_profile
 git clone https://github.com/NDari/dotfiles.git
-rm .zshrc && ln -s dotfiles/.zshrc && ln -s dotfiles/.zlogout
 $HOME/miniconda3/bin/pip install sexpdata websocket-client jedi neovim
 cd $HOME/tools
 git clone https://github.com/neovim/neovim.git
 cd neovim
-make CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX=/home/ec2-user/.local/'
+make -j72 CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX=/home/ec2-user/.local/'
 make install
 cd $HOME
 mkdir -p .config/nvim
 cd .config/nvim
 ln -s /home/ec2-user/dotfiles/init.vim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 cd $HOME
 ############################################################################
