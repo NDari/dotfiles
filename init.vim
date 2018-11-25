@@ -25,7 +25,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 
 " auto-add closing braces of all kinds, and matching qoutes.
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " open locationlist and quickfix with leader l and q
 Plug 'Valloric/ListToggle'
@@ -179,8 +179,8 @@ set ttimeoutlen=0
 set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
-" set relativenumber
-" set number
+set relativenumber
+set number
 
 " highlight searches
 set hlsearch
@@ -254,9 +254,9 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=light
+set background=dark
 syntax on
-colorscheme one
+colorscheme nofrils-dark
 
 " Set mouse behavior to be more normal
 set mouse=a
