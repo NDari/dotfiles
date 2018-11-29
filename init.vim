@@ -256,7 +256,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme nofrils-dark
+colorscheme one
 
 " Set mouse behavior to be more normal
 set mouse=a
