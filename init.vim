@@ -65,6 +65,7 @@ Plug 'w0rp/ale'
 Plug 'robertmeta/nofrils'
 Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-solarized8'
 
 " nerdtree
 Plug 'tpope/vim-vinegar'
@@ -256,7 +257,12 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme solarized8
+
+" make colorschemes look ok in tmux
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+let g:solarized_use16 = 1
 
 " Set mouse behavior to be more normal
 set mouse=a
