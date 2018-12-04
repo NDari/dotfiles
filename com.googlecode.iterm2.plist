@@ -2939,7 +2939,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAc7Gdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -2962,7 +2962,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>1949 -264 606 469 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2368 518 796 486 1680 -30 1920 1057 </string>
+	<string>2608 652 796 486 1920 48 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 43 1680 984 0 0 1680 1050 </string>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1</key>
@@ -3761,7 +3761,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-01T23:21:52Z</date>
+	<date>2018-12-04T14:58:54Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

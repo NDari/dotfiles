@@ -57,11 +57,11 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 80)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Hasklig-14:medium"))
-(set-face-attribute 'default t :font "Hasklig-14:medium")
+(add-to-list 'default-frame-alist '(font . "Consolas"))
+(set-face-attribute 'default t :font "Consolas")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -157,10 +157,10 @@
   (global-evil-surround-mode 1))
 
 ; theme
-(use-package atom-one-dark-theme
+(use-package solarized-theme
   :ensure t
   :init
-  (load-theme 'atom-one-dark t))
+  (load-theme 'solarized-dark t))
 
 ;; Which Key
 (use-package which-key
@@ -276,14 +276,14 @@
    ["#1B2229" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#DFDFDF"])
  '(custom-safe-themes
    (quote
-    ("0dd2666921bd4c651c7f8a724b3416e95228a13fca1aa27dc0022f4e023bf197" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "78496062ff095da640c6bb59711973c7c66f392e3ac0127e611221d541850de2" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "adf5275cc3264f0a938d97ded007c82913906fc6cd64458eaae6853f6be287ce" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "0dd2666921bd4c651c7f8a724b3416e95228a13fca1aa27dc0022f4e023bf197" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "78496062ff095da640c6bb59711973c7c66f392e3ac0127e611221d541850de2" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
  '(fci-rule-color "#5B6268")
  '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
  '(package-selected-packages
    (quote
-    (evil-escape use-package neotree helm flycheck evil-surround evil-snipe)))
+    (solarized-theme evil-escape use-package neotree helm flycheck evil-surround evil-snipe)))
  '(show-paren-mode t)
  '(vc-annotate-background "#282c34")
  '(vc-annotate-color-map
