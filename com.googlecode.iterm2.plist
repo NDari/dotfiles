@@ -2920,10 +2920,18 @@
 	<real>50</real>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSColorPanelMode</key>
+	<string>6</string>
+	<key>NSColorPickerPageableNameListDefaults</key>
+	<string>1Apple</string>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dotfiles</string>
+	<string>~/dotfiles/itermcolors</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
+	<string>{1125, 459}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 521}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -2939,7 +2947,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -2955,16 +2963,32 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSUserKeyEquivalents</key>
+	<dict>
+		<key>Open</key>
+		<string>@^t</string>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>379 221 1301 272 0 0 1680 1027 </string>
+	<string>577 179 819 77 0 0 1920 1177 </string>
+	<key>NSWindow Frame Preferences</key>
+	<string>384 387 924 485 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>760 786 400 129 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2650 378 620 392 1680 -390 2560 1417 </string>
+	<string>650 498 620 392 0 0 1920 1057 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>1949 -264 606 469 1680 -390 2560 1417 </string>
+	<string>269 139 606 456 0 0 1920 1178 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2608 652 796 486 1920 48 2048 1152 </string>
+	<string>374 708 796 486 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 43 1680 984 0 0 1680 1050 </string>
+	<string>0 0 1913 1177 0 0 1920 1177 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>183 68 570 451 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1_selection</key>
@@ -3591,11 +3615,11 @@
 			<key>Non Ascii Font</key>
 			<string>FiraMonoForPowerline-Bold 14</string>
 			<key>Non-ASCII Anti Aliased</key>
-			<true/>
+			<false/>
 			<key>Non-ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>Normal Font</key>
-			<string>Consolas-BoldForPowerline 18</string>
+			<string>Consolas-Bold 18</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3682,7 +3706,7 @@
 			<key>Use Underline Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.5</real>
+			<real>1</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -3691,12 +3715,16 @@
 			<string>/Users/nadari</string>
 		</dict>
 	</array>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>1</integer>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
+	<true/>
+	<key>NoSyncHaveShownPromoWithId_4</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>2D7AD13B-1038-4DDB-AC03-D62520834F6A</string>
+	<string>571A8000-D999-46E6-B9EC-1500712FA54F</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3704,7 +3732,11 @@
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>562520003.76751804</real>
+	<real>495682336.40437299</real>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>478010008.55376202</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>494020645.109855</real>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
@@ -3747,7 +3779,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/ndari/dotfiles</string>
+	<string>/Users/naseer/dotfiles</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -3757,13 +3789,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=13</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=46</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-04T14:58:54Z</date>
-	<key>SUSendProfileInfo</key>
-	<false/>
+	<date>2018-12-02T21:12:34Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>ShowBookmarkName</key>
