@@ -94,6 +94,10 @@ Plug 'junegunn/goyo.vim'
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
 
+" Racket
+Plug 'wlangstroth/vim-racket'
+Plug 'MicahElliott/vrod'
+
 " Initialize plugin system
 call plug#end()
 
