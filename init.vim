@@ -261,7 +261,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme solarized8
+colorscheme one
 
 " make colorschemes look ok in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

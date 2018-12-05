@@ -157,10 +157,10 @@
   (global-evil-surround-mode 1))
 
 ; theme
-(use-package solarized-theme
+(use-package atom-one-dark-theme
   :ensure t
   :init
-  (load-theme 'solarized-dark t))
+  (load-theme 'atom-one-dark t))
 
 ;; Which Key
 (use-package which-key
