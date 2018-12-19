@@ -62,6 +62,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 
 " looks
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 Plug 'robertmeta/nofrils'
 Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
@@ -148,7 +151,7 @@ let g:racer_experimental_completer = 1
 
 " nofrils settings
 let g:nofrils_heavylinenumbers=0
-let g:nofrils_strbackgrounds=0
+let g:nofrils_strbackgrounds=1
 let g:nofrils_heavycomments=0
 
 " vim-rust settings
