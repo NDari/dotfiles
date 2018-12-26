@@ -1,6 +1,7 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !mkdir -p ~/.vim/{backup,swp,undodir}
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -89,12 +90,12 @@ set showmode
 set showcmd
 
 " set one location for all the swap and backup files
-set backupdir=~/.config/nvim/backup//
-set directory=~/.config/nvim/swp//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swp//
 
 " enable persistent undo
 set undofile
-set undodir=~/.config/nvim/undodir//
+set undodir=~/.vim/undodir//
 
 " allow vim to recurse through sub dirs in :find
 set path +=**
@@ -110,7 +111,8 @@ set path +=**
 set wildmenu
 set wildmode=list:longest
 
-" set visualbell
+set visualbell
+set t_vb=
 set ttyfast
 set backspace=indent,eol,start
 set encoding=utf-8
