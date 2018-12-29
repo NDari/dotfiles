@@ -8,7 +8,7 @@ export SPARK_HOME=$HOME/tools/spark-2.3.2-bin-hadoop2.7
 # export HADOOP_CONF_DIR=/usr/hdp/2.6.1.0-129/hadoop/etc/hadoop/
 # export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
 # export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
-export PATH=$SPARK_HOME/bin:$$HOME/go/bin:$PATH
+export PATH=$SPARK_HOME/bin:$PATH
 export PYSPARK_DRIVER_PYTHON=ipython
 export JAVA_HOME=$(/usr/libexec/java_home)
 
