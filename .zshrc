@@ -64,6 +64,9 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
 
+# remove the random A and B or [OA that appear sometimes
+printf "\e[?1004l"
+
 # manually set language environment
 export LANG=en_US.UTF-8
 
