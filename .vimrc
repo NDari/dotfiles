@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'robertmeta/nofrils'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -161,29 +162,18 @@ tnoremap <C-k> <c-\><c-n><c-w>k
 tnoremap <C-l> <c-\><c-n><c-w>l
 tnoremap <Esc> <C-\><C-n>
 
-" retain highlighted section after indentation
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-" remap left/right
-noremap h b
-noremap b h
-noremap f w
-noremap w f
-
 " remap l to select current line
-noremap l <S-v>
+nnoremap l <S-v>
+vnoremap l <S-v>
 
 " set leader,
 let mapleader=" "
 
-nnoremap <leader>r :Rg<space>
+nnoremap <leader>g :Rg<cr>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :terminal<cr>
+nnoremap <leader>t :Tags<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :BCommits<CR>
-nnoremap <leader>h :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
