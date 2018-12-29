@@ -104,6 +104,8 @@ Plug 'MicahElliott/vrod'
 " Initialize plugin system
 call plug#end()
 
+set nocompatible
+
 " Plugin configs
 
 "deoplete

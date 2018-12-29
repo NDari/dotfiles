@@ -17,6 +17,8 @@ Plug 'w0rp/ale'
 
 call plug#end()
 
+set nocompatible
+
 " Plugin settings
 " fzf.vim settings
 " tags command
