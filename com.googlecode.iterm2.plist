@@ -2955,16 +2955,21 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>379 221 1301 272 0 0 1920 1177 </string>
+	<string>619 259 1301 138 0 0 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2650 378 620 392 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>1949 -264 606 469 1680 -390 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2608 744 928 394 1920 48 2048 1129 </string>
+	<string>2608 647 1016 512 1920 48 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1920 71 2243 1106 1920 48 2048 1129 </string>
+	<string>1680 -7 1920 1034 1680 -30 1920 1057 </string>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_669DAA71-D5F8-4867-83F5-DB8F1AD004C1_selection</key>
@@ -3637,7 +3642,7 @@
 			<key>Non-ASCII Ligatures</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Hasklig-SemiboldIt 18</string>
+			<string>Hasklig-Semibold 14</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -3807,7 +3812,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-04T14:58:54Z</date>
+	<date>2018-12-29T14:01:33Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'robertmeta/nofrils'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'ajh17/VimCompletesMe'
 Plug 'w0rp/ale'
 
 call plug#end()
@@ -30,7 +31,7 @@ let g:fzf_buffers_jump = 1
 
 " vim settings
 
-" use tags files. search "tags" file in the current directory where vim was
+" use tags files. search .tags file in the current directory where vim was
 " opened, and if not found, keep going up until $HOME.
 set tags+=./.tags,.tags;$HOME
 
@@ -42,15 +43,8 @@ set secure
 set autoindent
 set copyindent
 
-" Set split separator to Unicode box drawing character
-set encoding=utf8
-set fillchars=vert:│
-
-" Override color scheme to make split the same color as tmux's default
-autocmd ColorScheme * highlight VertSplit cterm=NONE ctermfg=Green ctermbg=NONE
-
-" set completions to only use menu, and not preview
-" set completeopt=
+" dont let things show in preview window
+set completeopt=
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -119,8 +113,8 @@ set t_vb=
 set ttyfast
 set backspace=indent,eol,start
 set encoding=utf-8
-" set laststatus=2 " Always display the statusline in all windows
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set laststatus=2 " Always display the statusline in all windows
+" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set the number of lines when scrolling above displayed page
 set scrolloff=15
