@@ -94,6 +94,12 @@ Plug 'https://gitlab.com/HiPhish/repl.nvim'
 " writing
 Plug 'junegunn/goyo.vim'
 
+" language client
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
 
@@ -107,6 +113,13 @@ call plug#end()
 set nocompatible
 
 " Plugin configs
+
+" language client settings
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'python': ['pyls'],
+    \ 'go': ['go-langserver'],
+    \ }
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
@@ -266,7 +279,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme gruvbox
 
 " make colorschemes look ok in tmux
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -310,21 +323,19 @@ vnoremap l <S-v>
 " set leader,
 let mapleader=" "
 
-nnoremap <leader>g :Rg<space>
+nnoremap <leader>g :Rg<cr>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>t :VTerm<cr>
+nnoremap <leader>t :Tags<cr>
 nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<CR>
-" nnoremap <leader> :BCommits<CR>
-nnoremap <leader>h :Lines<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
-nmap <leader>rs  <Plug>(ReplSend)
-nmap <leader>rsl <Plug>(ReplSendLine)
-vmap <leader>rs  <Plug>(ReplSend)
+nmap <leader>r  <Plug>(ReplSend)
+nmap <leader>rl <Plug>(ReplSendLine)
+vmap <leader>r  <Plug>(ReplSend)
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>

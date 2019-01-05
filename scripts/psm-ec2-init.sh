@@ -68,41 +68,38 @@ $HOME/miniconda3/bin/pip install \
 
 ##### spark
 ############################################################################
+SPARK_VERSION="2.4.0"
+HADOOP_VERSION="2.7"
+SPARK_TAR_DIR="spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
+
 mkdir -p $HOME/tools
 cd $HOME/tools
-wget http://archive.apache.org/dist/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz
-tar zxvf spark-2.3.1-bin-hadoop2.7.tgz
+wget http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/$SPARK_TAR_DIR
+mkdir spark && tar zxvf $SPARK_TAR_DIR -C spark --strip-components 1
 echo '' >> $HOME/.bash_profile
-echo 'export SPARK_HOME=$HOME/tools/spark-2.3.1-bin-hadoop2.7' >> $HOME/.bash_profile
+echo 'export SPARK_HOME=$HOME/tools/spark' >> $HOME/.bash_profile
 echo 'export PATH=$SPARK_HOME/bin:$PATH' >> $HOME/.bash_profile
 
 # Maven, and the needed jars to read from s3
 wget http://apache.mirrors.ionfish.org/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
 tar zxvf apache-maven-3.6.0-bin.tar.gz
 $HOME/tools/apache-maven-3.6.0/bin/mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-aws:2.7.3
-cp $HOME/.m2/repository/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar $HOME/tools/spark-2.3.1-bin-hadoop2.7/jars/
-cp $HOME/.m2/repository/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar $HOME/tools/spark-2.3.1-bin-hadoop2.7/jars/
+cp $HOME/.m2/repository/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar $HOME/tools/spark/jars/
+cp $HOME/.m2/repository/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar $HOME/tools/spark/jars/
 cd $HOME
 source $HOME/.bash_profile
 
 ##### ZSH and Neovim set up
 ############################################################################
-cd $HOME
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed '/\s*env\s\s*zsh\s*/d')"
-rm .zshrc && ln -s dotfiles/.zshrc && ln -s dotfiles/.zlogout
-echo "" >> $HOME/.bash_profile
-echo 'export SHELL=`which zsh`' >> $HOME/.bash_profile
-echo '[ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' >> $HOME/.bash_profile
-git clone https://github.com/NDari/dotfiles.git
+NVIM_VERSION="0.3.2"
 $HOME/miniconda3/bin/pip install sexpdata websocket-client jedi neovim
 cd $HOME/tools
-git clone https://github.com/neovim/neovim.git
-cd neovim
-make -j72 CMAKE_EXTRA_FLAGS='-DCMAKE_INSTALL_PREFIX=/home/ec2-user/.local/'
-make install
-cd $HOME
-mkdir -p .config/nvim
-cd .config/nvim
-ln -s /home/ec2-user/dotfiles/init.vim
+wget https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux64.tar.gz
+tar zxvf nvim-linux64.tar.gz
+mkdir -p $HOME/{.config/nvim,bin}
+cp nvim-linux64/bin/nvim $HOME/bin
+sudo mkdir -p /share
+sudo cp -R nvim-linux64/share/nvim/runtime /share/nvim
+aws s3 cp s3://psm-dev-datascience/Dari/tools/init.vim $HOME/.config/nvim/
 cd $HOME
 ############################################################################
