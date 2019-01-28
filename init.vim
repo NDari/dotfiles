@@ -90,6 +90,11 @@ Plug 'mklabs/split-term.vim'
 " repl
 Plug 'https://gitlab.com/HiPhish/repl.nvim'
 
+" kotlin
+Plug 'udalov/kotlin-vim'
+
+" gradle
+Plug 'tfnico/vim-gradle'
 
 " writing
 Plug 'junegunn/goyo.vim'

@@ -157,8 +157,5 @@ export ITERMPLOT=rv # for dark themes
 export MPLBACKEND="module://itermplot"
 export ITERMPLOT_LINES=10
 
-export PATH=$HOME/miniconda3/bin:$PATH
-
-
 export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+export PATH=$HOME/miniconda3/bin:$GOPATH/bin:$PATH
