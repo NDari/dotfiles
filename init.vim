@@ -13,7 +13,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -41,7 +42,6 @@ Plug 'godlygeek/tabular'
 
 " Go plugin. Do :GoInstallBinaries after this to install everything it needs.
 Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Debug go. Only works in neovim. Set breakpoints with :GoToggleBreakpoint and
 " debug with :GoDebug. Needs dlv installed.
 Plug 'jodosha/vim-godebug'
@@ -79,8 +79,6 @@ Plug 'tpope/vim-fugitive'
 " python
 " Jedi for static analysis and completion
 Plug 'davidhalter/jedi-vim'
-" make deoplete use jedi
-Plug 'zchee/deoplete-jedi'
 " better syntax
 Plug 'vim-python/python-syntax'
 
@@ -127,9 +125,12 @@ let g:LanguageClient_serverCommands = {
     \ }
 
 "deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" let g:deoplete#enable_at_startup = 1
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" vimcompletes me
+autocmd FileType * let b:vcm_tab_complete = 'omni'
 
 " enable all python syntax
 let g:python_highlight_all = 1
