@@ -119,6 +119,31 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 DEFAULT_USER=`whoami`
 
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# automatically add ssh agent on login.
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+ssh-add -l > /dev/null || ssh-add
+
+# fuzzy finder settings.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files -u'
+
+alias jl="jupyter lab --no-browser --ip=10.130.23.236 --port=9191"
+
+# itermplot settings to show plots in iterm. install with pip3 install itermplot
+export ITERMPLOT=rv # for dark themes
+export MPLBACKEND="module://itermplot"
+export ITERMPLOT_LINES=10
+
+export GOPATH=$HOME/go
+export PATH=$HOME/miniconda3/bin:$GOPATH/bin:$PATH
+
 declare -a zshrc_files=(
     ".cambrian.zshrc"
     ".psm.zshrc"
@@ -135,27 +160,3 @@ do
     fi
 done
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# automatically add ssh agent on login.
-if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-  eval `ssh-agent`
-  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -l > /dev/null || ssh-add
-
-# fuzzy finder settings.
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files'
-
-alias jl="jupyter lab --no-browser --ip=10.130.23.236 --port=9191"
-
-# itermplot settings to show plots in iterm. install with pip3 install itermplot
-export ITERMPLOT=rv # for dark themes
-export MPLBACKEND="module://itermplot"
-export ITERMPLOT_LINES=10
-
-export GOPATH=$HOME/go
-export PATH=$HOME/miniconda3/bin:$GOPATH/bin:$PATH
