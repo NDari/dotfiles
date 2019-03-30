@@ -1,17 +1,20 @@
-using OhMyREPL
-using Revise
-#= atreplinit() do repl =#
-#=     try =#
-#=         @eval using Revise =#
-#=         @async Revise.wait_steal_repl_backend() =#
-#=     catch =#
-#=     end =#
-#= end =#
+# in each project, we can include a _init.jl file to load the
+# module etc. When starting julia from that directory, it
+# will automatically run the initialization for us.
+isfile("_init.jl") && include(joinpath(pwd(), "_init.jl"))
 
-# always develop in $HOME/Projects/Julia
-function devDir()
-    devDir::String =  "$(homedir())/Projects/Julia"
+# set a local directory for personal code, and add it to the
+# load path so that we can easily use the modules.
+push!(LOAD_PATH,"$(homedir())/Projects/Julia" )
+
+# use revise. Automatically loads git, module, etc changes
+# when using the repl.
+using Revise
+atreplinit() do repl
+    try
+        @eval using Revise
+        @async Revise.wait_steal_repl_backend()
+    catch
+    end
 end
 
-push!(LOAD_PATH,devDir())
-cd(devDir())

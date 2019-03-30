@@ -81,21 +81,21 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
+tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
   # Normal (roman) font face
   normal:
-    family: Fira Code
+    family: Ubuntu Mono derivative Powerline
     # The `style` can be specified to pick a specific face.
-    style: Retina
+    style: Regular
 
   # Bold font face
   bold:
-    family: Fira Code
+    family: Ubuntu Mono derivative Powerline
     # The `style` can be specified to pick a specific face.
-    style: Retina
+    style: Regular
 
   # Italic font face
   # italic:
@@ -104,7 +104,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 18.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -145,35 +145,35 @@ persistent_logging: false
 draw_bold_text_with_bright_colors: true
 
 # Colors (Gruvbox dark)
-colors:
-  # Default colors
-  primary:
-    # hard contrast: background = '0x1d2021'
-    background: '0x282828'
-    # soft contrast: background = '0x32302f'
-    foreground: '0xebdbb2'
+# colors:
+#   # Default colors
+#   primary:
+#     # hard contrast: background = '0x1d2021'
+#     background: '0x282828'
+#     # soft contrast: background = '0x32302f'
+#     foreground: '0xebdbb2'
 
-  # Normal colors
-  normal:
-    black:   '0x282828'
-    red:     '0xcc241d'
-    green:   '0x98971a'
-    yellow:  '0xd79921'
-    blue:    '0x458588'
-    magenta: '0xb16286'
-    cyan:    '0x689d6a'
-    white:   '0xa89984'
+#   # Normal colors
+#   normal:
+#     black:   '0x282828'
+#     red:     '0xcc241d'
+#     green:   '0x98971a'
+#     yellow:  '0xd79921'
+#     blue:    '0x458588'
+#     magenta: '0xb16286'
+#     cyan:    '0x689d6a'
+#     white:   '0xa89984'
 
-  # Bright colors
-  bright:
-    black:   '0x928374'
-    red:     '0xfb4934'
-    green:   '0xb8bb26'
-    yellow:  '0xfabd2f'
-    blue:    '0x83a598'
-    magenta: '0xd3869b'
-    cyan:    '0x8ec07c'
-    white:   '0xebdbb2'
+#   # Bright colors
+#   bright:
+#     black:   '0x928374'
+#     red:     '0xfb4934'
+#     green:   '0xb8bb26'
+#     yellow:  '0xfabd2f'
+#     blue:    '0x83a598'
+#     magenta: '0xd3869b'
+#     cyan:    '0x8ec07c'
+#     white:   '0xebdbb2'
 
 # # Base16 Solarized Dark 256 - alacritty color config
 # # Ethan Schoonover (modified by aramisgithub)
@@ -211,35 +211,35 @@ colors:
 #     white:   '0xfdf6e3'
 
 # Colors (One Dark)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x282c34'
-#     foreground: '0xabb2bf'
+colors:
+  # Default colors
+  primary:
+    background: '0x282c34'
+    foreground: '0xabb2bf'
 
-#   # Normal colors
-#   normal:
-#     # NOTE: Use '0x131613' for the `black` color if you'd like to see
-#     # black text on the background.
-#     black:   '0x282c34'
-#     red:     '0xe06c75'
-#     green:   '0x98c379'
-#     yellow:  '0xd19a66'
-#     blue:    '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan:    '0x56b6c2'
-#     white:   '0xabb2bf'
+  # Normal colors
+  normal:
+    # NOTE: Use '0x131613' for the `black` color if you'd like to see
+    # black text on the background.
+    black:   '0x282c34'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
 
-#   # Bright colors
-#   bright:
-#     black:   '0x5c6370'
-#     red:     '0xe06c75'
-#     green:   '0x98c379'
-#     yellow:  '0xd19a66'
-#     blue:    '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan:    '0x56b6c2'
-#     white:   '0xffffff'
+  # Bright colors
+  bright:
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xffffff'
 
 
   # Indexed Colors
@@ -248,6 +248,60 @@ colors:
   # When these are not set, they're filled with sensible defaults.
   #indexed_colors:
   #  - { index: 16, color: '0x000000' }
+
+# Colors (Pencil Light)
+# colors:
+#  # Default Colors
+#  primary:
+#    background: '0xf1f1f1'
+#    foreground: '0x424242'
+#  # Normal colors
+#  normal:
+#    black:   '0x212121'
+#    red:     '0xc30771'
+#    green:   '0x10a778'
+#    yellow:  '0xa89c14'
+#    blue:    '0x008ec4'
+#    magenta: '0x523c79'
+#    cyan:    '0x20a5ba'
+#    white:   '0xe0e0e0'
+#  # Bright colors
+#  bright:
+#    black:   '0x212121'
+#    red:     '0xfb007a'
+#    green:   '0x5fd7af'
+#    yellow:  '0xf3e430'
+#    blue:    '0x20bbfc'
+#    magenta: '0x6855de'
+#    cyan:    '0x4fb8cc'
+#    white:   '0xf1f1f1'
+
+# Colors (Pencil Dark)
+# colors:
+#  # Default Colors
+#  primary:
+#    background: '0x212121'
+#    foreground: '0xf1f1f1'
+#  # Normal colors
+#  normal:
+#    black:   '0x212121'
+#    red:     '0xc30771'
+#    green:   '0x10a778'
+#    yellow:  '0xa89c14'
+#    blue:    '0x008ec4'
+#    magenta: '0x523c79'
+#    cyan:    '0x20a5ba'
+#    white:   '0xe0e0e0'
+#  # Bright colors
+#  bright:
+#    black:   '0x212121'
+#    red:     '0xfb007a'
+#    green:   '0x5fd7af'
+#    yellow:  '0xf3e430'
+#    blue:    '0x20bbfc'
+#    magenta: '0x6855de'
+#    cyan:    '0x4fb8cc'
+#    white:   '0xf1f1f1'
 
 # Visual Bell
 #

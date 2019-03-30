@@ -5,34 +5,44 @@ sudo yum -y install \
     autoconf \
     automake \
     cmake \
+    ctags \
     gcc \
     gcc-c++ \
+    geos-devel \
     git \
+    java-1.8.0-openjdk-devel.x86_64 \
     libtool \
     make \
     ninja-build \
     patch \
     pkgconfig \
+    tmux \
     unzip \
     util-linux-user.x86_64 \
-    zsh \
-    java-1.8.0-openjdk-devel.x86_64
+    zsh
 
 mkdir -p $HOME/.local/bin
 
 # Python3 setup
 ############################################################################
 cd $HOME
-wget 'https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh'
-chmod +x Miniconda3-4.5.4-Linux-x86_64.sh
-./Miniconda3-4.5.4-Linux-x86_64.sh -b -p $HOME/miniconda3
+
+mc_script=Miniconda3-4.5.11-Linux-x86_64.sh
+pybin=$HOME/miniconda3/bin/
+
+wget "https://repo.continuum.io/miniconda/$mc_script"
+chmod +x $mc_script
+bash ./$mc_script -b -p $HOME/miniconda3
+
 echo '' >> $HOME/.bash_profile
-echo 'export PATH=$HOME/miniconda3/bin:$PATH' >> $HOME/.bash_profile
+echo 'export PATH=$pybin:$PATH' >> $HOME/.bash_profile
+echo "export PYSPARK_PYTHON=$pybin/python" >> $HOME/.bash_profile
+echo "alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'" >> ${HOME}/.bash_profile
 source $HOME/.bash_profile
 
-$HOME/miniconda3/bin/pip install --upgrade pip
+$pybin/pip install --upgrade pip
 
-$HOME/miniconda3/bin/pip install \
+$pybin/pip install \
     awscli \
     beautifulsoup4 \
     bokeh \
@@ -80,19 +90,23 @@ echo '' >> $HOME/.bash_profile
 echo 'export SPARK_HOME=$HOME/tools/spark' >> $HOME/.bash_profile
 echo 'export PATH=$SPARK_HOME/bin:$PATH' >> $HOME/.bash_profile
 
+MAVEN_VERSION=3.6.0
+HADOOP_AWS_VERSION=2.7.3
+JARS_DIR=$HOME/tools/spark/jars/
+
 # Maven, and the needed jars to read from s3
-wget http://apache.mirrors.ionfish.org/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
-tar zxvf apache-maven-3.6.0-bin.tar.gz
-$HOME/tools/apache-maven-3.6.0/bin/mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-aws:2.7.3
-cp $HOME/.m2/repository/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar $HOME/tools/spark/jars/
-cp $HOME/.m2/repository/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar $HOME/tools/spark/jars/
+wget http://apache.mirrors.ionfish.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
+tar zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz
+$HOME/tools/apache-maven-$MAVEN_VERSION/bin/mvn dependency:get -Dartifact=org.apache.hadoop:hadoop-aws:$HADOOP_AWS_VERSION
+cp $HOME/.m2/repository/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar $JARS_DIR
+cp $HOME/.m2/repository/org/apache/hadoop/hadoop-aws/$HADOOP_AWS_VERSION/hadoop-aws-$HADOOP_AWS_VERSION.jar $JARS_DIR
 cd $HOME
 source $HOME/.bash_profile
 
 ##### ZSH and Neovim set up
 ############################################################################
-NVIM_VERSION="0.3.2"
-$HOME/miniconda3/bin/pip install sexpdata websocket-client jedi neovim
+NVIM_VERSION="0.3.4"
+$pybin/pip install pynvim sexpdata websocket-client jedi neovim
 cd $HOME/tools
 wget https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux64.tar.gz
 tar zxvf nvim-linux64.tar.gz
