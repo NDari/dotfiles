@@ -14,10 +14,10 @@
     (require 'use-package))
 
 ;; Minimal UI
-(scroll-bar-mode -1)
-(tool-bar-mode   -1)
-(tooltip-mode    -1)
-(menu-bar-mode   -1)
+;(setq scroll-bar-mode -1)
+;(setq tool-bar-mode   -1)
+;(setq tooltip-mode    -1)
+;(setq menu-bar-mode   -1)
 
 ;; disable initial screen
 (setq inhibit-startup-screen t)
@@ -35,8 +35,8 @@
 (setq scroll-margin 10)
 
 ;; Mac Emacs settings
-(setq mac-option-modifier 'super)
-(setq mac-command-modifier 'meta)
+;(setq mac-option-modifier 'super)
+;(setq mac-command-modifier 'meta)
 
 ;; fancy titlebar for macos
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -60,8 +60,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas"))
-(set-face-attribute 'default t :font "Consolas")
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono derivative Powerline Bold"))
+(set-face-attribute 'default t :font "Ubuntu Mono derivative Powerline Bold")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -121,7 +121,7 @@
   :init
   (global-evil-leader-mode))
 
-(evil-leader/set-leader " ")
+(evil-leader/set-leader "SPC")
 (evil-leader/set-key
   "t" 'helm-projectile
   "g" 'helm-find

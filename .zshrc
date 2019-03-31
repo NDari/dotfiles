@@ -93,19 +93,19 @@ alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 
 # pip rg to less. -ip => case-insensitive, colored
 s() {
-        rg -ip "$1" | less
+    rg -ip "$1" | less
 }
 
 t() {
-        tree -Caf -L ${1:-1} | less
+    tree -Caf -L ${1:-1} | less
 }
 
 function rebel-clj() {
-  clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $@}}" -m rebel-readline.main
+    clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $@}}" -m rebel-readline.main
 }
 
 function rebel-cljs() {
-  clojure -Sdeps "{:deps {com.bhauman/figwheel-main {:mvn/version \"0.1.7\"} com.bhauman/rebel-readline-cljs {:mvn/version \"0.1.4\"} $@}}" -m figwheel.main
+    clojure -Sdeps "{:deps {com.bhauman/figwheel-main {:mvn/version \"0.1.7\"} com.bhauman/rebel-readline-cljs {:mvn/version \"0.1.4\"} $@}}" -m figwheel.main
 }
 
 # color for manpages
@@ -124,8 +124,8 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # automatically add ssh agent on login.
 if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-  eval `ssh-agent`
-  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+    eval `ssh-agent`
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 ssh-add -l > /dev/null || ssh-add
@@ -159,4 +159,3 @@ do
         source "${HOME}/${f}"
     fi
 done
-
