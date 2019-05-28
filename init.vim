@@ -13,8 +13,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ajh17/VimCompletesMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -69,6 +69,7 @@ Plug 'robertmeta/nofrils'
 Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
+Plug 'kaicataldo/material.vim'
 
 " nerdtree
 Plug 'tpope/vim-vinegar'
@@ -90,6 +91,7 @@ Plug 'https://gitlab.com/HiPhish/repl.nvim'
 
 " kotlin
 Plug 'udalov/kotlin-vim'
+Plug 'fwcd/KotlinLanguageServer'
 
 " gradle
 Plug 'tfnico/vim-gradle'
@@ -110,6 +112,12 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'wlangstroth/vim-racket'
 Plug 'MicahElliott/vrod'
 
+" paren matching etc
+Plug 'tmsvg/pear-tree'
+
+" readline keybinding in insert and command mode
+" Plug 'tpope/vim-rsi'
+
 " Initialize plugin system
 call plug#end()
 
@@ -121,13 +129,21 @@ set nocompatible
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'python': ['pyls'],
+    \ 'kotlin': ['kotlinc'],
     \ 'go': ['go-langserver'],
+    \ 'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+    \     using LanguageServer;
+    \     server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
+    \     server.runlinter = true;
+    \     run(server);
+    \ '],
+    \ 'scala': ['scalameta_lsp'],
     \ }
 
 "deoplete
-" let g:deoplete#enable_at_startup = 1
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:deoplete#enable_at_startup = 1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vimcompletes me
 autocmd FileType * let b:vcm_tab_complete = 'omni'
@@ -144,7 +160,7 @@ let g:jedi#rename_command = ""
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': 'enew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -182,6 +198,10 @@ let g:rustfmt_autosave = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 
 " Vim configs
+
+" Python configs
+" pep8 on save
+au FileType python setlocal formatprg=autopep8\ -
 
 " rust specific key commands
 au FileType rust nmap gd <Plug>(rust-def)
@@ -285,7 +305,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme one
+colorscheme material
 
 " make colorschemes look ok in tmux
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
