@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-SERVER=$1
-PEMFILE=$2
+IP=$1
+SERVER=ec2-user@$IP
+PEMFILE=${2:-"$HOME/Datascience-EMR.pem"}
 
 ssh -i $PEMFILE $SERVER mkdir -p .ssh
 ssh -i $PEMFILE $SERVER mkdir -p .aws
