@@ -9,12 +9,18 @@ push!(LOAD_PATH,"$(homedir())/Projects/Julia" )
 
 # use revise. Automatically loads git, module, etc changes
 # when using the repl.
-using Revise
 atreplinit() do repl
     try
         @eval using Revise
         @async Revise.wait_steal_repl_backend()
     catch
+        @warn "Could not load Revise."
+    end
+
+    try
+        @eval using Rebugger
+    catch
+        @warn "Could not load Rebugger."
     end
 end
 
