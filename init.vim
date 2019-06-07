@@ -116,7 +116,7 @@ Plug 'MicahElliott/vrod'
 Plug 'tmsvg/pear-tree'
 
 " readline keybinding in insert and command mode
-" Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-rsi'
 
 " Initialize plugin system
 call plug#end()
@@ -303,9 +303,9 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
-colorscheme gruvbox
+colorscheme one
 
 " make colorschemes look ok in tmux
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
