@@ -70,6 +70,7 @@ Plug 'rakr/vim-one'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'kaicataldo/material.vim'
+Plug 'reedes/vim-colors-pencil'
 
 " nerdtree
 Plug 'tpope/vim-vinegar'
@@ -104,6 +105,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
@@ -127,26 +130,35 @@ set nocompatible
 
 " language client settings
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'python': ['pyls'],
-    \ 'kotlin': ['kotlinc'],
-    \ 'go': ['go-langserver'],
-    \ 'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-    \     using LanguageServer;
-    \     server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
-    \     server.runlinter = true;
-    \     run(server);
-    \ '],
-    \ 'scala': ['scalameta_lsp'],
-    \ }
+\   'rust': ['rustup', 'run', 'stable', 'rls'],
+\   'python': ['pyls'],
+\   'kotlin': ['kotlinc'],
+\   'go': ['go-langserver'],
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+\       using LanguageServer;
+\       using Pkg;
+\       import StaticLint;
+\       import SymbolServer;
+\       env_path = dirname(Pkg.Types.Context().env.project_file);
+\       debug = false;
+\
+\       server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "", Dict());
+\       server.runlinter = true;
+\       run(server);
+\   '],
+\   'scala': ['scalameta_lsp'],
+\ }
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" julia
+let g:default_julia_version = '1.1'
+
 " vimcompletes me
-autocmd FileType * let b:vcm_tab_complete = 'omni'
+" autocmd FileType * let b:vcm_tab_complete = 'omni'
 
 " enable all python syntax
 let g:python_highlight_all = 1

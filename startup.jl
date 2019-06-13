@@ -17,10 +17,11 @@ atreplinit() do repl
         @warn "Could not load Revise."
     end
 
+    end
+
     try
         @eval using Rebugger
     catch
         @warn "Could not load Rebugger."
     end
 end
-
