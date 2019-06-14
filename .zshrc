@@ -57,6 +57,7 @@ export KEYTIMEOUT=1
 plugins=(
     git
     history-substring-search
+    ubuntu
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -79,7 +80,6 @@ export EDITOR=`which nvim`
 # system aliases
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'
-alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 alias enw='emacs -nw'
 alias e='nvim'
 alias less='less -R' # pass escape chars through
@@ -149,6 +149,7 @@ declare -a zshrc_files=(
     ".psm.zshrc"
     ".psm.ds.zshrc"
     ".personal.zshrc"
+    ".personal-linux.zshrc"
 )
 
 # source all the special files if they exist.

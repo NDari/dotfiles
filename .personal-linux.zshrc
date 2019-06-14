@@ -31,16 +31,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # for racer to work. Must get rust source with "rustup component add rust-src"
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
-# cuda and cudann stuff
-#export CUDA_HOME="/usr/local/cuda"
-#export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-#export PATH="$CUDA_HOME/bin:$PATH"
-
 # racket stuff
 alias rak='racket -il xrepl'
-# export CUDA_HOME="/usr/local/cuda"
-# export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-# export PATH="$CUDA_HOME/bin:$PATH"
 
 # linux pbcopy/paste
 alias pbcopy='xclip -selection clipboard'
@@ -52,6 +44,3 @@ alias guix=$HOME/.config/guix/current/bin/guix
 # gerbil stuff
 export PATH=/usr/local/opt/gambit-scheme/current/bin:$PATH
 export GERBIL_HOME=/usr/local/opt/gerbil-scheme/libexec
-
-# Java stuff for osx
-# export JAVA_HOME=$(/usr/libexec/java_home)
