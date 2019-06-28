@@ -12,8 +12,8 @@ export lw='ndari@lewis4.rnet.missouri.edu'
 
 # Java stuff
 case "$machine" in
-        Linux) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-        Mac)   export JAVA_HOME=$(/usr/libexec/java_home)
+        Linux*) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64;;
+        Mac*)   export JAVA_HOME=$(/usr/libexec/java_home);;
 esac
 
 # Spark and Hive
@@ -40,7 +40,7 @@ export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 alias rak='racket -il xrepl'
 
 # linux pbcopy/paste
-if [ $machine == 'Linux' ]; then
+if [ $machine = 'Linux' ]; then
         alias pbcopy='xclip -selection clipboard'
         alias pbpaste='xclip -selection clipboard -o'
 fi
@@ -70,6 +70,6 @@ printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
 
 # olcao stuff
-if [ $machine == 'Linux']; then
+if [ $machine = 'Linux' ]; then
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
 fi
