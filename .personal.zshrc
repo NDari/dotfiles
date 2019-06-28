@@ -1,17 +1,25 @@
+nameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
 # UMKC stuff
 export lw='ndari@lewis4.rnet.missouri.edu'
 
-# python
-export PATH=$HOME/miniconda3/bin:$PATH
-
 # Java stuff
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+case "$machine" in
+        Linux) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+        Mac)   export JAVA_HOME=$(/usr/libexec/java_home)
+esac
 
 # Spark and Hive
 export SPARK_HOME=$HOME/tools/spark-2.4.0-bin-hadoop2.7
 export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
 export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
-export PATH=$SPARK_HOME/bin:$HIVE_HOME/bin:$PATH
 
 # ocaml stuff
 # source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -19,39 +27,49 @@ export PATH=$SPARK_HOME/bin:$HIVE_HOME/bin:$PATH
 
 #### Go stuff
 # export GOROOT=/usr/local/go
-export PATH=$HOME/go/bin:$PATH
 # export GOPATH=$HOME/go
 # export GOBIN=$GOPATH/bin
 # export PATH=$GOBIN:$GOROOT/bin:$PATH
 export GOROOT=/usr/local/go
-export PATH=$HOME/go/bin:$GOROOT/bin:$PATH
 
 # Rust stuff
-export PATH="$HOME/.cargo/bin:$PATH"
 # for racer to work. Must get rust source with "rustup component add rust-src"
 export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
-# cuda and cudann stuff
-#export CUDA_HOME="/usr/local/cuda"
-#export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-#export PATH="$CUDA_HOME/bin:$PATH"
-
 # racket stuff
 alias rak='racket -il xrepl'
-# export CUDA_HOME="/usr/local/cuda"
-# export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-# export PATH="$CUDA_HOME/bin:$PATH"
 
 # linux pbcopy/paste
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+if [ $machine == 'Linux' ]; then
+        alias pbcopy='xclip -selection clipboard'
+        alias pbpaste='xclip -selection clipboard -o'
+fi
 
 alias gforth=$HOME/tools/gforth/gforth
 alias guix=$HOME/.config/guix/current/bin/guix
 
 # gerbil stuff
-export PATH=/usr/local/opt/gambit-scheme/current/bin:$PATH
 export GERBIL_HOME=/usr/local/opt/gerbil-scheme/libexec
 
-# Java stuff for osx
-# export JAVA_HOME=$(/usr/libexec/java_home)
+# path. just add to this
+
+ALLPATHS=(
+        "$HOME/miniconda3/bin"
+        "$SPARK_HOME/bin"
+        "$HIVE_HOME/bin"
+        "$HOME/go/bin"
+        "$HOME/go/bin"
+        "$GOROOT/bin"
+        "$HOME/.cargo/bin"
+        "/usr/local/opt/gambit-scheme/current/bin"
+        "$HOME/bin"
+        "/usr/local/bin"
+        "$HOME/.local/bin"
+)
+printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
+export PATH=${NEWPATHS}${PATH}
+
+# olcao stuff
+if [ $machine == 'Linux']; then
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
+fi

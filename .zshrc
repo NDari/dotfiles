@@ -1,5 +1,4 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -91,23 +90,6 @@ alias ip='ipython'
 alias vi="vim"
 alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 
-# pip rg to less. -ip => case-insensitive, colored
-s() {
-    rg -ip "$1" | less
-}
-
-t() {
-    tree -Caf -L ${1:-1} | less
-}
-
-function rebel-clj() {
-    clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $@}}" -m rebel-readline.main
-}
-
-function rebel-cljs() {
-    clojure -Sdeps "{:deps {com.bhauman/figwheel-main {:mvn/version \"0.1.7\"} com.bhauman/rebel-readline-cljs {:mvn/version \"0.1.4\"} $@}}" -m figwheel.main
-}
-
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -141,9 +123,6 @@ export ITERMPLOT=rv # for dark themes
 export MPLBACKEND="module://itermplot"
 export ITERMPLOT_LINES=10
 
-export GOPATH=$HOME/go
-export PATH=$HOME/miniconda3/bin:$GOPATH/bin:$PATH
-
 declare -a zshrc_files=(
     ".cambrian.zshrc"
     ".psm.zshrc"
@@ -160,3 +139,7 @@ do
         source "${HOME}/${f}"
     fi
 done
+
+# source custom shell functions
+source $HOME/dotfiles/shell-functions
+
