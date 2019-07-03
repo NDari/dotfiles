@@ -94,14 +94,22 @@
 ; set default home. Mostly for windows
 (setq default-directory (getenv "HOME"))
 
-(define-key global-map (kbd "C-;") 'helm-M-x)
 ;;;;;;;;;;;;;;;;; Package settings
-
 ;; evil-mode
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  :custom (evil-collection-setup-minibuffer t)
+  (evil-collection-init))
 
 ;; evil mode custom key binds.
 (eval-after-load "evil"
@@ -126,7 +134,6 @@
   "t" 'helm-projectile
   "g" 'helm-find
   "f" 'helm-find-files
-  "e" 'new-shell
   "b" 'helm-buffers-list
   "x" 'helm-M-x
   "k" 'kill-buffer)
@@ -172,15 +179,15 @@
   (which-key-mode 1))
 
 ;; change paren highlight color
-(use-package paren
-  :ensure t
-  :config
-  (setq show-paren-delay 0)
-  (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "green")
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (show-paren-mode +1)
-  (setq show-paren-style 'expression)) ;; highlight whole expression
+;; (use-package paren
+;;   :ensure t
+;;   :config
+;;   (setq show-paren-delay 0)
+;;   (set-face-background 'show-paren-match (face-background 'default))
+;;   (set-face-foreground 'show-paren-match "green")
+;;   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+;;   (show-paren-mode +1)
+;;   (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
 (use-package all-the-icons :ensure t)
@@ -283,6 +290,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-collection-init nil t)
+ '(evil-collection-setup-minibuffer t)
  '(package-selected-packages
    (quote
     (flycheck company-racer rust-mode company helm neotree all-the-icons which-key atom-one-dark-theme evil-surround evil-snipe evil-escape evil-leader evil use-package))))
