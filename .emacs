@@ -112,31 +112,31 @@
   (evil-collection-init))
 
 ;; evil mode custom key binds.
-(eval-after-load "evil"
-  '(progn
-     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
-     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+; (eval-after-load "evil"
+;   '(progn
+;      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+;      (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+;      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+;      (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
+;      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+;      (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+;      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+;      (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
 
 ; and enable the <leader> key binding
-(use-package evil-leader
-  :ensure t
-  :init
-  (global-evil-leader-mode))
+; (use-package evil-leader
+;   :ensure t
+;   :init
+;   (global-evil-leader-mode))
 
-(evil-leader/set-leader "SPC")
-(evil-leader/set-key
-  "t" 'helm-projectile
-  "g" 'helm-find
-  "f" 'helm-find-files
-  "b" 'helm-buffers-list
-  "x" 'helm-M-x
-  "k" 'kill-buffer)
+; (evil-leader/set-leader "SPC")
+; (evil-leader/set-key
+;   "t" 'helm-projectile
+;   "g" 'helm-find
+;   "f" 'helm-find-files
+;   "b" 'helm-buffers-list
+;   "x" 'helm-M-x
+;   "k" 'kill-buffer)
 
 ;; allow escape to be remapped
 (use-package evil-escape
@@ -254,6 +254,18 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
+;; Superior Lisp Interaction Mode for Emacs
+(use-package slime
+  :ensure t
+  :defer t
+  :init
+  (setq inferior-lisp-program "sbcl")
+  :config
+  (add-hook 'slime-mode-hook
+            (lambda ()
+              (add-to-list 'slime-contribs 'slime-fancy)
+              (add-to-list 'slime-contribs 'inferior-slime))))
+
 ;; clojure stuff
 ;(use-package clojure-mode
   ;:ensure t
@@ -292,9 +304,7 @@
  ;; If there is more than one, they won't work right.
  '(evil-collection-init nil t)
  '(evil-collection-setup-minibuffer t)
- '(package-selected-packages
-   (quote
-    (flycheck company-racer rust-mode company helm neotree all-the-icons which-key atom-one-dark-theme evil-surround evil-snipe evil-escape evil-leader evil use-package))))
+ '(package-selected-packages nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
