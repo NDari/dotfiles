@@ -343,20 +343,9 @@ set splitright
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" switch in and out of terminal mode in nvim
-tnoremap <C-h> <c-\><c-n><c-w>h
-tnoremap <C-j> <c-\><c-n><c-w>j
-tnoremap <C-k> <c-\><c-n><c-w>k
-tnoremap <C-l> <c-\><c-n><c-w>l
-tnoremap <Esc> <C-\><C-n>
-
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
-
-" remap l to select current line
-nnoremap l <S-v>
-vnoremap l <S-v>
 
 " set leader,
 let mapleader=" "
@@ -365,8 +354,8 @@ nnoremap <leader>g :Rg<cr>
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader>c :Commands<cr>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>m :Marks<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>m :Lines<cr>
 nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
