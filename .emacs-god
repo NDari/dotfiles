@@ -1,4 +1,6 @@
-;; package management
+;;; package management
+
+
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
 			             ("gnu"   . "http://elpa.gnu.org/packages/")
@@ -39,10 +41,10 @@
 ;(setq mac-command-modifier 'meta)
 
 ;; fancy titlebar for macos
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
-(setq ns-use-proxy-icon  nil)
-(setq frame-title-format nil)
+;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;(add-to-list 'default-frame-alist '(ns-appearance . dark))
+;(setq ns-use-proxy-icon  nil)
+;(setq frame-title-format nil)
 
 ;; show matching parens
 (show-paren-mode 1)
@@ -60,8 +62,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono derivative Powerline Bold"))
-(set-face-attribute 'default t :font "Ubuntu Mono derivative Powerline Bold")
+(add-to-list 'default-frame-alist '(font . "Consolas"))
+(set-face-attribute 'default t :font "Consolas")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -78,91 +80,20 @@
 ;; line nums
 (global-linum-mode t)
 ;; use customized linum-format: add a addition space after the line number
-(setq linum-format
-      (lambda (line)
-        (propertize (format (let
-                                ((w (length (number-to-string (count-lines (point-min)
-                                                                           (point-max))))))
-                              (concat "%" (number-to-string w) "d "))
-                            line)
-                    'face
-                    'linum)))
+;(setq linum-format
+;      (lambda (line)
+;        (propertize (format (let
+;                                ((w (length (number-to-string (count-lines (point-min)
+;                                                                           (point-max))))))
+;                              (concat "%" (number-to-string w) "d "))
+;                            line)
+;                    'face
+;                    'linum)))
 
 ; highlight current line
 (global-hl-line-mode 1)
 
-; set default home. Mostly for windows
-(setq default-directory (getenv "HOME"))
-
 ;;;;;;;;;;;;;;;;; Package settings
-;; evil-mode
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  :custom (evil-collection-setup-minibuffer t)
-  (evil-collection-init))
-
-;; evil mode custom key binds.
-; (eval-after-load "evil"
-;   '(progn
-;      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-;      (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-;      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-;      (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
-;      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-;      (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-;      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-;      (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
-
-; and enable the <leader> key binding
-; (use-package evil-leader
-;   :ensure t
-;   :init
-;   (global-evil-leader-mode))
-
-; (evil-leader/set-leader "SPC")
-; (evil-leader/set-key
-;   "t" 'helm-projectile
-;   "g" 'helm-find
-;   "f" 'helm-find-files
-;   "b" 'helm-buffers-list
-;   "x" 'helm-M-x
-;   "k" 'kill-buffer)
-
-;; allow escape to be remapped
-(use-package evil-escape
-  :ensure t
-  :init
-  (evil-escape-mode +1)
-  :config
-  (setq-default evil-escape-key-sequence "kj")
-  (setq-default evil-escape-delay 0.1))
-
-;; snipe mode allows motion with "s" and two chars. a better version of
-;; easymotion, and a clone of vim-seek
-(use-package evil-snipe
-  :ensure t
-  :init
-  (setq evil-snipe-scope 'whole-visible)
-  :config
-  (evil-snipe-mode +1)
-  (evil-snipe-override-mode +1))
-
-;; same as vim surround
-(use-package evil-surround
-  :ensure t
-  :init
-  (global-evil-surround-mode 1))
-
 ; theme
 (use-package atom-one-dark-theme
   :ensure t
@@ -178,6 +109,22 @@
   :config
   (which-key-mode 1))
 
+;; God!
+; (use-package god-mode
+;   :ensure t
+;   :config
+;   (defvar j/god-cursor-enabled "red")
+;   (defvar j/god-cursor-disabled (cdr (assoc 'cursor-color (frame-parameters))))
+;   (defun j/god-cursor ()
+;     (set-cursor-color (if (or god-local-mode buffer-read-only)
+; 						 j/god-cursor-enabled
+; 						 j/god-cursor-disabled)))
+;   (add-hook 'god-mode-enabled-hook 'j/god-cursor)
+;   (add-hook 'god-mode-disabled-hook 'j/god-cursor)
+;   (setq god-exempt-major-modes nil)
+;   (setq god-exempt-predicates nil))
+; (global-set-key (kbd "<escape>") 'god-mode-all)
+
 ;; change paren highlight color
 ;; (use-package paren
 ;;   :ensure t
@@ -192,22 +139,6 @@
 ;; all the icons
 (use-package all-the-icons :ensure t)
 
-;; kinda like nerd tree
-(use-package neotree
-  :ensure t
-  :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
-;; make neotree keybinding work when in that buffer
-(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
-(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
-(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
-(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
-
 ;; helm
 (use-package helm
   :ensure t
@@ -221,13 +152,14 @@
   (setq helm-imenu-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
   (setq helm-candidate-number-list 150)
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (setq helm-echo-input-in-header-line t)
   (setq helm-autoresize-max-height 0)
   (setq helm-autoresize-min-height 20)
   :config
   (helm-mode +1))
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; enable company mode (for auto complete)
 (use-package company
@@ -288,14 +220,6 @@
   :ensure t
   :init
   (global-flycheck-mode t))
-
-;; spell checking. Emacs 24.2+ has flyspell, but we need
-;; to do brew install aspell --with-lang-en to add a spell-checker
-;; for it. to make it work in a buffer, do M-x flyspell-buffer
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'find-file-hooks 'turn-on-flyspell)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
