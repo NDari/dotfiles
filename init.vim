@@ -26,7 +26,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 
 " auto-add closing braces of all kinds, and matching qoutes.
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " open locationlist and quickfix with leader l and q
 Plug 'Valloric/ListToggle'
@@ -121,6 +121,9 @@ Plug 'tmsvg/pear-tree'
 " readline keybinding in insert and command mode
 Plug 'tpope/vim-rsi'
 
+" slime: send code to repl
+Plug 'jpalardy/vim-slime'
+
 " Initialize plugin system
 call plug#end()
 
@@ -155,7 +158,11 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " julia
-let g:default_julia_version = '1.1'
+let g:default_julia_version = '1.0'
+
+" slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
@@ -346,6 +353,13 @@ nnoremap N Nzzzv
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" make the panel switches work in terminal mode
+tnoremap <C-h> <c-\><c-n><c-w>h
+tnoremap <C-j> <c-\><c-n><c-w>j
+tnoremap <C-k> <c-\><c-n><c-w>k
+tnoremap <C-l> <c-\><c-n><c-w>l
+tnoremap <Esc> <C-\><C-n>
 
 " set leader,
 let mapleader=" "
