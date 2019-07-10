@@ -60,8 +60,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono derivative Powerline Bold"))
-(set-face-attribute 'default t :font "Ubuntu Mono derivative Powerline Bold")
+(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(set-face-attribute 'default t :font "Fira Code")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -90,9 +90,6 @@
 
 ; highlight current line
 (global-hl-line-mode 1)
-
-; set default home. Mostly for windows
-(setq default-directory (getenv "HOME"))
 
 ;;;;;;;;;;;;;;;;; Package settings
 ;; evil-mode
@@ -130,11 +127,8 @@
 
 (evil-leader/set-leader "SPC")
   (evil-leader/set-key
-    "t" 'helm-projectile
-    "g" 'helm-find
     "f" 'helm-find-files
-    "b" 'helm-buffers-list
-    "x" 'kill-buffer)
+    "b" 'helm-buffers-list)
 
 ;; allow escape to be remapped
 (use-package evil-escape
@@ -161,11 +155,11 @@
   :init
   (global-evil-surround-mode 1))
 
-; theme
-(use-package atom-one-dark-theme
+;; theme
+(use-package doom-themes
   :ensure t
-  :init
-  (load-theme 'atom-one-dark t))
+  :config
+  (load-theme 'doom-one t))
 
 ;; Which Key
 (use-package which-key
@@ -188,23 +182,13 @@
 ;;   (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
-(use-package all-the-icons :ensure t)
-
-;; kinda like nerd tree
-(use-package neotree
+(use-package all-the-icons
+  :if window-system
   :ensure t
-  :init
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+  :config
+  (when (not (member "all-the-icons" (font-family-list)))
+    (all-the-icons-install-fonts t)))
 
-;; make neotree keybinding work when in that buffer
-(evil-define-key 'normal neotree-mode-map (kbd "<return>") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
-(evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-hidden-file-toggle)
-(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
-(evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-rename-node)
-(evil-define-key 'normal neotree-mode-map (kbd "y") 'neotree-copy-node)
 
 ;; helm
 (use-package helm
@@ -297,7 +281,9 @@
  ;; If there is more than one, they won't work right.
  '(evil-collection-init nil t)
  '(evil-collection-setup-minibuffer t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   (quote
+    (doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

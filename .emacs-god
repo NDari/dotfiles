@@ -16,10 +16,10 @@
     (require 'use-package))
 
 ;; Minimal UI
-;(setq scroll-bar-mode -1)
-;(setq tool-bar-mode   -1)
-;(setq tooltip-mode    -1)
-;(setq menu-bar-mode   -1)
+(setq scroll-bar-mode -1)
+(setq tool-bar-mode   -1)
+(setq tooltip-mode    -1)
+(setq menu-bar-mode   -1)
 
 ;; disable initial screen
 (setq inhibit-startup-screen t)
@@ -62,8 +62,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas"))
-(set-face-attribute 'default t :font "Consolas")
+(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(set-face-attribute 'default t :font "Fira Code")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -80,25 +80,25 @@
 ;; line nums
 (global-linum-mode t)
 ;; use customized linum-format: add a addition space after the line number
-;(setq linum-format
-;      (lambda (line)
-;        (propertize (format (let
-;                                ((w (length (number-to-string (count-lines (point-min)
-;                                                                           (point-max))))))
-;                              (concat "%" (number-to-string w) "d "))
-;                            line)
-;                    'face
-;                    'linum)))
+(setq linum-format
+      (lambda (line)
+        (propertize (format (let
+                                ((w (length (number-to-string (count-lines (point-min)
+                                                                           (point-max))))))
+                              (concat "%" (number-to-string w) "d "))
+                            line)
+                    'face
+                    'linum)))
 
 ; highlight current line
 (global-hl-line-mode 1)
 
 ;;;;;;;;;;;;;;;;; Package settings
 ; theme
-(use-package atom-one-dark-theme
+(use-package doom-themes
   :ensure t
-  :init
-  (load-theme 'atom-one-dark t))
+  :config
+  (load-theme 'doom-one t))
 
 ;; Which Key
 (use-package which-key
@@ -137,7 +137,12 @@
 ;;   (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
-(use-package all-the-icons :ensure t)
+(use-package all-the-icons
+  :if window-system
+  :ensure t
+  :config
+  (when (not (member "all-the-icons" (font-family-list)))
+    (all-the-icons-install-fonts t)))
 
 ;; helm
 (use-package helm
@@ -226,8 +231,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-collection-init nil t)
- '(evil-collection-setup-minibuffer t)
  '(package-selected-packages nil))
 
 (custom-set-faces

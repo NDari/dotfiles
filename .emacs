@@ -1,6 +1,4 @@
-;;; package management
-
-
+;; package management
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
 			             ("gnu"   . "http://elpa.gnu.org/packages/")
@@ -16,10 +14,10 @@
     (require 'use-package))
 
 ;; Minimal UI
-;(setq scroll-bar-mode -1)
-;(setq tool-bar-mode   -1)
-;(setq tooltip-mode    -1)
-;(setq menu-bar-mode   -1)
+(setq scroll-bar-mode -1)
+(setq tool-bar-mode   -1)
+(setq tooltip-mode    -1)
+(setq menu-bar-mode   -1)
 
 ;; disable initial screen
 (setq inhibit-startup-screen t)
@@ -62,8 +60,8 @@
 (setq initial-frame-alist '((top . 0) (left . 0) (width . 100) (height . 50)))
 
 ; font
-(add-to-list 'default-frame-alist '(font . "Consolas"))
-(set-face-attribute 'default t :font "Consolas")
+(add-to-list 'default-frame-alist '(font . "Fira Code"))
+(set-face-attribute 'default t :font "Fira Code")
 
 ;; backups
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
@@ -80,25 +78,88 @@
 ;; line nums
 (global-linum-mode t)
 ;; use customized linum-format: add a addition space after the line number
-;(setq linum-format
-;      (lambda (line)
-;        (propertize (format (let
-;                                ((w (length (number-to-string (count-lines (point-min)
-;                                                                           (point-max))))))
-;                              (concat "%" (number-to-string w) "d "))
-;                            line)
-;                    'face
-;                    'linum)))
+(setq linum-format
+      (lambda (line)
+        (propertize (format (let
+                                ((w (length (number-to-string (count-lines (point-min)
+                                                                           (point-max))))))
+                              (concat "%" (number-to-string w) "d "))
+                            line)
+                    'face
+                    'linum)))
 
 ; highlight current line
 (global-hl-line-mode 1)
 
 ;;;;;;;;;;;;;;;;; Package settings
-; theme
-(use-package atom-one-dark-theme
+;; evil-mode
+(use-package evil
   :ensure t
   :init
-  (load-theme 'atom-one-dark t))
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+;; evil mode custom key binds.
+; (eval-after-load "evil"
+;   '(progn
+;      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+;      (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+;      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+;      (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
+;      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+;      (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+;      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+;      (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+
+; and enable the <leader> key binding
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode))
+
+(evil-leader/set-leader "SPC")
+  (evil-leader/set-key
+    "f" 'helm-find-files
+    "b" 'helm-buffers-list)
+
+;; allow escape to be remapped
+(use-package evil-escape
+  :ensure t
+  :init
+  (evil-escape-mode +1)
+  :config
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-delay 0.1))
+
+;; snipe mode allows motion with "s" and two chars. a better version of
+;; easymotion, and a clone of vim-seek
+(use-package evil-snipe
+  :ensure t
+  :init
+  (setq evil-snipe-scope 'whole-visible)
+  :config
+  (evil-snipe-mode +1)
+  (evil-snipe-override-mode +1))
+
+;; same as vim surround
+(use-package evil-surround
+  :ensure t
+  :init
+  (global-evil-surround-mode 1))
+
+;; theme
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
 
 ;; Which Key
 (use-package which-key
@@ -108,22 +169,6 @@
   (setq which-key-prefix-prefix "+")
   :config
   (which-key-mode 1))
-
-;; God!
-; (use-package god-mode
-;   :ensure t
-;   :config
-;   (defvar j/god-cursor-enabled "red")
-;   (defvar j/god-cursor-disabled (cdr (assoc 'cursor-color (frame-parameters))))
-;   (defun j/god-cursor ()
-;     (set-cursor-color (if (or god-local-mode buffer-read-only)
-; 						 j/god-cursor-enabled
-; 						 j/god-cursor-disabled)))
-;   (add-hook 'god-mode-enabled-hook 'j/god-cursor)
-;   (add-hook 'god-mode-disabled-hook 'j/god-cursor)
-;   (setq god-exempt-major-modes nil)
-;   (setq god-exempt-predicates nil))
-; (global-set-key (kbd "<escape>") 'god-mode-all)
 
 ;; change paren highlight color
 ;; (use-package paren
@@ -137,22 +182,22 @@
 ;;   (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
-(use-package all-the-icons :ensure t)
+(use-package all-the-icons
+  :if window-system
+  :ensure t
+  :config
+  (when (not (member "all-the-icons" (font-family-list)))
+    (all-the-icons-install-fonts t)))
+
 
 ;; helm
 (use-package helm
   :ensure t
   :init
-  (setq helm-M-x-fuzzy-match t)
   (setq helm-mode-fuzzy-match t)
-  (setq helm-buffers-fuzzy-matching t)
-  (setq helm-recentf-fuzzy-match t)
-  (setq helm-locate-fuzzy-match t)
-  (setq helm-semantic-fuzzy-match t)
-  (setq helm-imenu-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
   (setq helm-candidate-number-list 150)
-  (setq helm-split-window-inside-p t)
+  (setq helm-split-window-in-side-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (setq helm-echo-input-in-header-line t)
   (setq helm-autoresize-max-height 0)
@@ -198,6 +243,31 @@
               (add-to-list 'slime-contribs 'slime-fancy)
               (add-to-list 'slime-contribs 'inferior-slime))))
 
+;; Custom keybinding
+; (use-package general
+;   :ensure t
+;   :config (general-define-key
+;   :states '(normal visual insert emacs)
+;   :prefix "SPC"
+;   :non-normal-prefix "M-SPC"
+;   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+;   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+;   "SPC" '(helm-M-x :which-key "M-x")
+;   "pf"  '(helm-find-file :which-key "find files")
+;   ;; Buffers
+;   "bb"  '(helm-buffers-list :which-key "buffers list")
+;   ;; Window
+;   "wl"  '(windmove-right :which-key "move right")
+;   "wh"  '(windmove-left :which-key "move left")
+;   "wk"  '(windmove-up :which-key "move up")
+;   "wj"  '(windmove-down :which-key "move bottom")
+;   "w/"  '(split-window-right :which-key "split right")
+;   "w-"  '(split-window-below :which-key "split bottom")
+;   "wx"  '(delete-window :which-key "delete window")
+;   ;; Others
+;   "at"  '(ansi-term :which-key "open terminal")
+; ))
+
 ;; clojure stuff
 ;(use-package clojure-mode
   ;:ensure t
@@ -221,6 +291,14 @@
   :init
   (global-flycheck-mode t))
 
+;; spell checking. Emacs 24.2+ has flyspell, but we need
+;; to do brew install aspell --with-lang-en to add a spell-checker
+;; for it. to make it work in a buffer, do M-x flyspell-buffer
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(add-hook 'find-file-hooks 'turn-on-flyspell)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -228,7 +306,9 @@
  ;; If there is more than one, they won't work right.
  '(evil-collection-init nil t)
  '(evil-collection-setup-minibuffer t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   (quote
+    (doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
