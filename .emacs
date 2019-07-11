@@ -14,10 +14,10 @@
     (require 'use-package))
 
 ;; Minimal UI
-(setq scroll-bar-mode -1)
-(setq tool-bar-mode   -1)
-(setq tooltip-mode    -1)
-(setq menu-bar-mode   -1)
+(scroll-bar-mode -1)
+(tool-bar-mode   -1)
+(tooltip-mode    -1)
+(menu-bar-mode   -1)
 
 ;; disable initial screen
 (setq inhibit-startup-screen t)
@@ -120,15 +120,15 @@
 ;      (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
 
 ; and enable the <leader> key binding
-(use-package evil-leader
-  :ensure t
-  :init
-  (global-evil-leader-mode))
-
-(evil-leader/set-leader "SPC")
-  (evil-leader/set-key
-    "f" 'helm-find-files
-    "b" 'helm-buffers-list)
+; (use-package evil-leader
+;   :ensure t
+;   :init
+;   (global-evil-leader-mode))
+;
+; (evil-leader/set-leader "SPC")
+;   (evil-leader/set-key
+;     "f" 'helm-find-files
+;     "b" 'helm-buffers-list)
 
 ;; allow escape to be remapped
 (use-package evil-escape
@@ -244,29 +244,21 @@
               (add-to-list 'slime-contribs 'inferior-slime))))
 
 ;; Custom keybinding
-; (use-package general
-;   :ensure t
-;   :config (general-define-key
-;   :states '(normal visual insert emacs)
-;   :prefix "SPC"
-;   :non-normal-prefix "M-SPC"
-;   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
-;   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
-;   "SPC" '(helm-M-x :which-key "M-x")
-;   "pf"  '(helm-find-file :which-key "find files")
-;   ;; Buffers
-;   "bb"  '(helm-buffers-list :which-key "buffers list")
-;   ;; Window
-;   "wl"  '(windmove-right :which-key "move right")
-;   "wh"  '(windmove-left :which-key "move left")
-;   "wk"  '(windmove-up :which-key "move up")
-;   "wj"  '(windmove-down :which-key "move bottom")
-;   "w/"  '(split-window-right :which-key "split right")
-;   "w-"  '(split-window-below :which-key "split bottom")
-;   "wx"  '(delete-window :which-key "delete window")
-;   ;; Others
-;   "at"  '(ansi-term :which-key "open terminal")
-; ))
+(use-package general
+  :ensure t
+  :config (general-define-key
+    :states '(normal visual insert emacs)
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC"
+    ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+    "SPC" '(helm-M-x :which-key "M-x")
+    "ff"  '(helm-find-file :which-key "find files")
+    ;; Buffers
+    "bb"  '(helm-buffers-list :which-key "buffers list")
+    "bn"  '(next-buffer :which-key "buffers list")
+    "bp"  '(previous-buffer :which-key "buffers list")
+    ;; Others
+    "at"  '(eshell :which-key "open eshell")))
 
 ;; clojure stuff
 ;(use-package clojure-mode
@@ -308,7 +300,7 @@
  '(evil-collection-setup-minibuffer t)
  '(package-selected-packages
    (quote
-    (doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
+    (slime-company company-lsp helm-company doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
