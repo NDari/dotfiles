@@ -34,6 +34,9 @@
 ;; set the scrolling to leave 10 lines above or below the highest or lowest line
 (setq scroll-margin 10)
 
+;; tab to complete and indent
+(setq tab-always-indent 'complete)
+
 ;; Mac Emacs settings
 ;(setq mac-option-modifier 'super)
 ;(setq mac-command-modifier 'meta)
@@ -108,27 +111,27 @@
   (evil-collection-init))
 
 ;; evil mode custom key binds.
-; (eval-after-load "evil"
-;   '(progn
-;      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-;      (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
-;      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-;      (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
-;      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-;      (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-;      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-;      (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+(eval-after-load "evil"
+  '(progn
+     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
 
 ; and enable the <leader> key binding
-; (use-package evil-leader
-;   :ensure t
-;   :init
-;   (global-evil-leader-mode))
-;
-; (evil-leader/set-leader "SPC")
-;   (evil-leader/set-key
-;     "f" 'helm-find-files
-;     "b" 'helm-buffers-list)
+ (use-package evil-leader
+   :ensure t
+   :init
+   (global-evil-leader-mode))
+
+ (evil-leader/set-leader "SPC")
+   (evil-leader/set-key
+     "f" 'helm-find-files
+     "b" 'helm-buffers-list)
 
 ;; allow escape to be remapped
 (use-package evil-escape
@@ -243,23 +246,6 @@
               (add-to-list 'slime-contribs 'slime-fancy)
               (add-to-list 'slime-contribs 'inferior-slime))))
 
-;; Custom keybinding
-(use-package general
-  :ensure t
-  :config (general-define-key
-    :states '(normal visual insert emacs)
-    :prefix "SPC"
-    :non-normal-prefix "M-SPC"
-    ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
-    "SPC" '(helm-M-x :which-key "M-x")
-    "ff"  '(helm-find-file :which-key "find files")
-    ;; Buffers
-    "bb"  '(helm-buffers-list :which-key "buffers list")
-    "bn"  '(next-buffer :which-key "buffers list")
-    "bp"  '(previous-buffer :which-key "buffers list")
-    ;; Others
-    "at"  '(eshell :which-key "open eshell")))
-
 ;; clojure stuff
 ;(use-package clojure-mode
   ;:ensure t
@@ -276,6 +262,21 @@
   ;(add-hook 'cider-repl-mode-hook #'eldoc-mode)
   ;(add-hook 'cider-repl-mode-hook #'paredit-mode)
   ;(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+
+(use-package paredit
+  :ensure t
+  :config
+  (dolist (m '(emacs-lisp-mode-hook
+	       racket-mode-hook
+	       racket-repl-mode-hook))
+    (add-hook m #'paredit-mode))
+  (bind-keys :map paredit-mode-map
+	     ("{"   . paredit-open-curly)
+	     ("}"   . paredit-close-curly))
+  (unless terminal-frame
+    (bind-keys :map paredit-mode-map
+	       ("M-[" . paredit-wrap-square)
+	       ("M-{" . paredit-wrap-curly))))
 
 ;; linting settings
 (use-package flycheck
@@ -300,7 +301,7 @@
  '(evil-collection-setup-minibuffer t)
  '(package-selected-packages
    (quote
-    (slime-company company-lsp helm-company doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
+    (racket-mode slime-company company-lsp helm-company doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

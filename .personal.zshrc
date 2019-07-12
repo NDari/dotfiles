@@ -1,4 +1,4 @@
-nameOut="$(uname -s)"
+unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     machine=Linux;;
     Darwin*)    machine=Mac;;
