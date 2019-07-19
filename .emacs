@@ -175,15 +175,15 @@
   (which-key-mode 1))
 
 ;; change paren highlight color
-(use-package paren
-  :ensure t
-  :config
-  (setq show-paren-delay 0)
-  (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "green")
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (show-paren-mode +1)
-  (setq show-paren-style 'expression)) ;; highlight whole expression
+;(use-package paren
+;  :ensure t
+;  :config
+;  (setq show-paren-delay 0)
+;  (set-face-background 'show-paren-match (face-background 'default))
+;  (set-face-foreground 'show-paren-match "green")
+;  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+;  (show-paren-mode +1)
+;  (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
 (use-package all-the-icons
