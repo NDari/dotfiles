@@ -19,6 +19,9 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 
+;; no syntax
+;; (global-font-lock-mode 0)
+
 ;; disable initial screen
 (setq inhibit-startup-screen t)
 
@@ -83,11 +86,9 @@
 ;; use customized linum-format: add a addition space after the line number
 (setq linum-format
       (lambda (line)
-        (propertize (format (let
-                                ((w (length (number-to-string (count-lines (point-min)
-                                                                           (point-max))))))
+        (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
                               (concat "%" (number-to-string w) "d "))
-                            line)
+                           line)
                     'face
                     'linum)))
 
@@ -159,10 +160,10 @@
   (global-evil-surround-mode 1))
 
 ;; theme
-(use-package doom-themes
+(use-package gruvbox-theme
   :ensure t
   :config
-  (load-theme 'doom-one t))
+  (load-theme 'gruvbox t))
 
 ;; Which Key
 (use-package which-key
@@ -174,15 +175,15 @@
   (which-key-mode 1))
 
 ;; change paren highlight color
-;; (use-package paren
-;;   :ensure t
-;;   :config
-;;   (setq show-paren-delay 0)
-;;   (set-face-background 'show-paren-match (face-background 'default))
-;;   (set-face-foreground 'show-paren-match "green")
-;;   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-;;   (show-paren-mode +1)
-;;   (setq show-paren-style 'expression)) ;; highlight whole expression
+(use-package paren
+  :ensure t
+  :config
+  (setq show-paren-delay 0)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-foreground 'show-paren-match "green")
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (show-paren-mode +1)
+  (setq show-paren-style 'expression)) ;; highlight whole expression
 
 ;; all the icons
 (use-package all-the-icons
@@ -197,16 +198,16 @@
 (use-package helm
   :ensure t
   :init
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 150)
-  (setq helm-split-window-in-side-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (setq helm-echo-input-in-header-line t)
   (setq helm-autoresize-max-height 0)
   (setq helm-autoresize-min-height 20)
   :config
-  (helm-mode +1))
+  (helm-mode +1)
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-list 150)
+  (setq helm-split-window-in-side-p t))
 (global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; enable company mode (for auto complete)
@@ -247,36 +248,21 @@
               (add-to-list 'slime-contribs 'inferior-slime))))
 
 ;; clojure stuff
-;(use-package clojure-mode
-  ;:ensure t
-  ;:config
-  ;(add-hook 'clojure-mode-hook #'paredit-mode)
-  ;(add-hook 'clojure-mode-hook #'subword-mode)
-  ;(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
-;
-;(use-package cider
-  ;:ensure t
-  ;:config
-  ;(setq nrepl-log-messages t)
-  ;(add-hook 'cider-mode-hook #'eldoc-mode)
-  ;(add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  ;(add-hook 'cider-repl-mode-hook #'paredit-mode)
-  ;(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
-
-(use-package paredit
+(use-package clojure-mode
   :ensure t
   :config
-  (dolist (m '(emacs-lisp-mode-hook
-	       racket-mode-hook
-	       racket-repl-mode-hook))
-    (add-hook m #'paredit-mode))
-  (bind-keys :map paredit-mode-map
-	     ("{"   . paredit-open-curly)
-	     ("}"   . paredit-close-curly))
-  (unless terminal-frame
-    (bind-keys :map paredit-mode-map
-	       ("M-[" . paredit-wrap-square)
-	       ("M-{" . paredit-wrap-curly))))
+ (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'subword-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
+
+(use-package cider
+  :ensure t
+  :config
+  (setq nrepl-log-messages t)
+  (add-hook 'cider-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
 
 ;; linting settings
 (use-package flycheck
@@ -292,17 +278,15 @@
 (add-hook 'find-file-hooks 'turn-on-flyspell)
 
 
+;; Custom stuff. Auto generated and modified.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-collection-init nil t)
- '(evil-collection-setup-minibuffer t)
  '(package-selected-packages
    (quote
-    (racket-mode slime-company company-lsp helm-company doom-themes which-key use-package slime rust-mode neotree helm flycheck evil-surround evil-snipe evil-leader evil-escape evil-collection company-racer all-the-icons))))
-
+    (flycheck cider clojure-mode slime company-racer rust-mode company helm all-the-icons which-key gruvbox-theme evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
