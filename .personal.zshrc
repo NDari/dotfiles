@@ -65,6 +65,7 @@ ALLPATHS=(
         "$HOME/bin"
         "/usr/local/bin"
         "$HOME/.local/bin"
+        "$HOME/.guix-profile/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}

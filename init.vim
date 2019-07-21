@@ -13,7 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
@@ -101,12 +101,12 @@ Plug 'tfnico/vim-gradle'
 Plug 'junegunn/goyo.vim'
 
 " language client
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2'
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
@@ -127,30 +127,34 @@ Plug 'jpalardy/vim-slime'
 " Initialize plugin system
 call plug#end()
 
-set nocompatible
+" enable ale auto completion
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
+let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
 " Plugin configs
 
 " language client settings
-let g:LanguageClient_serverCommands = {
-\   'rust': ['rustup', 'run', 'stable', 'rls'],
-\   'python': ['pyls'],
-\   'kotlin': ['kotlinc'],
-\   'go': ['go-langserver'],
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       using Pkg;
-\       import StaticLint;
-\       import SymbolServer;
-\       env_path = dirname(Pkg.Types.Context().env.project_file);
-\       debug = false;
-\
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "", Dict());
-\       server.runlinter = true;
-\       run(server);
-\   '],
-\   'scala': ['scalameta_lsp'],
-\ }
+" let g:LanguageClient_serverCommands = {
+" \   'rust': ['rustup', 'run', 'stable', 'rls'],
+" \   'python': ['pyls'],
+" \   'kotlin': ['kotlinc'],
+" \   'go': ['go-langserver'],
+" \   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+" \       using LanguageServer;
+" \       using Pkg;
+" \       import StaticLint;
+" \       import SymbolServer;
+" \       env_path = dirname(Pkg.Types.Context().env.project_file);
+" \       debug = false;
+" \
+" \       server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "", Dict());
+" \       server.runlinter = true;
+" \       run(server);
+" \   '],
+" \   'scala': ['scalameta_lsp'],
+" \ }
+" let g:LanguageClient_useVirtualText = 0
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
@@ -161,8 +165,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:default_julia_version = '1.0'
 
 " slime
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+" let g:slime_target = "tmux"
+" let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+let g:slime_target = "neovim"
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
@@ -217,6 +222,9 @@ let g:rustfmt_autosave = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 
 " Vim configs
+
+set nocompatible
+
 
 " Python configs
 " pep8 on save
@@ -374,9 +382,6 @@ nnoremap <leader>x :q<cr>
 nnoremap <leader><leader> :
 vnoremap <leader><leader> :
 tnoremap <leader><leader> :
-nmap <leader>r  <Plug>(ReplSend)
-nmap <leader>rl <Plug>(ReplSendLine)
-vmap <leader>r  <Plug>(ReplSend)
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
