@@ -88,13 +88,22 @@ set splitright
 " set path to include current dir and all sub dirs recur
 set path+=**
 
+
 " netrw settings
 let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_liststyle=3
 
 " mapping
-vnoremap : ;
-vnoremap ; :
-nnoremap : ;
-nnoremap ; :
+"vnoremap : ;
+"vnoremap ; :
+"nnoremap : ;
+"nnoremap ; :
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" terminal mode escaping and window changing
+tnoremap <c-w><c-w> <c-\><c-n><c-w><c-w>
+tnoremap <esc> <c-\><c-n>
