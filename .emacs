@@ -1,4 +1,4 @@
-;; package management
+;;; package --- initualization for my emacs
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
 			             ("gnu"   . "http://elpa.gnu.org/packages/")
@@ -12,6 +12,7 @@
       (package-install 'use-package))
 (eval-when-compile
     (require 'use-package))
+(setq use-package-verbose t)
 
 ;; Minimal UI
 (scroll-bar-mode -1)
@@ -28,21 +29,27 @@
 ;; always follow symlinks
 (setq vc-follow-symlinks t)
 
-;; keep line location between reopening of a file
-(setq scroll-preserve-screen-position 1)
-
 ;; set scrolling to be one line at a time
-(setq scroll-step 1)
-
-;; set the scrolling to leave 10 lines above or below the highest or lowest line
-(setq scroll-margin 10)
+(setq scroll-step 1
+      scroll-margin 10
+      scroll-preserve-screen-position 1)
 
 ;; tab to complete and indent
 (setq tab-always-indent 'complete)
 
+;; Emacs modes typically provide a standard means to change the
+;; indentation width -- eg. c-basic-offset: use that to adjust your
+;; personal indentation width, while maintaining the style (and
+;; meaning) of any files you load.
+(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+(setq-default tab-width 4)            ;; but maintain correct appearance
+
 ;; Mac Emacs settings
-;(setq mac-option-modifier 'super)
-;(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
+
+;; enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; fancy titlebar for macos
 ;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -82,15 +89,7 @@
   `((".*" ,temporary-file-directory t)))
 
 ;; line nums
-(global-linum-mode t)
-;; use customized linum-format: add a addition space after the line number
-(setq linum-format
-      (lambda (line)
-        (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
-                              (concat "%" (number-to-string w) "d "))
-                           line)
-                    'face
-                    'linum)))
+(global-display-line-numbers-mode t)
 
 ; highlight current line
 (global-hl-line-mode 1)
@@ -115,13 +114,9 @@
 (eval-after-load "evil"
   '(progn
      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-     (define-key evil-insert-state-map (kbd "C-h") 'evil-window-left)
      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-     (define-key evil-insert-state-map (kbd "C-j") 'evil-window-down)
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-insert-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-     (define-key evil-insert-state-map (kbd "C-l") 'evil-window-right)))
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)))
 
 ; and enable the <leader> key binding
  (use-package evil-leader
@@ -160,10 +155,10 @@
   (global-evil-surround-mode 1))
 
 ;; theme
-(use-package gruvbox-theme
-  :ensure t
-  :config
-  (load-theme 'gruvbox t))
+;; (use-package one-themes
+;;   :config
+;;   (load-theme 'one-dark t))
+(load-theme 'wheatgrass)
 
 ;; Which Key
 (use-package which-key
@@ -204,19 +199,27 @@
   (setq helm-autoresize-min-height 20)
   :config
   (helm-mode +1)
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 150)
-  (setq helm-split-window-in-side-p t))
+  (helm-mode-fuzzy-match t)
+  (helm-completion-in-region-fuzzy-match t)
+  (helm-candidate-number-list 150)
+  (helm-split-window-in-side-p t))
 (global-set-key (kbd "M-x") 'helm-M-x)
+
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-completion-system 'helm)
+  :config
+  ;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (projectile-mode +1))
 
 ;; enable company mode (for auto complete)
 (use-package company
   :ensure t
   :config
-  (setq company-idle-delay 0.5)
+  (setq company-idle-delay 0.2)
   (setq company-show-numbers t)
-  (setq company-tooltip-limit 20)
+  (setq company-tooltip-limit 10)
   (setq company-minimum-prefix-length 2)
   (setq company-tooltip-align-annotations t)
   ;; invert the navigation direction if the the completion popup-isearch-match
@@ -227,13 +230,14 @@
 (use-package rust-mode
   :ensure t
   :init
-  (setq rust-format-on-save t))
+  (setq rust-format-on-save t)
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode))
 
 (use-package company-racer
-  :ensure t)
-
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
+  :ensure t
+  :config
+  (add-hook 'racer-mode-hook #'eldoc-mode))
 
 ;; Superior Lisp Interaction Mode for Emacs
 (use-package slime
@@ -251,7 +255,7 @@
 (use-package clojure-mode
   :ensure t
   :config
- (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
 
@@ -268,25 +272,34 @@
 (use-package flycheck
   :ensure t
   :init
-  (global-flycheck-mode t))
+  (global-flycheck-mode t)
+  :config
+  ;; spell checking. Emacs 24.2+ has flyspell, but we need
+  ;; to do brew install aspell --with-lang-en to add a spell-checker
+  ;; for it. to make it work in a buffer, do M-x flyspell-buffer
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'find-file-hooks 'turn-on-flyspell))
 
-;; spell checking. Emacs 24.2+ has flyspell, but we need
-;; to do brew install aspell --with-lang-en to add a spell-checker
-;; for it. to make it work in a buffer, do M-x flyspell-buffer
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-(add-hook 'find-file-hooks 'turn-on-flyspell)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
 
-;; Custom stuff. Auto generated and modified.
+;;; end here
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
  '(package-selected-packages
    (quote
-    (flycheck cider clojure-mode slime company-racer rust-mode company helm all-the-icons which-key gruvbox-theme evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
+    (one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
