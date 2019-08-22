@@ -14,7 +14,7 @@ Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'ajh17/VimCompletesMe'
+Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -80,25 +80,25 @@ Plug 'tpope/vim-fugitive'
 
 " python
 " Jedi for static analysis and completion
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 " better syntax
-Plug 'vim-python/python-syntax'
+" Plug 'vim-python/python-syntax'
 
 " terminal
 Plug 'mklabs/split-term.vim'
 
 " repl
-Plug 'https://gitlab.com/HiPhish/repl.nvim'
+" Plug 'https://gitlab.com/HiPhish/repl.nvim'
 
 " kotlin
-Plug 'udalov/kotlin-vim'
-Plug 'fwcd/KotlinLanguageServer'
+" Plug 'udalov/kotlin-vim'
+" Plug 'fwcd/KotlinLanguageServer'
 
 " gradle
-Plug 'tfnico/vim-gradle'
+" Plug 'tfnico/vim-gradle'
 
 " writing
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 
 " language client
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -116,7 +116,7 @@ Plug 'wlangstroth/vim-racket'
 Plug 'MicahElliott/vrod'
 
 " paren matching etc
-Plug 'tmsvg/pear-tree'
+" Plug 'tmsvg/pear-tree'
 
 " readline keybinding in insert and command mode
 Plug 'tpope/vim-rsi'
@@ -130,7 +130,7 @@ call plug#end()
 " enable ale auto completion
 let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
-let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
+" let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
 " Plugin configs
 
@@ -158,27 +158,34 @@ let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still 
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" call deoplete#custom#option('sources', {
+"   \ '_': ['ale'],
+"   \ 'rust': ['racer'],
+" \})
 
 " julia
-let g:default_julia_version = '1.0'
+let g:default_julia_version = '1.0.4'
 
 " slime
-" let g:slime_target = "tmux"
-" let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
-let g:slime_target = "neovim"
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+let g:slime_dont_ask_default = 1
+let g:slime_preserve_curpos = 0
+" let g:slime_python_ipython = 1
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
+autocmd FileType markdown,txt setlocal complete+=k/usr/share/dict/words
 
 " enable all python syntax
-let g:python_highlight_all = 1
+" let g:python_highlight_all = 1
 
 " vim-jedi settings
-let g:jedi#force_py_version = 3
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#rename_command = ""
+" let g:jedi#force_py_version = 3
+" let g:jedi#use_splits_not_buffers = "right"
+" let g:jedi#rename_command = ""
 
 " fzf.vim settings
 " tags command
@@ -223,12 +230,11 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " Vim configs
 
-set nocompatible
-
 
 " Python configs
 " pep8 on save
 au FileType python setlocal formatprg=autopep8\ -
+au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " rust specific key commands
 au FileType rust nmap gd <Plug>(rust-def)
@@ -239,13 +245,14 @@ au FileType rust nmap <leader>gd <Plug>(rust-doc)
 " autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" <bar> redraw!
 
 filetype plugin indent on
-set exrc
-set secure
+set exrc " Add ability to have a .vimrc for each project
+set secure " prevent bad .vimrc files from being bad
 set autoindent
 set copyindent
+set nocompatible
 
 " set completions to only use menu, and not preview
-" set completeopt=
+set completeopt=menu
 
 "  timeoutlen is used for mapping delays, and ttimeoutlen is used for key code delays.
 set timeoutlen=1000
@@ -264,6 +271,9 @@ set hlsearch
 " ignore case for searches, unless it starts with upper case
 set ignorecase
 set smartcase
+
+" add typical header paths to vim
+let &path.="/usr/local/include","/usr/include","~/include"
 
 " when opening a file, to the the line from last session
 if has("autocmd")
@@ -290,10 +300,10 @@ set title
 set hidden
 
 " automatically write before things like :next
-set autowrite
+set autowriteall
 
 " show me the command i am typing
-set showcmd
+" set showcmd
 
 " set one location for all the swap and backup files
 set backupdir=~/.config/nvim/backup//
@@ -304,11 +314,12 @@ set undofile
 set undodir=~/.config/nvim/undodir//
 
 " dictionary settings
-" set spell spelllang=en_us
-" hi clear SpellBa
-" hi SpellBad cterm=undercurl
-" hi clear SpellCap
-" hi SpellCap cterm=underline
+" use c-x c-k for completions from dictionary
+set spell spelllang=en_us
+hi clear SpellBa
+hi SpellBad cterm=undercurl
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
@@ -320,6 +331,8 @@ set backspace=indent,eol,start
 set encoding=utf-8
 " set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+" Better display for messages
+set cmdheight=2
 
 " set the number of lines when scrolling above displayed page
 set scrolloff=15
@@ -334,19 +347,14 @@ set background=dark
 syntax on
 colorscheme gruvbox
 
-" make colorschemes look ok in tmux
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" let g:solarized_use16 = 1
-
 " Set mouse behavior to be more normal
 set mouse=a
 
 " set tabs to 4 spaces
 set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " Make splits open naturally
 set splitbelow
