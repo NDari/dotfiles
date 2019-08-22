@@ -273,7 +273,7 @@ set ignorecase
 set smartcase
 
 " add typical header paths to vim
-let &path.="/usr/local/include","/usr/include","~/include"
+let &path.="/usr/local/include,/usr/include,~/include,"
 
 " when opening a file, to the the line from last session
 if has("autocmd")
