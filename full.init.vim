@@ -129,7 +129,7 @@ call plug#end()
 
 " enable ale auto completion
 let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
+" set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 " let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
 " Plugin configs
@@ -158,8 +158,8 @@ set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " call deoplete#custom#option('sources', {
 "   \ '_': ['ale'],
 "   \ 'rust': ['racer'],
