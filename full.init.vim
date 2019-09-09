@@ -82,7 +82,7 @@ Plug 'tpope/vim-fugitive'
 " Jedi for static analysis and completion
 " Plug 'davidhalter/jedi-vim'
 " better syntax
-" Plug 'vim-python/python-syntax'
+Plug 'vim-python/python-syntax'
 
 " terminal
 Plug 'mklabs/split-term.vim'
@@ -167,12 +167,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " julia
 let g:default_julia_version = '1.0.4'
+let g:latex_to_unicode_tab = 0
 
 " slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 let g:slime_dont_ask_default = 1
-let g:slime_preserve_curpos = 0
 let g:slime_python_ipython = 1
 
 " vimcompletes me
@@ -232,9 +232,10 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 
 " Python configs
-" pep8 on save
-au FileType python setlocal formatprg=autopep8\ -
 au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
+" Go configs
+au FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
 
 " rust specific key commands
 au FileType rust nmap gd <Plug>(rust-def)
@@ -315,11 +316,11 @@ set undodir=~/.config/nvim/undodir//
 
 " dictionary settings
 " use c-x c-k for completions from dictionary
-set spell spelllang=en_us
-hi clear SpellBa
-hi SpellBad cterm=undercurl
-hi clear SpellCap
-hi SpellCap cterm=underline
+" set spell spelllang=en_us
+" hi clear SpellBa
+" hi SpellBad cterm=undercurl
+" hi clear SpellCap
+" hi SpellCap cterm=underline
 
 " display everything that matches when we hit tab on a command
 set wildmenu
