@@ -26,11 +26,10 @@ export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 # eval $(opam config env)
 
 #### Go stuff
-# export GOROOT=/usr/local/go
-# export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
 # export GOBIN=$GOPATH/bin
 # export PATH=$GOBIN:$GOROOT/bin:$PATH
-export GOROOT=/usr/local/go
 
 # Rust stuff
 # for racer to work. Must get rust source with "rustup component add rust-src"

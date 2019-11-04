@@ -155,10 +155,9 @@
   (global-evil-surround-mode 1))
 
 ;; theme
-;; (use-package one-themes
-;;   :config
-;;   (load-theme 'one-dark t))
-(load-theme 'wheatgrass)
+(use-package gruvbox-theme
+  :config
+  (load-theme 'gruvbox-dark-hard t))
 
 ;; Which Key
 (use-package which-key
@@ -199,10 +198,10 @@
   (setq helm-autoresize-min-height 20)
   :config
   (helm-mode +1)
-  (helm-mode-fuzzy-match t)
-  (helm-completion-in-region-fuzzy-match t)
-  (helm-candidate-number-list 150)
-  (helm-split-window-in-side-p t))
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-list 150)
+  (setq helm-split-window-in-side-p t))
 (global-set-key (kbd "M-x") 'helm-M-x)
 
 (use-package projectile
@@ -296,10 +295,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
+    ("a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
  '(package-selected-packages
    (quote
-    (one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
+    (gruvbox-theme one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

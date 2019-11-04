@@ -14,6 +14,8 @@ Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-tag'
 " Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
@@ -83,7 +85,8 @@ Plug 'tpope/vim-fugitive'
 " Jedi for static analysis and completion
 " Plug 'davidhalter/jedi-vim'
 " better syntax
-Plug 'vim-python/python-syntax'
+" Plug 'vim-python/python-syntax'
+Plug 'psf/black'
 
 " terminal
 Plug 'mklabs/split-term.vim'
@@ -130,6 +133,8 @@ call plug#end()
 
 " enable ale auto completion
 " let g:ale_completion_enabled = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
 " set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 " let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
@@ -174,7 +179,7 @@ let g:latex_to_unicode_tab = 0
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 let g:slime_dont_ask_default = 1
-let g:slime_python_ipython = 1
+" let g:slime_python_ipython = 1
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
@@ -219,15 +224,18 @@ let g:racer_cmd = "$HOME/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 
 " nofrils settings
-let g:nofrils_heavylinenumbers=0
-let g:nofrils_strbackgrounds=0
-let g:nofrils_heavycomments=0
+let g:nofrils_heavylinenumbers=1
+let g:nofrils_strbackgrounds=1
+let g:nofrils_heavycomments=1
 
 " vim-rust settings
 let g:rustfmt_autosave = 1
 
 " disable tmux-navigator when zoomed
 let g:tmux_navigator_disable_when_zoomed = 1
+
+" set black's line length to 80
+let g:black_linelength = 80
 
 " Vim configs
 
@@ -236,6 +244,7 @@ au FileType julia setlocal iskeyword+=@-@
 
 " Python configs
 au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+au BufWritePost *.py execute ':Black'
 
 " Go configs
 au FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
@@ -335,7 +344,7 @@ set encoding=utf-8
 " set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 " Better display for messages
-set cmdheight=2
+set cmdheight=1
 
 " set the number of lines when scrolling above displayed page
 set scrolloff=15

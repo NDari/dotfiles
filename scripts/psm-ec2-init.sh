@@ -90,7 +90,7 @@ echo '' >> $HOME/.bash_profile
 echo 'export SPARK_HOME=$HOME/tools/spark' >> $HOME/.bash_profile
 echo 'export PATH=$SPARK_HOME/bin:$PATH' >> $HOME/.bash_profile
 
-MAVEN_VERSION=3.6.0
+MAVEN_VERSION=3.6.2
 HADOOP_AWS_VERSION=2.7.3
 JARS_DIR=$HOME/tools/spark/jars/
 

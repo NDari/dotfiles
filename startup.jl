@@ -3,8 +3,10 @@
 # will automatically run the initialization for us.
 isfile("_init.jl") && include(joinpath(pwd(), "_init.jl"))
 
-# use revise. Automatically loads git, module, etc changes
-# when using the repl.
+# set a local directory for personal code, and add it to the
+# load path so that we can easily use the modules.
+#= push!(LOAD_PATH,"$(homedir())/Projects/Julia" ) =#
+
 atreplinit() do repl
     try
         @eval using Debugger
