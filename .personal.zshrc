@@ -68,6 +68,7 @@ ALLPATHS=(
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
+export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 
 # olcao stuff
 if [ $machine = 'Linux' ]; then

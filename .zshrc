@@ -142,4 +142,3 @@ done
 
 # source custom shell functions
 source $HOME/dotfiles/shell-functions
-

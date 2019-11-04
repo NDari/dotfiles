@@ -164,15 +164,9 @@ let g:ale_lint_on_text_changed = 'never'
 
 "deoplete
 let g:deoplete#enable_at_startup = 1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" call deoplete#custom#option('sources', {
-"   \ '_': ['ale'],
-"   \ 'rust': ['racer'],
-" \})
 
 " julia
-let g:default_julia_version = '1.0.4'
+let g:default_julia_version = '1.2'
 let g:latex_to_unicode_tab = 0
 
 " slime
@@ -183,7 +177,6 @@ let g:slime_dont_ask_default = 1
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
-autocmd FileType markdown,txt setlocal complete+=k/usr/share/dict/words
 
 " enable all python syntax
 " let g:python_highlight_all = 1
@@ -246,8 +239,17 @@ au FileType julia setlocal iskeyword+=@-@
 au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 au BufWritePost *.py execute ':Black'
 
+" Julia configs
+au FileType julia setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
 " Go configs
 au FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
+
+" forth
+autocmd FileType forth setlocal shiftwidth=8 tabstop=8 softtabstop=8
+
+" text/markdown
+autocmd FileType markdown,txt setlocal complete+=k/usr/share/dict/words
 
 " rust specific key commands
 au FileType rust nmap gd <Plug>(rust-def)
@@ -271,7 +273,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-set cursorline
+" set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 set relativenumber
@@ -378,9 +380,17 @@ set softtabstop=4
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" remap ; in normal mode to commands
+nnoremap ; :Commands<cr>
+
 " retain highlighted section after indentation
 vnoremap > >gv
 vnoremap < <gv
+
+" tab/s-tab for menus
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 
 " make the panel switches work in terminal mode
 tnoremap <C-h> <c-\><c-n><c-w>h
