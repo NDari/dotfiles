@@ -13,8 +13,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'justinmk/vim-sneak'
 
 " vim completion with ease of using tabs
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ajh17/VimCompletesMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -71,6 +71,7 @@ Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'kaicataldo/material.vim'
 Plug 'reedes/vim-colors-pencil'
+Plug 'chriskempson/base16-vim'
 
 " nerdtree
 Plug 'tpope/vim-vinegar'
@@ -128,7 +129,7 @@ Plug 'jpalardy/vim-slime'
 call plug#end()
 
 " enable ale auto completion
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 " set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 " let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
@@ -230,6 +231,8 @@ let g:tmux_navigator_disable_when_zoomed = 1
 
 " Vim configs
 
+" Julia
+au FileType julia setlocal iskeyword+=@-@
 
 " Python configs
 au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -250,7 +253,6 @@ set exrc " Add ability to have a .vimrc for each project
 set secure " prevent bad .vimrc files from being bad
 set autoindent
 set copyindent
-set nocompatible
 
 " set completions to only use menu, and not preview
 set completeopt=menu
@@ -346,20 +348,20 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme gruvbox
+colorscheme base16-gruvbox-dark-pale
 
 " Set mouse behavior to be more normal
 set mouse=a
 
 " set tabs to 4 spaces
 set expandtab
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " Make splits open naturally
-set splitbelow
-set splitright
+" set splitbelow
+" set splitright
 
 " keymaps
 " Search mappings: These will make it so that going to the next item in a
