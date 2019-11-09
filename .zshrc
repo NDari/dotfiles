@@ -128,8 +128,6 @@ unset env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files -u'
 
-alias jl="jupyter lab --no-browser --ip=10.130.23.236 --port=9191"
-
 # itermplot settings to show plots in iterm. install with pip3 install itermplot
 export ITERMPLOT=rv # for dark themes
 export MPLBACKEND="module://itermplot"
