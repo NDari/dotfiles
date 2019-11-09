@@ -22,6 +22,6 @@ atreplinit() do repl
     end
 end
 
-using OhMyREPL
-OhMyREPL.enable_autocomplete_brackets(false)
+#= using OhMyREPL =#
+#= OhMyREPL.enable_autocomplete_brackets(false) =#
 

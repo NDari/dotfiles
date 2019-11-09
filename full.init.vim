@@ -374,8 +374,8 @@ set tabstop=4
 set softtabstop=4
 
 " Make splits open naturally
-" set splitbelow
-" set splitright
+set splitbelow
+set splitright
 
 " keymaps
 " Search mappings: These will make it so that going to the next item in a

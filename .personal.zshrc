@@ -1,3 +1,5 @@
+cd
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)     machine=Linux;;
@@ -17,7 +19,7 @@ case "$machine" in
 esac
 
 # Spark and Hive
-export SPARK_HOME=$HOME/tools/spark-2.4.0-bin-hadoop2.7
+export SPARK_HOME=$HOME/tools/spark-2.4.4-bin-hadoop2.7
 export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
 export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 
@@ -28,8 +30,8 @@ export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 #### Go stuff
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-# export GOBIN=$GOPATH/bin
-# export PATH=$GOBIN:$GOROOT/bin:$PATH
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$GOROOT/bin:$PATH
 
 # Rust stuff
 # for racer to work. Must get rust source with "rustup component add rust-src"
@@ -44,7 +46,6 @@ if [ $machine = 'Linux' ]; then
         alias pbpaste='xclip -selection clipboard -o'
 fi
 
-alias gforth=$HOME/tools/gforth/gforth
 alias guix=$HOME/.config/guix/current/bin/guix
 
 # gerbil stuff

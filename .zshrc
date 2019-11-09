@@ -129,6 +129,7 @@ declare -a zshrc_files=(
     ".psm.ds.zshrc"
     ".personal.zshrc"
     ".personal-linux.zshrc"
+    ".personal-wsl.zshrc"
 )
 
 # source all the special files if they exist.
