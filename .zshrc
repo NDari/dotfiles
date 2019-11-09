@@ -102,15 +102,27 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 DEFAULT_USER=`whoami`
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+env=~/.ssh/agent.env
 
-# automatically add ssh agent on login.
-if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-    eval `ssh-agent`
-    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ;
+}
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
 fi
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -l > /dev/null || ssh-add
+unset env
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
