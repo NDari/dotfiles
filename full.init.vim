@@ -15,7 +15,6 @@ Plug 'justinmk/vim-sneak'
 " vim completion with ease of using tabs
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'deoplete-plugins/deoplete-tag'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
 " Plug 'ajh17/VimCompletesMe'
@@ -247,14 +246,7 @@ set conceallevel=2
 au FileType julia setlocal iskeyword+=@-@
 
 " Python configs
-au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 au BufWritePost *.py execute ':Black'
-
-" Julia configs
-au FileType julia setlocal shiftwidth=4 tabstop=4 softtabstop=4
-
-" Go configs
-au FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
 
 " forth
 autocmd FileType forth setlocal shiftwidth=8 tabstop=8 softtabstop=8

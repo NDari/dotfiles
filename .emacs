@@ -1,4 +1,4 @@
-;;; package --- initualization for my emacs
+;;; PACKAGE --- initualization for my emacs
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
 			             ("gnu"   . "http://elpa.gnu.org/packages/")

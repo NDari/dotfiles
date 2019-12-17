@@ -87,7 +87,7 @@ alias tl='tmux list-sessions'
 alias ta='tmux attach -t'
 alias h='history | fzf'
 alias ip='ipython'
-alias vi="vim"
+alias vi="nvi"
 alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 
 # color for manpages
@@ -126,7 +126,7 @@ unset env
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # itermplot settings to show plots in iterm. install with pip3 install itermplot
 export ITERMPLOT=rv # for dark themes
