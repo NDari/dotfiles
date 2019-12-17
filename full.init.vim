@@ -17,7 +17,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-tag'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'Shougo/deoplete-clangx'
 " Plug 'ajh17/VimCompletesMe'
 
@@ -44,6 +43,9 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " align things. Visual selection -> :Tabularize /{pattern}
 Plug 'godlygeek/tabular'
+
+" markdown. Note it must come after tabular
+Plug 'plasticboy/vim-markdown'
 
 " Go plugin. Do :GoInstallBinaries after this to install everything it needs.
 Plug 'fatih/vim-go'
@@ -134,14 +136,17 @@ Plug 'jpalardy/vim-slime'
 " Initialize plugin system
 call plug#end()
 
+" Plugin configs
+
 " enable ale auto completion
 " let g:ale_completion_enabled = 1
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 1
+" let g:ale_lint_on_text_changed = 'never'
 " set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 " let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
-" Plugin configs
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
 
 " language client settings
 " let g:LanguageClient_serverCommands = {
@@ -170,7 +175,7 @@ let g:deoplete#enable_at_startup = 1
 
 " julia
 let g:default_julia_version = '1.2'
-let g:latex_to_unicode_tab = 0
+let g:latex_to_unicode_tab = 1
 
 " slime
 let g:slime_target = "tmux"
@@ -234,6 +239,9 @@ let g:tmux_navigator_disable_when_zoomed = 1
 let g:black_linelength = 80
 
 " Vim configs
+
+" mostly for markdown
+set conceallevel=2
 
 " Julia
 au FileType julia setlocal iskeyword+=@-@
