@@ -29,7 +29,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 
 " auto-add closing braces of all kinds, and matching qoutes.
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " open locationlist and quickfix with leader l and q
 Plug 'Valloric/ListToggle'
@@ -173,14 +173,14 @@ let g:vim_markdown_folding_disabled = 1
 let g:deoplete#enable_at_startup = 1
 
 " julia
-let g:default_julia_version = '1.2'
+let g:default_julia_version = '1.3'
 let g:latex_to_unicode_tab = 1
 
 " slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 let g:slime_dont_ask_default = 1
-" let g:slime_python_ipython = 1
+let g:slime_python_ipython = 1
 
 " vimcompletes me
 " autocmd FileType * let b:vcm_tab_complete = 'omni'
@@ -276,7 +276,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 
 " highlight current line
-" set cursorline
+set cursorline
 
 " Set both relative AND absolute numbers on. (requires vim 7.4)
 set relativenumber
@@ -360,7 +360,7 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=dark
+set background=light
 syntax on
 colorscheme base16-gruvbox-dark-pale
 

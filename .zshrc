@@ -126,7 +126,7 @@ unset env
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
 
 # itermplot settings to show plots in iterm. install with pip3 install itermplot
 export ITERMPLOT=rv # for dark themes
