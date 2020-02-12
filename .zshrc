@@ -57,6 +57,7 @@ plugins=(
     git
     history-substring-search
     ubuntu
+    archlinux
 )
 
 source $ZSH/oh-my-zsh.sh

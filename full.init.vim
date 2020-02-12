@@ -95,26 +95,8 @@ Plug 'psf/black'
 " terminal
 Plug 'mklabs/split-term.vim'
 
-" repl
-" Plug 'https://gitlab.com/HiPhish/repl.nvim'
-
-" kotlin
-" Plug 'udalov/kotlin-vim'
-" Plug 'fwcd/KotlinLanguageServer'
-
-" gradle
-" Plug 'tfnico/vim-gradle'
-
 " writing
 " Plug 'junegunn/goyo.vim'
-
-" language client
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2'
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
@@ -122,9 +104,6 @@ Plug 'JuliaEditorSupport/julia-vim'
 " Racket
 Plug 'wlangstroth/vim-racket'
 Plug 'MicahElliott/vrod'
-
-" paren matching etc
-" Plug 'tmsvg/pear-tree'
 
 " readline keybinding in insert and command mode
 Plug 'tpope/vim-rsi'
@@ -147,28 +126,6 @@ call plug#end()
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 
-" language client settings
-" let g:LanguageClient_serverCommands = {
-" \   'rust': ['rustup', 'run', 'stable', 'rls'],
-" \   'python': ['pyls'],
-" \   'kotlin': ['kotlinc'],
-" \   'go': ['go-langserver'],
-" \   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-" \       using LanguageServer;
-" \       using Pkg;
-" \       import StaticLint;
-" \       import SymbolServer;
-" \       env_path = dirname(Pkg.Types.Context().env.project_file);
-" \       debug = false;
-" \
-" \       server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, "", Dict());
-" \       server.runlinter = true;
-" \       run(server);
-" \   '],
-" \   'scala': ['scalameta_lsp'],
-" \ }
-" let g:LanguageClient_useVirtualText = 0
-
 "deoplete
 let g:deoplete#enable_at_startup = 1
 
@@ -181,17 +138,6 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 let g:slime_dont_ask_default = 1
 let g:slime_python_ipython = 1
-
-" vimcompletes me
-" autocmd FileType * let b:vcm_tab_complete = 'omni'
-
-" enable all python syntax
-" let g:python_highlight_all = 1
-
-" vim-jedi settings
-" let g:jedi#force_py_version = 3
-" let g:jedi#use_splits_not_buffers = "right"
-" let g:jedi#rename_command = ""
 
 " fzf.vim settings
 " tags command
@@ -382,9 +328,6 @@ set splitright
 " search will center on the line it's found in."
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-" remap ; in normal mode to commands
-nnoremap ; :Commands<cr>
 
 " retain highlighted section after indentation
 vnoremap > >gv

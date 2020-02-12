@@ -45,8 +45,8 @@
 (setq-default tab-width 4)            ;; but maintain correct appearance
 
 ;; Mac Emacs settings
-(setq mac-option-modifier 'super)
-(setq mac-command-modifier 'meta)
+;(setq mac-option-modifier 'super)
+;(setq mac-command-modifier 'meta)
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
