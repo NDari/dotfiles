@@ -16,7 +16,8 @@ Plug 'justinmk/vim-sneak'
 " Plug 'Shougo/deoplete.nvim'
 " Plug 'roxma/nvim-yarp'
 " Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'ycm-core/YouCompleteMe'
+" Plug 'ycm-core/YouCompleteMe'
+Plug 'ajh17/VimCompletesMe'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
