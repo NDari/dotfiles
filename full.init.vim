@@ -137,7 +137,7 @@ let g:latex_to_unicode_tab = 1
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
 let g:slime_dont_ask_default = 1
-let g:slime_python_ipython = 1
+" let g:slime_python_ipython = 1
 
 " fzf.vim settings
 " tags command
@@ -193,6 +193,7 @@ au FileType julia setlocal iskeyword+=@-@
 
 " Python configs
 au BufWritePost *.py execute ':Black'
+" autocmd BufWritePre *.py 0,$!black
 
 " forth
 autocmd FileType forth setlocal shiftwidth=8 tabstop=8 softtabstop=8
@@ -306,7 +307,7 @@ au BufWritePre *.* :%s/\s\+$//e
 "Set color scheme
 " set t_Co=256
 set termguicolors
-set background=light
+set background=dark
 syntax on
 colorscheme base16-gruvbox-dark-pale
 
@@ -328,6 +329,9 @@ set splitright
 " search will center on the line it's found in."
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+" remap ; in normal mode to commands
+" nnoremap ; :Commands<cr>
 
 " retain highlighted section after indentation
 vnoremap > >gv
@@ -355,9 +359,9 @@ nnoremap <leader>c :Commands<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>m :Lines<cr>
 nnoremap <leader>x :q<cr>
-nnoremap <leader><leader> :
-vnoremap <leader><leader> :
-tnoremap <leader><leader> :
+" nnoremap <leader><leader> :
+" vnoremap <leader><leader> :
+" tnoremap <leader><leader> :
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
