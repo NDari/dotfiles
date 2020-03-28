@@ -1,4 +1,4 @@
-cd
+cd $HOME
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -30,15 +30,10 @@ export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 #### Go stuff
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$GOROOT/bin:$PATH
-
-# Rust stuff
-# for racer to work. Must get rust source with "rustup component add rust-src"
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+export GO111MODULE=on
 
 # racket stuff
-alias rak='racket -il xrepl'
+#alias rak='racket -il xrepl'
 
 # linux pbcopy/paste
 if [ $machine = 'Linux' ]; then
@@ -46,10 +41,10 @@ if [ $machine = 'Linux' ]; then
         alias pbpaste='xclip -selection clipboard -o'
 fi
 
-alias guix=$HOME/.config/guix/current/bin/guix
+#alias guix=$HOME/.config/guix/current/bin/guix
 
 # gerbil stuff
-export GERBIL_HOME=/usr/local/opt/gerbil-scheme/libexec
+#export GERBIL_HOME=/usr/local/opt/gerbil-scheme/libexec
 
 # path. just add to this
 
@@ -58,18 +53,19 @@ ALLPATHS=(
         "$SPARK_HOME/bin"
         "$HIVE_HOME/bin"
         "$HOME/go/bin"
-        "$HOME/go/bin"
         "$GOROOT/bin"
         "$HOME/.cargo/bin"
-        "/usr/local/opt/gambit-scheme/current/bin"
         "$HOME/bin"
         "/usr/local/bin"
         "$HOME/.local/bin"
-        "$HOME/.guix-profile/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
-export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+# export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+
+# Rust stuff
+# for racer to work. Must get rust source with "rustup component add rust-src"
+export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
 
 # olcao stuff
 if [ $machine = 'Linux' ]; then

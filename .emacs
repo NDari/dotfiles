@@ -1,8 +1,12 @@
 ;;; PACKAGE --- initualization for my emacs
+
+
+;;; Code:
 (require 'package)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
 			             ("gnu"   . "http://elpa.gnu.org/packages/")
-			             ("melpa" . "https://melpa.org/packages/")))
+			             ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -198,11 +202,12 @@
   (setq helm-autoresize-min-height 20)
   :config
   (helm-mode +1)
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 150)
-  (setq helm-split-window-in-side-p t))
-(global-set-key (kbd "M-x") 'helm-M-x)
+  (custom-set-variables
+   '(helm-mode-fuzzy-match t)
+   '(helm-completion-in-region-fuzzy-match t)
+   '(helm-candidate-number-list 10)
+   '(helm-split-window-in-side-p t))
+  (bind-key "M-x" 'helm-M-x))
 
 (use-package projectile
   :ensure t
@@ -225,6 +230,12 @@
   ;; is displayed on top (happens near the bottom of windows)
   (setq company-tooltip-flip-when-above t)
   (global-company-mode))
+
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 
 (use-package rust-mode
   :ensure t
@@ -295,10 +306,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
+    ("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
+ '(helm-candidate-number-list 10)
+ '(helm-completion-in-region-fuzzy-match t)
+ '(helm-mode-fuzzy-match t)
+ '(helm-split-window-inside-p t)
  '(package-selected-packages
    (quote
-    (gruvbox-theme one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
+    (elpy gruber-darker-theme gruvbox-theme one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
