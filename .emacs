@@ -49,8 +49,8 @@
 (setq-default tab-width 4)            ;; but maintain correct appearance
 
 ;; Mac Emacs settings
-;(setq mac-option-modifier 'super)
-;(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -237,46 +237,38 @@
   :init
   (advice-add 'python-mode :before 'elpy-enable))
 
-(use-package rust-mode
-  :ensure t
-  :init
-  (setq rust-format-on-save t)
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode))
+;; use jupyter console for the repl
+(setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters
+             "jupyter")
+;; disable eply using it's own venv
+(setq elpy-rpc-virtualenv-path 'current)
 
-(use-package company-racer
-  :ensure t
-  :config
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+; (use-package rust-mode
+;   :ensure t
+;   :init
+;   (setq rust-format-on-save t)
+;   :config
+;   (add-hook 'rust-mode-hook #'racer-mode))
+;
+; (use-package company-racer
+;   :ensure t
+;   :config
+;   (add-hook 'racer-mode-hook #'eldoc-mode))
 
 ;; Superior Lisp Interaction Mode for Emacs
-(use-package slime
-  :ensure t
-  :defer t
-  :init
-  (setq inferior-lisp-program "sbcl")
-  :config
-  (add-hook 'slime-mode-hook
-            (lambda ()
-              (add-to-list 'slime-contribs 'slime-fancy)
-              (add-to-list 'slime-contribs 'inferior-slime))))
-
-;; clojure stuff
-(use-package clojure-mode
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
-
-(use-package cider
-  :ensure t
-  :config
-  (setq nrepl-log-messages t)
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode))
+; (use-package slime
+;   :ensure t
+;   :defer t
+;   :init
+;   (setq inferior-lisp-program "sbcl")
+;   :config
+;   (add-hook 'slime-mode-hook
+;             (lambda ()
+;               (add-to-list 'slime-contribs 'slime-fancy)
+;               (add-to-list 'slime-contribs 'inferior-slime))))
 
 ;; linting settings
 (use-package flycheck
@@ -291,6 +283,16 @@
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (add-hook 'find-file-hooks 'turn-on-flyspell))
 
+(use-package vterm
+    :ensure t
+    :load-path "~/tools/emacs-libvterm")
+
+(use-package julia-mode
+    :ensure t)
+
+(use-package julia-snail
+  :ensure t
+  :hook (julia-mode . julia-snail-mode))
 
 (use-package exec-path-from-shell
   :ensure t
@@ -306,14 +308,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "b73a23e836b3122637563ad37ae8c7533121c2ac2c8f7c87b381dd7322714cd0" default)))
+    ("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" default)))
  '(helm-candidate-number-list 10)
  '(helm-completion-in-region-fuzzy-match t)
  '(helm-mode-fuzzy-match t)
  '(helm-split-window-inside-p t)
  '(package-selected-packages
    (quote
-    (elpy gruber-darker-theme gruvbox-theme one-themes exec-path-from-shell flycheck cider clojure-mode slime company-racer rust-mode company projectile helm all-the-icons which-key evil-surround evil-snipe evil-escape evil-leader evil-collection evil use-package))))
+    (gruvbox-theme exec-path-from-shell julia-snail julia-mode vterm flycheck elpy company projectile helm all-the-icons which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
