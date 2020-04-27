@@ -58,6 +58,7 @@ ALLPATHS=(
         "$HOME/bin"
         "/usr/local/bin"
         "$HOME/.local/bin"
+        "$HOME/.nimble/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
@@ -65,7 +66,7 @@ export PATH=${NEWPATHS}${PATH}
 
 # Rust stuff
 # for racer to work. Must get rust source with "rustup component add rust-src"
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # olcao stuff
 if [ $machine = 'Linux' ]; then
