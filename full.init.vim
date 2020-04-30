@@ -17,7 +17,13 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
+Plug 'lighttiger2505/deoplete-vim-lsp'
 " Plug 'ajh17/VimCompletesMe'
+
+" lsp
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 
 " ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
 Plug 'tpope/vim-surround'
@@ -87,7 +93,7 @@ Plug 'tpope/vim-fugitive'
 
 " python
 " Jedi for static analysis and completion
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 " better syntax
 " Plug 'vim-python/python-syntax'
 Plug 'psf/black'
@@ -111,6 +117,8 @@ Plug 'tpope/vim-rsi'
 " slime: send code to repl
 Plug 'jpalardy/vim-slime'
 
+"nim
+Plug 'zah/nim.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -192,7 +200,7 @@ set conceallevel=2
 au FileType julia setlocal iskeyword+=@-@
 
 " Python configs
-au BufWritePost *.py execute ':Black'
+" au BufWritePost *.py execute ':Black'
 " autocmd BufWritePre *.py 0,$!black
 
 " forth
@@ -309,7 +317,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme base16-gruvbox-dark-pale
+colorscheme gruvbox
 
 " Set mouse behavior to be more normal
 set mouse=a
