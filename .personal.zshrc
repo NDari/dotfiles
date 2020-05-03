@@ -19,7 +19,7 @@ case "$machine" in
 esac
 
 # Spark and Hive
-export SPARK_HOME=$HOME/tools/spark-2.4.4-bin-hadoop2.7
+export SPARK_HOME=$HOME/tools/spark-2.4.5-bin-hadoop2.7
 export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
 export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 
@@ -58,6 +58,7 @@ ALLPATHS=(
         "$HOME/bin"
         "/usr/local/bin"
         "$HOME/.local/bin"
+        "$HOME/.guix-profile/bin"
         "$HOME/.nimble/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"

@@ -24,20 +24,20 @@ catch ex
     @warn "Could not load Revise: $ex"
 end
 
-@info "Importing OhMyREPL"
-try
-    haskey(Pkg.installed(), "OhMyREPL") || @eval Pkg.add("OhMyREPL")
-    using OhMyREPL
-    colorscheme!("Monokai24bit")
-    OhMyREPL.enable_autocomplete_brackets(false)
-catch ex
-    @warn "Could not load OhMyREPL: $ex"
-end
+#= @info "Importing OhMyREPL" =#
+#= try =#
+#=     haskey(Pkg.installed(), "OhMyREPL") || @eval Pkg.add("OhMyREPL") =#
+#=     using OhMyREPL =#
+#=     colorscheme!("Monokai24bit") =#
+#=     OhMyREPL.enable_autocomplete_brackets(false) =#
+#= catch ex =#
+#=     @warn "Could not load OhMyREPL: $ex" =#
+#= end =#
 
-@info "Importing Debugger"
-try
-    haskey(Pkg.installed(), "Debugger") || @eval Pkg.add("Debugger")
-    using Debugger
-catch ex
-    @warn "Could not load OhMyREPL: $ex"
-end
+#= @info "Importing Debugger" =#
+#= try =#
+#=     haskey(Pkg.installed(), "Debugger") || @eval Pkg.add("Debugger") =#
+#=     using Debugger =#
+#= catch ex =#
+#=     @warn "Could not load OhMyREPL: $ex" =#
+#= end =#
