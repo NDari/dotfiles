@@ -1,4 +1,4 @@
-;;; PACKAGE --- initualization for my emacs
+;; PACKAGE --- initualization for my emacs
 
 
 ;;; Code:
@@ -102,11 +102,17 @@
 ;; evil-mode
 (use-package evil
   :ensure t
+  :bind
+  (:map evil-motion-state-map
+        ("C-u" . evil-scroll-up))
   :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t
+        evil-want-C-i-jump t
+        evil-want-Y-yank-to-eol t
+        evil-want-keybinding nil)
   :config
-  (evil-mode 1))
+  (evil-mode t)
+  (add-to-list 'evil-emacs-state-modes 'vterm-mode))
 
 (use-package evil-collection
   :after evil
@@ -238,13 +244,11 @@
   (advice-add 'python-mode :before 'elpy-enable))
 
 ;; use jupyter console for the repl
-(setq python-shell-interpreter "jupyter"
-      python-shell-interpreter-args "console --simple-prompt"
-      python-shell-prompt-detect-failure-warning nil)
-(add-to-list 'python-shell-completion-native-disabled-interpreters
-             "jupyter")
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i --simple-prompt")
 ;; disable eply using it's own venv
 (setq elpy-rpc-virtualenv-path 'current)
+
 
 ; (use-package rust-mode
 ;   :ensure t
@@ -279,6 +283,7 @@
   ;; spell checking. Emacs 24.2+ has flyspell, but we need
   ;; to do brew install aspell --with-lang-en to add a spell-checker
   ;; for it. to make it work in a buffer, do M-x flyspell-buffer
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (add-hook 'find-file-hooks 'turn-on-flyspell))
@@ -308,14 +313,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" default)))
+    ("76c5b2592c62f6b48923c00f97f74bcb7ddb741618283bdb2be35f3c0e1030e3" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" default)))
  '(helm-candidate-number-list 10)
  '(helm-completion-in-region-fuzzy-match t)
  '(helm-mode-fuzzy-match t)
  '(helm-split-window-inside-p t)
  '(package-selected-packages
    (quote
-    (gruvbox-theme exec-path-from-shell julia-snail julia-mode vterm flycheck elpy company projectile helm all-the-icons which-key use-package))))
+    (zenburn-theme markdown-mode+ markdown-mode gruvbox-theme exec-path-from-shell julia-snail julia-mode vterm flycheck elpy company projectile helm all-the-icons which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
