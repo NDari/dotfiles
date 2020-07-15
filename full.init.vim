@@ -309,7 +309,7 @@ au BufWritePre *.* :%s/\s\+$//e
 set termguicolors
 set background=dark
 syntax on
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-gruvbox-dark-pale
 
 " Set mouse behavior to be more normal
 set mouse=a
