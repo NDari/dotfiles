@@ -52,6 +52,9 @@ Plug 'fatih/vim-go'
 " debug with :GoDebug. Needs dlv installed.
 Plug 'jodosha/vim-godebug'
 
+" nim
+Plug 'alaviss/nim.nvim'
+
 " Rust plugin. Use rustup. then
 " `rustup update` to get the latest.
 " `cargo install rustfmt` for formatting
@@ -111,6 +114,9 @@ Plug 'tpope/vim-rsi'
 " slime: send code to repl
 Plug 'jpalardy/vim-slime'
 
+" lsp
+Plug 'neovim/nvim-lsp'
+
 " Initialize plugin system
 call plug#end()
 
@@ -123,6 +129,28 @@ call plug#end()
 " set omnifunc=ale#completion#OmniFunc " list completions with C-x C-o
 " let g:ale_set_highlights = 0 " dont highlight errors inline. Margins will still work
 
+" nvim-lsp
+lua << EOF
+    local nvim_lsp = require'nvim_lsp'
+    local util = require 'nvim_lsp/util'
+    nvim_lsp.julials.setup{
+        root_dir = function(fname)
+            return util.find_git_ancestor(fname) or vim.loop.os_homedir();
+        end;
+    }
+    nvim_lsp.nimls.setup{}
+    nvim_lsp.solargraph.setup{
+        root_dir = function(fname)
+            return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+        end;
+    }
+EOF
+autocmd Filetype nim,ruby,julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+
+" disable folding
+set nofoldenable
+
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 
@@ -130,8 +158,8 @@ let g:vim_markdown_folding_disabled = 1
 let g:deoplete#enable_at_startup = 1
 
 " julia
-let g:default_julia_version = '1.3'
-let g:latex_to_unicode_tab = 1
+let g:default_julia_version = '1.5'
+let g:latex_to_unicode_auto = 1
 
 " slime
 let g:slime_target = "tmux"
@@ -366,6 +394,17 @@ nnoremap <leader>x :q<cr>
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" nvim-lsp completions
+nnoremap <leader>gd    :lua vim.lsp.buf.declaration()<CR>
+nnoremap <leader><c-]> :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>k     :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>gD    :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader><c-k> :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>1gD   :lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>gr    :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>g0    :lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <leader>gW    :lua vim.lsp.buf.workspace_symbol()<CR>
 
 " Command to toggle paste mode on and off
 set pastetoggle=<leader>v
