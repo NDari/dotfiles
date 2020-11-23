@@ -19,21 +19,21 @@ export lw='ndari@lewis4.rnet.missouri.edu'
 #esac
 
 # Spark and Hive
-export SPARK_HOME=$HOME/tools/spark-2.4.5-bin-hadoop2.7
+export SPARK_HOME=$HOME/tools/spark-3.0.0-bin-hadoop2.7
 export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
 export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 
 # ocaml stuff
-# source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-# eval $(opam config env)
+source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+eval $(opam config env)
 
 #### Go stuff
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
+# export GOROOT=/usr/local/Cellar/go
+# export GOPATH=$HOME/go
+# export GO111MODULE=on
 
 # racket stuff
-#alias rak='racket -il xrepl'
+alias rak='racket -il xrepl'
 
 # linux pbcopy/paste
 if [ $machine = 'Linux' ]; then
@@ -78,4 +78,9 @@ eval "$(rbenv init -)"
 # olcao stuff
 if [ $machine = 'Linux' ]; then
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
+fi
+
+# ruby
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
 fi
