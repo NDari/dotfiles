@@ -13,10 +13,10 @@ esac
 export lw='ndari@lewis4.rnet.missouri.edu'
 
 # Java stuff
-case "$machine" in
-        Linux*) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64;;
-        Mac*)   export JAVA_HOME=$(/usr/libexec/java_home);;
-esac
+#case "$machine" in
+#        Linux*) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64;;
+#        Mac*)   export JAVA_HOME=$(/usr/libexec/java_home);;
+#esac
 
 # Spark and Hive
 export SPARK_HOME=$HOME/tools/spark-2.4.5-bin-hadoop2.7
@@ -60,14 +60,20 @@ ALLPATHS=(
         "$HOME/.local/bin"
         "$HOME/.guix-profile/bin"
         "$HOME/.nimble/bin"
+        "$HOME/.rbenv/shims"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
 # export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 
+alias python='python3'
+
 # Rust stuff
 # for racer to work. Must get rust source with "rustup component add rust-src"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+# export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+# Ruby stuff
+eval "$(rbenv init -)"
 
 # olcao stuff
 if [ $machine = 'Linux' ]; then

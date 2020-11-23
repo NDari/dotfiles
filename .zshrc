@@ -6,7 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -27,17 +27,16 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # history options
-HISTFILE="$HOME/.zhistory"
-HISTSIZE=10000000
-SAVEHIST=10000000
+export HISTFILE="$HOME/.zhistory"
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+export HISTTIMEFORMAT="[%F %T] "
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
@@ -54,10 +53,13 @@ export KEYTIMEOUT=1
 # Add wisely, as too many plugins slow down shell startup.
 # For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
+    bundler
     git
     history-substring-search
     ubuntu
     archlinux
+    kubectl
+    rails
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -70,9 +72,6 @@ printf "\e[?1004l"
 
 # manually set language environment
 export LANG=en_US.UTF-8
-
-# do not save duplicate commands in history
-export HISTCONTROL=ignoreboth:erasedups
 
 # set editor stuff
 export EDITOR=`which nvim`
@@ -87,7 +86,8 @@ alias tns='tmux new-session -s'
 alias tl='tmux list-sessions'
 alias ta='tmux attach -t'
 alias h='history | fzf'
-alias ip='ipython --profile slime'
+alias ip='ipython'
+alias ips='ipython --profile slime'
 alias vi="nvi"
 alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
 
@@ -127,7 +127,7 @@ unset env
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
 
 # set default terl
 # export TERM=xterm
@@ -157,3 +157,6 @@ done
 
 # source custom shell functions
 source $HOME/dotfiles/shell-functions
+
+# make direnv work
+eval "$(direnv hook zsh)"
