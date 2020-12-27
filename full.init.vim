@@ -34,6 +34,9 @@ if !exists('g:vscode')
     " and 'end'
     Plug 'tpope/vim-endwise'
 
+    " sensible defaults
+    Plug 'tpope/vim-sensible'
+
     " open locationlist and quickfix with leader l and q
     Plug 'Valloric/ListToggle'
 
@@ -54,6 +57,9 @@ if !exists('g:vscode')
     " Debug go. Only works in neovim. Set breakpoints with :GoToggleBreakpoint and
     " debug with :GoDebug. Needs dlv installed.
     Plug 'jodosha/vim-godebug'
+
+    " all the languages
+    Plug 'sheerun/vim-polyglot'
 
     " nim
     Plug 'alaviss/nim.nvim'
@@ -88,6 +94,9 @@ if !exists('g:vscode')
     " nerdtree
     Plug 'tpope/vim-vinegar'
 
+    " save and restore sessions
+    Plug 'tpope/vim-obsession'
+
     " awesome git management with :G*
     Plug 'tpope/vim-fugitive'
 
@@ -118,7 +127,7 @@ if !exists('g:vscode')
     Plug 'jpalardy/vim-slime'
 
     " lsp
-    Plug 'neovim/nvim-lsp'
+    Plug 'neovim/nvim-lspconfig'
 
     " Initialize plugin system
     call plug#end()
@@ -134,17 +143,16 @@ if !exists('g:vscode')
 
     " nvim-lsp
     lua << EOF
-        local nvim_lsp = require'nvim_lsp'
-        local util = require 'nvim_lsp/util'
-        nvim_lsp.julials.setup{
+        local lspconfig = require'lspconfig'
+        lspconfig.julials.setup{
             root_dir = function(fname)
-                return util.find_git_ancestor(fname) or vim.loop.os_homedir();
+                return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir();
             end;
         }
-        nvim_lsp.nimls.setup{}
-        nvim_lsp.solargraph.setup{
+        lspconfig.nimls.setup{}
+        lspconfig.solargraph.setup{
             root_dir = function(fname)
-                return util.find_git_ancestor(fname) or vim.loop.os_homedir()
+                return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
             end;
         }
 EOF
@@ -344,11 +352,11 @@ EOF
     " Set mouse behavior to be more normal
     set mouse=a
 
-    " set tabs to 4 spaces
+    " set tabs to 2 spaces
     set expandtab
-    set shiftwidth=4
-    set tabstop=4
-    set softtabstop=4
+    set shiftwidth=2
+    set tabstop=2
+    set softtabstop=2
 
     " Make splits open naturally
     set splitbelow
