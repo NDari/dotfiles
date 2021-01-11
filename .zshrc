@@ -53,13 +53,13 @@ export KEYTIMEOUT=1
 # Add wisely, as too many plugins slow down shell startup.
 # For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
-    bundler
-    git
-    history-substring-search
-    ubuntu
-    archlinux
-    kubectl
-    rails
+  bundler
+  git
+  history-substring-search
+  ubuntu
+  archlinux
+  kubectl
+  rails
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -103,60 +103,54 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 DEFAULT_USER=`whoami`
 
 # ssh
-# env=~/.ssh/agent.env
+env=~/.ssh/agent.env
 
-# agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
-# agent_start () {
-#     (umask 077; ssh-agent >| "$env")
-#     . "$env" >| /dev/null ;
-# }
+agent_start () {
+  (umask 077; ssh-agent >| "$env")
+  . "$env" >| /dev/null ;
+}
 
-# agent_load_env
+agent_load_env
 
-# # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-# agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
-# if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-#     agent_start
-#     ssh-add -k
-# elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-#     ssh-add -k
-# fi
-# unset env
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+  agent_start
+  ssh-add -k
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+  ssh-add -k
+fi
+unset env
 
 # fuzzy finder settings.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
 
-# set default terl
-# export TERM=xterm
-
-# itermplot settings to show plots in iterm. install with pip3 install itermplot
-export ITERMPLOT=rv # for dark themes
-export MPLBACKEND="module://itermplot"
-export ITERMPLOT_LINES=10
-
 declare -a zshrc_files=(
-    ".cambrian.zshrc"
-    ".psm.zshrc"
-    ".psm.ds.zshrc"
-    ".personal.zshrc"
-    ".personal-linux.zshrc"
-    ".personal-wsl.zshrc"
+".cambrian.zshrc"
+".psm.zshrc"
+".psm.ds.zshrc"
+".personal.zshrc"
+".personal-linux.zshrc"
+".personal-wsl.zshrc"
 )
 
 # source all the special files if they exist.
 for f in "${zshrc_files[@]}"
 do
-    if [ -L "${HOME}/${f}" ]; then
-        echo "loading $HOME/$f"
-        source "${HOME}/${f}"
-    fi
+  if [ -L "${HOME}/${f}" ]; then
+    echo "loading $HOME/$f"
+    source "${HOME}/${f}"
+  fi
 done
 
 # source custom shell functions
 source $HOME/dotfiles/shell-functions
 
 # make direnv work
-eval "$(direnv hook zsh)"
+if which direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi

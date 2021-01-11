@@ -77,7 +77,7 @@ if !exists('g:vscode')
     Plug 'junegunn/fzf.vim'
     "
     " linting
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
 
     " looks
     Plug 'vim-airline/vim-airline'
@@ -405,6 +405,9 @@ EOF
     nmap <silent> <leader>ev :e $MYVIMRC<CR>
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+    " Ale go to def
+    nnoremap gd :ALEGoToDefinition<CR>
+
     " nvim-lsp completions
     nnoremap <leader>gd    :lua vim.lsp.buf.declaration()<cr>
     nnoremap <leader><c-]> :lua vim.lsp.buf.definition()<cr>
@@ -427,4 +430,20 @@ EOF
                 \ call fzf#vim#grep(
                 \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
                 \   <bang>0)
+
+    " jumps for fzf
+    function! GetJumps()
+      redir => cout
+      silent jumps
+      redir END
+      return reverse(split(cout, "\n")[1:])
+    endfunction
+    function! GoToJump(jump)
+        let jumpnumber = split(a:jump, '\s\+')[0]
+        execute "normal " . jumpnumber . "\<c-o>"
+    endfunction
+    command! Jumps call fzf#run(fzf#wrap({
+            \ 'source': GetJumps(),
+            \ 'sink': function('GoToJump')}))
+
 endif

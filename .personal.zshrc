@@ -2,11 +2,11 @@ cd $HOME
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    *)          machine="UNKNOWN:${unameOut}"
+  Linux*)     machine=Linux;;
+  Darwin*)    machine=Mac;;
+  CYGWIN*)    machine=Cygwin;;
+  MINGW*)     machine=MinGw;;
+  *)          machine="UNKNOWN:${unameOut}"
 esac
 
 # UMKC stuff
@@ -24,8 +24,13 @@ export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
 export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 
 # ocaml stuff
-source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-eval $(opam config env)
+if [ -d "$HOME/.opam" ]
+then
+  source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+  eval $(opam config env)
+else
+  echo "Skipping ocaml stuff..."
+fi
 
 #### Go stuff
 # export GOROOT=/usr/local/Cellar/go
@@ -37,8 +42,8 @@ alias rak='racket -il xrepl'
 
 # linux pbcopy/paste
 if [ $machine = 'Linux' ]; then
-        alias pbcopy='xclip -selection clipboard'
-        alias pbpaste='xclip -selection clipboard -o'
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
 fi
 
 #alias guix=$HOME/.config/guix/current/bin/guix
@@ -49,38 +54,36 @@ fi
 # path. just add to this
 
 ALLPATHS=(
-        "$HOME/miniconda3/bin"
-        "$SPARK_HOME/bin"
-        "$HIVE_HOME/bin"
-        "$HOME/go/bin"
-        "$GOROOT/bin"
-        "$HOME/.cargo/bin"
-        "$HOME/bin"
-        "/usr/local/bin"
-        "$HOME/.local/bin"
-        "$HOME/.guix-profile/bin"
-        "$HOME/.nimble/bin"
-        "$HOME/.rbenv/shims"
+  "$HOME/miniconda3/bin"
+  "$SPARK_HOME/bin"
+  "$HIVE_HOME/bin"
+  "$HOME/go/bin"
+  "$GOROOT/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/bin"
+  "/usr/local/bin"
+  "$HOME/.local/bin"
+  "$HOME/.guix-profile/bin"
+  "$HOME/.nimble/bin"
+  "$HOME/.rbenv/shims"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
 # export GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
 
-alias python='python3'
-
 # Rust stuff
 # for racer to work. Must get rust source with "rustup component add rust-src"
 # export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
-# Ruby stuff
-eval "$(rbenv init -)"
-
 # olcao stuff
 if [ $machine = 'Linux' ]; then
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
 fi
 
 # ruby
 if which rbenv > /dev/null; then
-    eval "$(rbenv init -)"
+  eval "$(rbenv init -)"
 fi
+
+# set terminal (for kitty)
+export TERM=xterm-256color
