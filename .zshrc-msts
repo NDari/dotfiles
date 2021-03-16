@@ -1,0 +1,18 @@
+ALLPATHS=(
+  "$HOME/.rbenv/shims"
+)
+printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
+export PATH=${NEWPATHS}${PATH}
+
+# ruby
+if which rbenv > /dev/null; then
+  eval "$(rbenv init -)"
+fi
+
+export KUBECONFIG=$HOME/.kube/config
+
+# check prod pods
+alias pingprod="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 'https://oapp.infolock.com/health/ping'; echo ''; sleep 1; done"
+alias pingbeta="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 'https://oapp.beta.infolock.com/health/ping'; echo ''; sleep 1; done"
+
+alias kc="kubectx"

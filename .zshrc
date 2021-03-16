@@ -130,12 +130,10 @@ unset env
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
 
 declare -a zshrc_files=(
-".cambrian.zshrc"
-".psm.zshrc"
-".psm.ds.zshrc"
-".personal.zshrc"
-".personal-linux.zshrc"
-".personal-wsl.zshrc"
+".zshrc-msts"
+".zshrc-personal"
+".zshrc-personal-linux"
+".zshrc-personal-wsl"
 )
 
 # source all the special files if they exist.
