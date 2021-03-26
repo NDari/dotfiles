@@ -16,3 +16,7 @@ alias pingprod="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 
 alias pingbeta="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 'https://oapp.beta.infolock.com/health/ping'; echo ''; sleep 1; done"
 
 alias kc="kubectx"
+
+kcon() {
+  keti $1 -- /bin/bash
+}

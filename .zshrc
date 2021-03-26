@@ -90,6 +90,7 @@ alias ip='ipython'
 alias ips='ipython --profile slime'
 alias vi="nvi"
 alias pyspark='PYSPARK_DRIVER_PYTHON=ipython pyspark'
+alias ls='ls --color=always'
 
 # color for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
