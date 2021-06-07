@@ -90,6 +90,7 @@ if !exists('g:vscode')
     Plug 'kaicataldo/material.vim'
     Plug 'reedes/vim-colors-pencil'
     Plug 'chriskempson/base16-vim'
+    Plug 'sainnhe/gruvbox-material'
 
     " nerdtree
     Plug 'tpope/vim-vinegar'
@@ -129,6 +130,9 @@ if !exists('g:vscode')
     " lsp
     Plug 'neovim/nvim-lspconfig'
 
+    " tree sitter
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
     " Initialize plugin system
     call plug#end()
 
@@ -158,6 +162,17 @@ if !exists('g:vscode')
 EOF
     autocmd Filetype nim,ruby,julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
+    " nvim-treesitter
+    lua <<EOF
+    require'nvim-treesitter.configs'.setup {
+      ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+      ignore_install = { "javascript" }, -- List of parsers to ignore installing
+      highlight = {
+        enable = true              -- false will disable the whole extension
+      },
+    }
+EOF
+
     " disable folding
     set nofoldenable
 
@@ -184,6 +199,7 @@ EOF
     " let g:fzf_layout = { 'window': 'enew' }
     " [Buffers] Jump to the existing window if possible
     let g:fzf_buffers_jump = 1
+    let g:fzf_preview_window = []
 
     " vim-go settings
     let g:go_highlight_build_constraints = 1
@@ -347,7 +363,7 @@ EOF
     set termguicolors
     set background=dark
     syntax on
-    colorscheme gruvbox
+    colorscheme gruvbox-material
 
     " Set mouse behavior to be more normal
     set mouse=a
@@ -418,6 +434,9 @@ EOF
     nnoremap <leader>gr    :lua vim.lsp.buf.references()<cr>
     nnoremap <leader>g0    :lua vim.lsp.buf.document_symbol()<cr>
     nnoremap <leader>gW    :lua vim.lsp.buf.workspace_symbol()<cr>
+
+    nnoremap <leader>j     :%!python -m json.tool<cr>
+    vnoremap <leader>j     :!python -m json.tool<cr>
 
     " Command to toggle paste mode on and off
     set pastetoggle=<leader>v

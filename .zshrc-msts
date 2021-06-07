@@ -15,8 +15,5 @@ export KUBECONFIG=$HOME/.kube/config
 alias pingprod="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 'https://oapp.infolock.com/health/ping'; echo ''; sleep 1; done"
 alias pingbeta="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 'https://oapp.beta.infolock.com/health/ping'; echo ''; sleep 1; done"
 
-alias kc="kubectx"
-
-kcon() {
-  keti $1 -- /bin/bash
-}
+# aws-mfa duration. Set to 36 hours
+export MFA_STS_DURATION=129600
