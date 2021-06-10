@@ -363,7 +363,7 @@ EOF
     set termguicolors
     set background=dark
     syntax on
-    colorscheme gruvbox-material
+    colorscheme gruvbox
 
     " Set mouse behavior to be more normal
     set mouse=a
