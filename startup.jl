@@ -18,19 +18,41 @@
 #= catch ex =#
 #=     @warn "Could not load Revise: $ex" =#
 #= end =#
+import Pkg
 
-@info "Importing OhMyREPL"
-using OhMyREPL
-colorscheme!("Monokai24bit")
-OhMyREPL.enable_autocomplete_brackets(false)
-#= catch ex =#
-#=     @warn "Could not load OhMyREPL: $ex" =#
-#= end =#
+if isfile("Project.toml")
+  # auto-activate project in current directory =#
+  @info "Activating project in $(pwd())"
+  Pkg.activate(".")
+else
+  want_packages = Set([
+    "Debugger",
+    "OhMyREPL",
+    "DataFrames",
+    "DataFramesMeta",
+    "Revise",
+  ])
 
-#= @info "Importing Debugger" =#
-#= try =#
-#=     #1= haskey(Pkg.installed(), "Debugger") || @eval Pkg.add("Debugger") =1# =#
-#=     using Debugger =#
-#= catch ex =#
-#=     @warn "Could not load OhMyREPL: $ex" =#
-#= end =#
+  function top_level_deps()
+    deps = Pkg.dependencies()
+    installs = []
+    for (uuid, dep) in deps
+        dep.is_direct_dep || continue
+        dep.version === nothing && continue
+        push!(installs, dep.name)
+    end
+    return Set(installs)
+  end
+
+  uninstalled_packages = setdiff(want_packages, top_level_deps())
+
+  for p in uninstalled_packages
+    @info "Installing $p"
+    Pkg.add(p)
+  end
+
+  @info "Importing OhMyREPL"
+  using OhMyREPL
+  colorscheme!("OneDark")
+  OhMyREPL.enable_autocomplete_brackets(false)
+end
