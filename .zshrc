@@ -76,6 +76,10 @@ export LANG=en_US.UTF-8
 # set editor stuff
 export EDITOR=`which nvim`
 
+# make ctrlp/n work with partially types commands
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
 # system aliases
 alias gpo='gp --set-upstream origin `git_current_branch`'
 alias c='clear'

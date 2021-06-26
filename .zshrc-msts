@@ -17,3 +17,12 @@ alias pingbeta="for ((i=1;i<=1000;i++)); do date; curl --location --request GET 
 
 # aws-mfa duration. Set to 36 hours
 export MFA_STS_DURATION=129600
+
+betacon() {
+  keti $(kgp | grep 'beta.delay' | cut -d' ' -f 1) -- rails console
+}
+
+prodcon() {
+  keti $(kgp | grep 'prod.delay' | cut -d' ' -f 1) -- rails console
+}
+export PATH="/Users/ndari/.ebcli-virtual-env/executables:$PATH"

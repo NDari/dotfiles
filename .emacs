@@ -223,6 +223,16 @@
   ;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (projectile-mode +1))
 
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         ;; (XX-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
 ;; enable company mode (for auto complete)
 (use-package company
   :ensure t
@@ -319,7 +329,7 @@
  '(helm-mode-fuzzy-match t)
  '(helm-split-window-inside-p t)
  '(package-selected-packages
-   '()))
+   '(gruvbox-theme which-key use-package projectile julia-snail helm flycheck exec-path-from-shell evil-surround evil-snipe evil-leader evil-escape evil-collection elpy all-the-icons)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
