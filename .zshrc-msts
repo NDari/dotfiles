@@ -4,11 +4,6 @@ ALLPATHS=(
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
 
-# ruby
-if which rbenv > /dev/null; then
-  eval "$(rbenv init -)"
-fi
-
 export KUBECONFIG=$HOME/.kube/config
 
 # check prod pods
