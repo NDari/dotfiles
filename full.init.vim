@@ -154,6 +154,7 @@ if !exists('g:vscode')
             end;
         }
         lspconfig.nimls.setup{}
+        lspconfig.pylsp.setup{}
         lspconfig.solargraph.setup{
             root_dir = function(fname)
                 return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
