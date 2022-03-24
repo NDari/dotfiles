@@ -64,6 +64,7 @@ ALLPATHS=(
   "$HOME/.local/bin"
   "$HOME/.guix-profile/bin"
   "$HOME/.nimble/bin"
+  # "/opt/homebrew/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}

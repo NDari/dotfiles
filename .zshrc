@@ -145,6 +145,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --i
 declare -a zshrc_files=(
 ".zshrc-msts"
 ".zshrc-personal"
+".zshrc-tc"
 ".zshrc-personal-linux"
 ".zshrc-personal-wsl"
 )

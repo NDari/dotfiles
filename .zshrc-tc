@@ -1,0 +1,5 @@
+function tc {
+  cd $HOME/projects/teracrunch/$1
+}
+
+alias bazel=bazelisk
