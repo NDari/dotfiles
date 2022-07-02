@@ -3,3 +3,5 @@ function tc {
 }
 
 alias bazel=bazelisk
+
+eval "$(direnv hook zsh)"
