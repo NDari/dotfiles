@@ -53,13 +53,14 @@ export KEYTIMEOUT=1
 # Add wisely, as too many plugins slow down shell startup.
 # For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
-  bundler
+  #bundler
   git
   history-substring-search
-  ubuntu
-  archlinux
-  kubectl
-  rails
+  #ubuntu
+  #archlinux
+  #kubectl
+  fzf
+  #rails
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -115,6 +116,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 DEFAULT_USER=`whoami`
 
+# remove things like ^M on enter for interactive CLIs
+stty sane
+
 # ssh
 env=~/.ssh/agent.env
 
@@ -162,7 +166,10 @@ done
 # source custom shell functions
 source $HOME/dotfiles/shell-functions
 
-# make direnv work
+# make direnv work, and work with tmux
 if which direnv > /dev/null; then
+  if [[ -n $TMUX && -n $DIRENV_DIR ]]; then
+      unset `printf '%s ' ${(kM)parameters:#DIRENV_*}`  # unset env vars starting with DIRENV_
+  fi
   eval "$(direnv hook zsh)"
 fi
