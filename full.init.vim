@@ -207,7 +207,7 @@ let g:slime_dont_ask_default = 1
 " tags command
 let g:fzf_tags_command = 'ctags -R -f .tags'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-" let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': 'enew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 let g:fzf_preview_window = []
@@ -433,7 +433,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Ale go to def
-nnoremap gd :ALEGoToDefinition<CR>
+" nnoremap gd :ALEGoToDefinition<CR>
 
 " nvim-lsp completions
 nnoremap <leader>gd    :lua vim.lsp.buf.declaration()<cr>
