@@ -85,4 +85,4 @@ if which rbenv > /dev/null; then
 fi
 
 # set terminal (for kitty)
-export TERM=xterm-256color
+export TERM=tmux-256color
