@@ -7,9 +7,6 @@ case "${unameOut}" in
   *)          machine="UNKNOWN:${unameOut}"
 esac
 
-# UMKC stuff
-export lw='ndari@lewis4.rnet.missouri.edu'
-
 # Java stuff
 #case "$machine" in
 #        Linux*) export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64;;
@@ -17,18 +14,18 @@ export lw='ndari@lewis4.rnet.missouri.edu'
 #esac
 
 # Spark and Hive
-export SPARK_HOME=$HOME/tools/spark-3.0.0-bin-hadoop2.7
-export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
-export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
+# export SPARK_HOME=$HOME/tools/spark-3.0.0-bin-hadoop2.7
+# export PYSPARK_PYTHON=$HOME/miniconda3/bin/python
+# export HIVE_HOME=$HOME/tools/apache-hive-3.1.1-bin
 
 # ocaml stuff
-if [ -d "$HOME/.opam" ]
-then
-  source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-  eval $(opam config env)
-else
-  echo "Skipping ocaml stuff..."
-fi
+# if [ -d "$HOME/.opam" ]
+# then
+#   source $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+#   eval $(opam config env)
+# else
+#   echo "Skipping ocaml stuff..."
+# fi
 
 #### Go stuff
 # export GOROOT=/usr/local/Cellar/go
@@ -36,7 +33,7 @@ fi
 # export GO111MODULE=on
 
 # racket stuff
-alias rak='racket -il xrepl'
+# alias rak='racket -il xrepl'
 
 # linux pbcopy/paste
 if [ $machine = 'Linux' ]; then
@@ -54,16 +51,15 @@ fi
 ALLPATHS=(
   "/usr/local/opt/coreutils/libexec/gnubin"
   "$HOME/miniconda3/bin"
-  "$SPARK_HOME/bin"
-  "$HIVE_HOME/bin"
-  "$HOME/go/bin"
-  "$GOROOT/bin"
-  "$HOME/.cargo/bin"
+  # "$SPARK_HOME/bin"
+  # "$HIVE_HOME/bin"
+  # "$HOME/go/bin"
+  # "$GOROOT/bin"
+  # "$HOME/.cargo/bin"
   "$HOME/bin"
   "/usr/local/bin"
   "$HOME/.local/bin"
-  "$HOME/.guix-profile/bin"
-  "$HOME/.nimble/bin"
+  "$HOME/.pixi/bin"
   # "/opt/homebrew/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
@@ -80,9 +76,9 @@ if [ $machine = 'Linux' ]; then
 fi
 
 # ruby
-if which rbenv > /dev/null; then
-  eval "$(rbenv init -)"
-fi
+# if which rbenv > /dev/null; then
+#   eval "$(rbenv init -)"
+# fi
 
 # set terminal (for kitty)
-export TERM=tmux-256color
+export TERM=xterm-256color
