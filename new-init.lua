@@ -35,7 +35,6 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
-
 -- search configs
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -71,13 +70,21 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cmdheight = 1
 vim.cmd("set noshowmode")
+-- Reserve a space in the gutter
+vim.opt.signcolumn = 'yes'
 
 -- keybindings
--- Moving between splits and resizing
-vim.keymap.set("", "<C-j>", "<C-W>j")
-vim.keymap.set("", "<C-k>", "<C-W>k")
-vim.keymap.set("", "<C-l>", "<C-W>l")
-vim.keymap.set("", "<C-H>", "<C-W>h")
+-- Moving between splits
+vim.keymap.set("n", "<C-j>", "<C-W>j")
+vim.keymap.set("n", "<C-k>", "<C-W>k")
+vim.keymap.set("n", "<C-l>", "<C-W>l")
+vim.keymap.set("n", "<C-h>", "<C-W>h")
+-- and terminal
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j")
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
+
 
 -- .vimrc access and source
 vim.keymap.set("n", "<leader>ev", ":e $MYVIMRC<CR>")
@@ -110,7 +117,7 @@ require("lazy").setup({
     {"justinmk/vim-sneak"},
 
     -- add closing braces and qoutes
-    {"jiangmiao/auto-pairs"},
+    -- {"jiangmiao/auto-pairs"},
 
     -- []q quickfix, []b buffers, []a file
     {"tpope/vim-unimpaired"},
@@ -126,6 +133,34 @@ require("lazy").setup({
 
     -- readline keybinds in insert mode
     {"tpope/vim-rsi"},
+
+    -- fzf stuff
+    -- install fzf if we dont have it.
+    {
+      "junegunn/fzf",
+      build = "./install --bin"
+    },
+    {
+      "ibhagwan/fzf-lua",
+      -- optional for icon support
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        -- calling `setup` is optional for customization
+        require("fzf-lua").setup({})
+      end
+    },
+
+    -- send code to repl
+    -- {
+    --   "jpalardy/vim-slime",
+
+    --   config = function()
+    --     vim.g.slime_target = "neovim"
+    --     vim.g.slime_bracketed_paste = 1
+    --     vim.g.slime_suggest_default = 1
+    --     -- vim.cmd([[let g:slime_default_config = {"pane_direction": "right"}]])
+    --   end,
+    -- },
 
     -- statusline
     { 
@@ -200,9 +235,6 @@ require("lazy").setup({
 vim.cmd("colorscheme gruvbox")
 
 -- lsp configs
--- Reserve a space in the gutter
-vim.opt.signcolumn = 'yes'
-
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
 -- This should be executed before you configure any language server
 local lspconfig_defaults = require('lspconfig').util.default_config
@@ -219,16 +251,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
     local opts = {buffer = event.buf}
 
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   end,
 })
 
@@ -274,3 +306,10 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
   }),
 })
+
+vim.keymap.set("n", "<leader>b", '<cmd>lua require("fzf-lua").buffers()<CR>', {})
+vim.keymap.set("n", "<leader>q", '<cmd>lua require("fzf-lua").quickfix()<CR>', {})
+vim.keymap.set("n", "<leader>f", '<cmd>lua require("fzf-lua").files()<CR>', {})
+-- vim.keymap.set("n", "<leader>", '<cmd>lua require("fzf-lua").live_grep_glob()<CR>', {})
+vim.keymap.set("n", "<leader>r", '<cmd>lua require("fzf-lua").grep_project()<CR>', {})
+-- vim.keymap.set("n", "<leader>", '<cmd>lua require"fzf-lua".help_tags()<CR>', {})
