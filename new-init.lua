@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -58,7 +58,7 @@ vim.opt.scrolloff = 15
 -- mouse support
 vim.opt.mouse = "a"
 
--- enable 24bit RGB colors 
+-- enable 24bit RGB colors
 vim.opt.termguicolors = true
 
 -- completions to use menu and not preview
@@ -88,12 +88,15 @@ vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
 
 -- .vimrc access and source
 vim.keymap.set("n", "<leader>ev", ":e $MYVIMRC<CR>")
-vim.keymap.set("n", "<leader>sv", ":Lazy sync<CR>")
+-- vim.keymap.set("n", "<leader>sv", ":Lazy sync<CR>")
 
 -- Search mappings: These will make it so that going to the next one in a
 -- search will center on the line it's found in.
-vim.keymap.set('n', 'n', 'nzzzv', {noremap = true})
-vim.keymap.set('n', 'N', 'Nzzzv', {noremap = true})
+vim.keymap.set('n', 'n', 'nzzzv', { noremap = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true })
+
+-- paste over selection without copying the selection to clipboard
+vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- Yanking a line should act like D and C
 vim.keymap.set('n', 'Y', 'y$')
@@ -105,34 +108,39 @@ vim.keymap.set("x", "<", "<gv")
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- color scheme
-    {"ellisonleao/gruvbox.nvim"},
-
     -- lsp
-    {"neovim/nvim-lspconfig"},
-    {"hrsh7th/cmp-nvim-lsp"},
-    {"hrsh7th/nvim-cmp"},
+    { "neovim/nvim-lspconfig" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/nvim-cmp" },
+    { "williamboman/mason.nvim" },         -- for installing things
+    { "williamboman/mason-lspconfig.nvim" }, -- for installing lsp
+    { "hrsh7th/cmp-buffer" },              -- completions from the buffers
+    { "hrsh7th/cmp-path" },                -- completion for paths
+    { "hrsh7th/cmp-cmdline" },             -- vim command completions
 
-    -- s + 2 chars to jump to anything. repeat to go next
-    {"justinmk/vim-sneak"},
-
-    -- add closing braces and qoutes
-    -- {"jiangmiao/auto-pairs"},
+    -- add pairs automatically
+    {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+      -- use opts = {} for passing setup options
+      -- this is equivalent to setup({}) function
+    },
 
     -- []q quickfix, []b buffers, []a file
-    {"tpope/vim-unimpaired"},
+    { "tpope/vim-unimpaired" },
 
     -- yank/change in pairs
-    {"tpope/vim-surround"},
-    
+    { "tpope/vim-surround" },
+
     -- comment lines
-    {"tpope/vim-commentary"},
-    
+    { "tpope/vim-commentary" },
+
     -- file system with -
-    {"tpope/vim-vinegar"},
+    { "tpope/vim-vinegar" },
 
     -- readline keybinds in insert mode
-    {"tpope/vim-rsi"},
+    { "tpope/vim-rsi" },
 
     -- fzf stuff
     -- install fzf if we dont have it.
@@ -150,6 +158,34 @@ require("lazy").setup({
       end
     },
 
+    -- color schemes
+    { "chriskempson/base16-vim" },
+    { "sainnhe/gruvbox-material" },
+    {
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+      config = function()
+        require("tokyonight").setup({
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+          transparent = true,     -- Enable this to disable setting the background color
+          terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+          styles = {
+            -- Style to be applied to different syntax groups
+            -- Value is any valid attr-list value for `:help nvim_set_hl`
+            comments = { italic = false },
+            keywords = { italic = false },
+            -- Background styles. Can be "dark", "transparent" or "normal"
+            sidebars = "dark", -- style for sidebars, see below
+            floats = "dark",   -- style for floating windows
+          },
+        })
+      end
+    },
+
     -- send code to repl
     -- {
     --   "jpalardy/vim-slime",
@@ -163,13 +199,12 @@ require("lazy").setup({
     -- },
 
     -- statusline
-    { 
+    {
       "nvim-lualine/lualine.nvim",
       dependencies = { 'nvim-tree/nvim-web-devicons' },
-      config = function ()
+      config = function()
         require("lualine").setup({
-          options = { 
-            theme = 'gruvbox',
+          options = {
             icons_enabled = true,
           },
           sections = {
@@ -177,7 +212,7 @@ require("lazy").setup({
               {
                 'filename',
                 file_status = true, -- displays file status (readonly status, modified status)
-                path = 2 -- 0 = just filename, 1 = relative path, 2 = absolute path
+                path = 1            -- 0 = just filename, 1 = relative path, 2 = absolute path
               }
             }
           }
@@ -192,20 +227,20 @@ require("lazy").setup({
       main = 'nvim-treesitter.configs', -- Sets main module to use for opts
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       opts = {
-        ensure_installed = { 
-          'bash', 
-          'c', 
-          'diff', 
-          'lua', 
-          'luadoc', 
-          'markdown', 
-          'markdown_inline', 
+        ensure_installed = {
+          'bash',
+          'c',
+          'diff',
+          'lua',
+          'luadoc',
+          'markdown',
+          'markdown_inline',
           'python',
           'sql',
-          'query', 
+          'query',
           'ruby',
-          'vim', 
-          'vimdoc' 
+          'vim',
+          'vimdoc',
         },
         -- Autoinstall languages that are not installed
         auto_install = true,
@@ -232,7 +267,7 @@ require("lazy").setup({
 })
 
 -- pluging configs
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme gruvbox-material")
 
 -- lsp configs
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
@@ -243,13 +278,15 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
   lspconfig_defaults.capabilities,
   require('cmp_nvim_lsp').default_capabilities()
 )
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = {buffer = event.buf}
+    local opts = { buffer = event.buf }
 
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -259,40 +296,66 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
+    vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<CR>', opts)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   end,
 })
 
 -- You'll find a list of language servers here:
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
--- These are example language servers. 
-require('lspconfig').julials.setup({
-  root_dir = function(fname)
-    return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir();
-  end;
-})
+-- These are example language servers.
+require('lspconfig').julials.setup({})
 require('lspconfig').pylsp.setup({
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
+          ignore = { 'W391' },
           maxLineLength = 100
         }
       }
     }
   }
 })
-require('lspconfig').solargraph.setup({
-  root_dir = function(fname)
-    return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-  end;
-})
+require('lspconfig').solargraph.setup({})
+require('lspconfig').lua_ls.setup {
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+        return
+      end
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT'
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+          -- Depending on the usage, you might want to add additional paths here.
+          -- "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+}
 
 local cmp = require('cmp')
 cmp.setup({
   sources = {
-    {name = 'nvim_lsp'},
+    { name = 'nvim_lsp' },
   },
   snippet = {
     expand = function(args)
@@ -306,6 +369,12 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
   }),
 })
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 vim.keymap.set("n", "<leader>b", '<cmd>lua require("fzf-lua").buffers()<CR>', {})
 vim.keymap.set("n", "<leader>q", '<cmd>lua require("fzf-lua").quickfix()<CR>', {})
