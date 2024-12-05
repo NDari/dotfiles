@@ -35,6 +35,9 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 
+-- keep things around
+vim.opt.hidden = true
+
 -- search configs
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -112,11 +115,11 @@ require("lazy").setup({
     { "neovim/nvim-lspconfig" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/nvim-cmp" },
-    { "williamboman/mason.nvim" },         -- for installing things
+    { "williamboman/mason.nvim" },           -- for installing things
     { "williamboman/mason-lspconfig.nvim" }, -- for installing lsp
-    { "hrsh7th/cmp-buffer" },              -- completions from the buffers
-    { "hrsh7th/cmp-path" },                -- completion for paths
-    { "hrsh7th/cmp-cmdline" },             -- vim command completions
+    { "hrsh7th/cmp-buffer" },                -- completions from the buffers
+    { "hrsh7th/cmp-path" },                  -- completion for paths
+    { "hrsh7th/cmp-cmdline" },               -- vim command completions
 
     -- add pairs automatically
     {
@@ -158,34 +161,15 @@ require("lazy").setup({
       end
     },
 
-    -- color schemes
-    { "chriskempson/base16-vim" },
-    { "sainnhe/gruvbox-material" },
+    -- toggle a terminal window
     {
-      "folke/tokyonight.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
-      config = function()
-        require("tokyonight").setup({
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-          transparent = true,     -- Enable this to disable setting the background color
-          terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-          styles = {
-            -- Style to be applied to different syntax groups
-            -- Value is any valid attr-list value for `:help nvim_set_hl`
-            comments = { italic = false },
-            keywords = { italic = false },
-            -- Background styles. Can be "dark", "transparent" or "normal"
-            sidebars = "dark", -- style for sidebars, see below
-            floats = "dark",   -- style for floating windows
-          },
-        })
-      end
+      'akinsho/toggleterm.nvim',
+      version = "*",
+      config = true,
     },
 
+    -- color schemes
+    { "sainnhe/gruvbox-material" },
     -- send code to repl
     -- {
     --   "jpalardy/vim-slime",
@@ -382,3 +366,38 @@ vim.keymap.set("n", "<leader>f", '<cmd>lua require("fzf-lua").files()<CR>', {})
 -- vim.keymap.set("n", "<leader>", '<cmd>lua require("fzf-lua").live_grep_glob()<CR>', {})
 vim.keymap.set("n", "<leader>r", '<cmd>lua require("fzf-lua").grep_project()<CR>', {})
 -- vim.keymap.set("n", "<leader>", '<cmd>lua require"fzf-lua".help_tags()<CR>', {})
+
+local toggleterm = require("toggleterm")
+toggleterm.setup({
+  size = 20,
+  open_mapping = [[<c-\>]],
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = 2,
+  start_in_insert = true,
+  insert_mappings = true,
+  persist_size = true,
+  direction = "float",
+  close_on_exit = true,
+  shell = vim.o.shell,
+  float_opts = {
+    border = "curved",
+    winblend = 0,
+    highlights = {
+      border = "Normal",
+      background = "Normal",
+    },
+  },
+})
+function _G.set_terminal_keymaps()
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+end
+
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
