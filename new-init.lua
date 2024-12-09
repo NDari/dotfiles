@@ -1,6 +1,6 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
@@ -34,6 +34,12 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
+
+-- allow per-project configs
+vim.o.exrc = true
+-- exrc has security issues. this helps. nvim 0.9+ does not need this but
+-- adding here just in case of an older version
+vim.o.secure = true
 
 -- keep things around
 vim.opt.hidden = true
@@ -169,7 +175,15 @@ require("lazy").setup({
     },
 
     -- color schemes
-    { "sainnhe/gruvbox-material" },
+    {
+      "ellisonleao/gruvbox.nvim",
+      lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      priority = 1000, -- make sure to load this before all the other start plugins
+      config = function()
+        -- load the colorscheme here
+        vim.cmd("colorscheme gruvbox")
+      end,
+    },
     -- send code to repl
     -- {
     --   "jpalardy/vim-slime",
@@ -227,15 +241,17 @@ require("lazy").setup({
           'vimdoc',
         },
         -- Autoinstall languages that are not installed
-        auto_install = true,
+        auto_install = false,
         highlight = {
           enable = true,
           -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
           --  If you are experiencing weird indenting issues, add the language to
           --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-          additional_vim_regex_highlighting = { 'ruby' },
+          additional_vim_regex_highlighting = false, -- { 'ruby' },
         },
-        indent = { enable = true, disable = { 'ruby' } },
+        indent = {
+          enable = true,
+        },
       },
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -251,7 +267,6 @@ require("lazy").setup({
 })
 
 -- pluging configs
-vim.cmd("colorscheme gruvbox-material")
 
 -- lsp configs
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
@@ -306,7 +321,7 @@ require('lspconfig').lua_ls.setup {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+      if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
         return
       end
     end
