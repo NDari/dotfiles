@@ -44,6 +44,9 @@ vim.o.secure = true
 -- keep things around
 vim.opt.hidden = true
 
+-- background
+vim.opt.background = "dark"
+
 -- search configs
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -78,7 +81,13 @@ vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cmdheight = 1
-vim.cmd("set noshowmode")
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
 -- Reserve a space in the gutter
 vim.opt.signcolumn = 'yes'
 
@@ -94,6 +103,9 @@ vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")
 
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- .vimrc access and source
 vim.keymap.set("n", "<leader>ev", ":e $MYVIMRC<CR>")
@@ -113,6 +125,17 @@ vim.keymap.set('n', 'Y', 'y$')
 -- retain highlighted section after indenting
 vim.keymap.set("x", ">", ">gv")
 vim.keymap.set("x", "<", "<gv")
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -385,7 +408,7 @@ vim.keymap.set("n", "<leader>r", '<cmd>lua require("fzf-lua").grep_project()<CR>
 local toggleterm = require("toggleterm")
 toggleterm.setup({
   size = 20,
-  open_mapping = [[<c-\>]],
+  open_mapping = [[<leader>t]],
   hide_numbers = true,
   shade_filetypes = {},
   shade_terminals = true,
