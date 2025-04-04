@@ -34,7 +34,7 @@ end)
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
-	command = "setlocal shiftwidth=4 tabstop=4"
+	command = "setlocal shiftwidth=4 tabstop=4",
 })
 
 -- Enable break indent
@@ -128,7 +128,7 @@ vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("x", ">", ">gv")
 vim.keymap.set("x", "<", "<gv")
 
--- open diagnostics 
+-- open diagnostics
 vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
 
 -- [[ Basic Autocommands ]]
@@ -205,13 +205,13 @@ require("lazy").setup({
 		-- use opts = {} for passing setup options
 		-- this is equivalent to setup({}) function
 	},
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {
-      theme = "catppuccin-latte",
-    }
-  },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			theme = "catppuccin-latte",
+		},
+	},
 
 	{
 		"folke/snacks.nvim",
@@ -242,60 +242,349 @@ require("lazy").setup({
 		},
 		keys = {
 			-- Top Pickers & Explorer
-			{ "<leader>b", function() Snacks.picker.buffers({ current = false }) end, desc = "Buffers", },
-			{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep", },
-			{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History", },
-			{ "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History", },
-			{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer", },
+			{
+				"<leader>b",
+				function()
+					Snacks.picker.buffers({ current = false })
+				end,
+				desc = "Buffers",
+			},
+			{
+				"<leader>/",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Grep",
+			},
+			{
+				"<leader>:",
+				function()
+					Snacks.picker.command_history()
+				end,
+				desc = "Command History",
+			},
+			{
+				"<leader>n",
+				function()
+					Snacks.picker.notifications()
+				end,
+				desc = "Notification History",
+			},
+			{
+				"<leader>e",
+				function()
+					Snacks.explorer()
+				end,
+				desc = "File Explorer",
+			},
 			-- find
-			{ "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files", },
-			{ "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files", },
-			{ "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects", },
-			{ "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent", },
+			{
+				"<leader>ff",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "Find Files",
+			},
+			{
+				"<leader>fg",
+				function()
+					Snacks.picker.git_files()
+				end,
+				desc = "Find Git Files",
+			},
+			{
+				"<leader>fp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "Projects",
+			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.picker.recent()
+				end,
+				desc = "Recent",
+			},
 			-- git
-			{ "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches", },
-			{ "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log", },
-			{ "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line", },
-			{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status", },
-			{ "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash", },
-			{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)", },
-			{ "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File", },
+			{
+				"<leader>gb",
+				function()
+					Snacks.picker.git_branches()
+				end,
+				desc = "Git Branches",
+			},
+			{
+				"<leader>gl",
+				function()
+					Snacks.picker.git_log()
+				end,
+				desc = "Git Log",
+			},
+			{
+				"<leader>gL",
+				function()
+					Snacks.picker.git_log_line()
+				end,
+				desc = "Git Log Line",
+			},
+			{
+				"<leader>gs",
+				function()
+					Snacks.picker.git_status()
+				end,
+				desc = "Git Status",
+			},
+			{
+				"<leader>gS",
+				function()
+					Snacks.picker.git_stash()
+				end,
+				desc = "Git Stash",
+			},
+			{
+				"<leader>gd",
+				function()
+					Snacks.picker.git_diff()
+				end,
+				desc = "Git Diff (Hunks)",
+			},
+			{
+				"<leader>gf",
+				function()
+					Snacks.picker.git_log_file()
+				end,
+				desc = "Git Log File",
+			},
 			-- Grep
-			{ "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines", },
-			{ "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers", },
-			{ "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep", },
-			{ "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" },
+			{
+				"<leader>sb",
+				function()
+					Snacks.picker.lines()
+				end,
+				desc = "Buffer Lines",
+			},
+			{
+				"<leader>sB",
+				function()
+					Snacks.picker.grep_buffers()
+				end,
+				desc = "Grep Open Buffers",
+			},
+			{
+				"<leader>sg",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Grep",
+			},
+			{
+				"<leader>sw",
+				function()
+					Snacks.picker.grep_word()
+				end,
+				desc = "Visual selection or word",
+				mode = { "n", "x" },
 			},
 			-- search
-			{ '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers", },
-			{ "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History", },
-			{ "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds", },
-			{ "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines", },
-			{ "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History", },
-			{ "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands", },
-			{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics", },
-			{ "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics", },
-			{ "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages", },
-			{ "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights", },
-			{ "<leader>si", function() Snacks.picker.icons() end, desc = "Icons", },
-			{ "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps", },
-			{ "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps", },
-			{ "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List", },
-			{ "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks", },
-			{ "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages", },
-			{ "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec", },
-			{ "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List", },
-			{ "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume", },
-			{ "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History", },
-			{ "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes", },
+			{
+				'<leader>s"',
+				function()
+					Snacks.picker.registers()
+				end,
+				desc = "Registers",
+			},
+			{
+				"<leader>s/",
+				function()
+					Snacks.picker.search_history()
+				end,
+				desc = "Search History",
+			},
+			{
+				"<leader>sa",
+				function()
+					Snacks.picker.autocmds()
+				end,
+				desc = "Autocmds",
+			},
+			{
+				"<leader>sb",
+				function()
+					Snacks.picker.lines()
+				end,
+				desc = "Buffer Lines",
+			},
+			{
+				"<leader>sc",
+				function()
+					Snacks.picker.command_history()
+				end,
+				desc = "Command History",
+			},
+			{
+				"<leader>sC",
+				function()
+					Snacks.picker.commands()
+				end,
+				desc = "Commands",
+			},
+			{
+				"<leader>sd",
+				function()
+					Snacks.picker.diagnostics()
+				end,
+				desc = "Diagnostics",
+			},
+			{
+				"<leader>sD",
+				function()
+					Snacks.picker.diagnostics_buffer()
+				end,
+				desc = "Buffer Diagnostics",
+			},
+			{
+				"<leader>sh",
+				function()
+					Snacks.picker.help()
+				end,
+				desc = "Help Pages",
+			},
+			{
+				"<leader>sH",
+				function()
+					Snacks.picker.highlights()
+				end,
+				desc = "Highlights",
+			},
+			{
+				"<leader>si",
+				function()
+					Snacks.picker.icons()
+				end,
+				desc = "Icons",
+			},
+			{
+				"<leader>sj",
+				function()
+					Snacks.picker.jumps()
+				end,
+				desc = "Jumps",
+			},
+			{
+				"<leader>sk",
+				function()
+					Snacks.picker.keymaps()
+				end,
+				desc = "Keymaps",
+			},
+			{
+				"<leader>sl",
+				function()
+					Snacks.picker.loclist()
+				end,
+				desc = "Location List",
+			},
+			{
+				"<leader>sm",
+				function()
+					Snacks.picker.marks()
+				end,
+				desc = "Marks",
+			},
+			{
+				"<leader>sM",
+				function()
+					Snacks.picker.man()
+				end,
+				desc = "Man Pages",
+			},
+			{
+				"<leader>sp",
+				function()
+					Snacks.picker.lazy()
+				end,
+				desc = "Search for Plugin Spec",
+			},
+			{
+				"<leader>sq",
+				function()
+					Snacks.picker.qflist()
+				end,
+				desc = "Quickfix List",
+			},
+			{
+				"<leader>sR",
+				function()
+					Snacks.picker.resume()
+				end,
+				desc = "Resume",
+			},
+			{
+				"<leader>su",
+				function()
+					Snacks.picker.undo()
+				end,
+				desc = "Undo History",
+			},
+			{
+				"<leader>uC",
+				function()
+					Snacks.picker.colorschemes()
+				end,
+				desc = "Colorschemes",
+			},
 			-- LSP
-			{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition", },
-			{ "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration", },
-			{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References", },
-			{ "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation", },
-			{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition", },
-			{ "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols", },
-			{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols", },
+			{
+				"gd",
+				function()
+					Snacks.picker.lsp_definitions()
+				end,
+				desc = "Goto Definition",
+			},
+			{
+				"gD",
+				function()
+					Snacks.picker.lsp_declarations()
+				end,
+				desc = "Goto Declaration",
+			},
+			{
+				"gr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+				nowait = true,
+				desc = "References",
+			},
+			{
+				"gI",
+				function()
+					Snacks.picker.lsp_implementations()
+				end,
+				desc = "Goto Implementation",
+			},
+			{
+				"gy",
+				function()
+					Snacks.picker.lsp_type_definitions()
+				end,
+				desc = "Goto T[y]pe Definition",
+			},
+			{
+				"<leader>ss",
+				function()
+					Snacks.picker.lsp_symbols()
+				end,
+				desc = "LSP Symbols",
+			},
+			{
+				"<leader>sS",
+				function()
+					Snacks.picker.lsp_workspace_symbols()
+				end,
+				desc = "LSP Workspace Symbols",
+			},
 			-- Other
 			-- { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" }, },
 			-- { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" }, },
@@ -393,16 +682,16 @@ require("lazy").setup({
 			-- Diagnostic Config
 			-- See :help vim.diagnostic.Opts
 			vim.diagnostic.config({
-        update_in_insert = false, -- so diags are updated on insertLeave
+				update_in_insert = false, -- so diags are updated on insertLeave
 				severity_sort = true,
-        virtual_text = { current_line = true, severity = { min = "INFO", max = "WARN" } },
-        virtual_lines = { current_line = true, severity = { min = "ERROR"} },
+				virtual_text = { current_line = true, severity = { min = "INFO", max = "WARN" } },
+				virtual_lines = { current_line = true, severity = { min = "ERROR" } },
 				float = {
-          focusable = false,
-          style = "minimal",
-          border = "rounded",
-          source = "if_many",
-        },
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = "if_many",
+				},
 				underline = true,
 			})
 
@@ -441,14 +730,14 @@ require("lazy").setup({
 					-- capabilities = {},
 					settings = {
 						Python = {
-              plugins = {
-                pycodestyle = {
-                  maxLineLength = 100
-                }
-              },
+							plugins = {
+								pycodestyle = {
+									maxLineLength = 100,
+								},
+							},
 						},
 					},
-        },
+				},
 
 				lua_ls = {
 					-- cmd = { ... },
@@ -521,7 +810,7 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = false,
+			format_on_save = true,
 			-- format_on_save = function(bufnr)
 			-- 	-- Disable "format_on_save lsp_fallback" for languages that don't
 			-- 	-- have a well standardized coding style. You can add additional
@@ -587,7 +876,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-cmdline",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -601,7 +890,7 @@ require("lazy").setup({
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				completion = { completeopt = "menu" },
+				completion = { completeopt = "menuone,noselect" },
 
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
@@ -624,7 +913,7 @@ require("lazy").setup({
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
@@ -720,6 +1009,9 @@ require("lazy").setup({
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
+			require("mini.surround").setup()
+
+			-- Highlight and remove trailing spaces
 			require("mini.surround").setup()
 		end,
 	},
