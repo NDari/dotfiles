@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = true
+vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -197,6 +197,20 @@ require("lazy").setup({
 	-- Then, because we use the `opts` key (recommended), the configuration runs
 	-- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
+	-- send code to repl
+	{
+		"jpalardy/vim-slime",
+
+		config = function()
+			vim.g.slime_target = "tmux"
+			vim.g.slime_bracketed_paste = 1
+			vim.g.slime_dont_ask_default = 1
+			vim.cmd(
+				[[let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": "{right}"}]]
+			)
+		end,
+	},
+
 	-- add pairs automatically
 	{
 		"windwp/nvim-autopairs",
@@ -209,7 +223,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			theme = "catppuccin-latte",
+			theme = "gruvbox",
 		},
 	},
 
@@ -973,7 +987,7 @@ require("lazy").setup({
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("catppuccin-latte")
+			-- vim.cmd.colorscheme("catppuccin-latte")
 		end,
 	},
 	{
@@ -981,7 +995,7 @@ require("lazy").setup({
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			-- vim.cmd("colorscheme gruvbox")
+			vim.cmd("colorscheme gruvbox")
 		end,
 	},
 
