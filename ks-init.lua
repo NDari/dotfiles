@@ -197,8 +197,7 @@ require("lazy").setup({
 	-- Then, because we use the `opts` key (recommended), the configuration runs
 	-- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-	-- send code to repl
-	{
+	{ -- send code to repl
 		"jpalardy/vim-slime",
 
 		config = function()
@@ -223,7 +222,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			theme = "gruvbox",
+			theme = "kanagawa",
 		},
 	},
 
@@ -469,7 +468,7 @@ require("lazy").setup({
 				function()
 					Snacks.picker.highlights()
 				end,
-				desc = "Highlights",
+				desc = "Highligsts",
 			},
 			{
 				"<leader>si",
@@ -636,14 +635,7 @@ require("lazy").setup({
 		end,
 	},
 
-	-- NOTE: Plugins can specify dependencies.
-	--
-	-- The dependencies are proper plugin specifications as well - anything
-	-- you do for a plugin at the top level, you can do for a dependency.
-	--
-	-- Use the `dependencies` key to specify the dependencies of a particular plugin
-	-- tmux
-	{
+	{ -- tmux navigation seemless with nvim
 		"christoomey/vim-tmux-navigator",
 		cmd = {
 			"TmuxNavigateLeft",
@@ -675,6 +667,7 @@ require("lazy").setup({
 			},
 		},
 	},
+
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -995,16 +988,24 @@ require("lazy").setup({
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd("colorscheme gruvbox")
+			-- vim.cmd("colorscheme gruvbox")
 		end,
 	},
 
-	-- Highlight todo, notes, etc in comments
-	{
+	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
+	},
+
+	{
+		"rebelot/kanagawa.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			vim.cmd("colorscheme kanagawa")
+		end,
 	},
 
 	{ -- Collection of various small independent plugins/modules
