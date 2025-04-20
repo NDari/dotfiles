@@ -29,7 +29,7 @@ This installs to $Env:ProgramFiles\PowerShell\7
 
 - scoop install sudo
 
-# add git
+# add git, make sure $HOME is set on windows
 
 scoop install git
 
