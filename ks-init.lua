@@ -17,9 +17,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Change default shell to powershell if on windows
-if vim.fn.has("windows") then
-	vim.o.shell = "pwsh"
-end
+-- if vim.fn.has("windows") then
+-- 	vim.o.shell = "pwsh"
+-- end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -227,6 +227,10 @@ require("lazy").setup({
 		opts = {
 			theme = "gruvbox",
 		},
+	},
+
+	{
+		"tpope/vim-rsi",
 	},
 
 	{
