@@ -50,7 +50,7 @@ fi
 
 ALLPATHS=(
   "/usr/local/opt/coreutils/libexec/gnubin"
-  "$HOME/miniconda3/bin"
+  # "$HOME/miniconda3/bin"
   # "$SPARK_HOME/bin"
   # "$HIVE_HOME/bin"
   # "$HOME/go/bin"
