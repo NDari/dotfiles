@@ -202,7 +202,10 @@ require("lazy").setup({
 
 	{ -- send code to repl
 		"jpalardy/vim-slime",
-
+		keys = {
+			{ "<leader>r", ":<C-u>'<,'>SlimeSend<CR>", mode = "v", desc = "Slime Send Selection" },
+			{ "<leader>r", "<cmd>SlimeSendCurrentLine<CR>", mode = "n", desc = "Slime Send current line" },
+		},
 		config = function()
 			vim.g.slime_target = "tmux"
 			vim.g.slime_bracketed_paste = 1

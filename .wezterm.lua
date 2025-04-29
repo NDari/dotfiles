@@ -34,7 +34,7 @@ config.term = "xterm-256color"
 -- Keybindings
 config.disable_default_key_bindings = true
 
-config.leader = { key = "s", mods = "CTRL" }
+config.leader = { key = "s", mods = "ALT" }
 config.keys = {
 	{ key = "-", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 	{ key = "\\", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
@@ -68,10 +68,9 @@ config.wsl_domains = {
 		default_cwd = "~",
 	},
 }
--- config.default_domain = "WSL:Ubuntu-24.04"
 
 if is_windows() then
-	config.default_prog = { "pwsh.exe", "-NoLogo" }
+	config.default_domain = "WSL:Ubuntu-24.04"
 end
 
 -- and finally, return the configuration to wezterm
