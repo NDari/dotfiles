@@ -134,6 +134,9 @@ vim.keymap.set("x", "<", "<gv")
 -- open diagnostics
 vim.keymap.set("n", "<leader>k", vim.diagnostic.open_float)
 
+-- open parent directory
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -227,6 +230,7 @@ require("lazy").setup({
 		-- use opts = {} for passing setup options
 		-- this is equivalent to setup({}) function
 	},
+
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -235,8 +239,30 @@ require("lazy").setup({
 		},
 	},
 
-	{
+	{ -- readline chords in insert
 		"tpope/vim-rsi",
+	},
+
+	{
+		"stevearc/oil.nvim",
+		opts = {
+			use_default_keymaps = true,
+			keymaps = {
+				["<CR>"] = "actions.select",
+				["<leader>os"] = { "actions.select", opts = { vertical = true } },
+				["<leader>oh"] = { "actions.select", opts = { horizontal = true } },
+				["<leader>op"] = "actions.preview",
+				["<leader>oc"] = { "actions.close", mode = "n" },
+				["<leader>or"] = "actions.refresh",
+				["-"] = { "actions.parent", mode = "n" },
+				["_"] = { "actions.open_cwd", mode = "n" },
+				["`"] = { "actions.cd", mode = "n" },
+				["<leader>o."] = { "actions.toggle_hidden", mode = "n" },
+				["<leader>o\\"] = { "actions.toggle_trash", mode = "n" },
+			},
+		},
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		lazy = false,
 	},
 
 	{
