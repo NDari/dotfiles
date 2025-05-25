@@ -1,10 +1,10 @@
 unameOut="$(uname -s)"
 case "${unameOut}" in
-  Linux*)     machine=Linux;;
-  Darwin*)    machine=Mac;;
-  CYGWIN*)    machine=Cygwin;;
-  MINGW*)     machine=MinGw;;
-  *)          machine="UNKNOWN:${unameOut}"
+	Linux*)     machine=Linux;;
+	Darwin*)    machine=Mac;;
+	CYGWIN*)    machine=Cygwin;;
+	MINGW*)     machine=MinGw;;
+	*)          machine="UNKNOWN:${unameOut}"
 esac
 
 # Java stuff
@@ -37,8 +37,8 @@ esac
 
 # linux pbcopy/paste
 if [ $machine = 'Linux' ]; then
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
 fi
 
 #alias guix=$HOME/.config/guix/current/bin/guix
@@ -49,18 +49,18 @@ fi
 # path. just add to this
 
 ALLPATHS=(
-  "/usr/local/opt/coreutils/libexec/gnubin"
-  # "$HOME/miniconda3/bin"
-  # "$SPARK_HOME/bin"
-  # "$HIVE_HOME/bin"
-  # "$HOME/go/bin"
-  # "$GOROOT/bin"
-  # "$HOME/.cargo/bin"
-  "$HOME/bin"
-  "$HOME/.local/bin"
-  "/usr/local/bin"
-  "/usr/local/go/bin"
-  # "/opt/homebrew/bin"
+	"/usr/local/opt/coreutils/libexec/gnubin"
+	# "$HOME/miniconda3/bin"
+	# "$SPARK_HOME/bin"
+	# "$HIVE_HOME/bin"
+	# "$HOME/go/bin"
+	# "$GOROOT/bin"
+	# "$HOME/.cargo/bin"
+	"$HOME/bin"
+	"$HOME/.local/bin"
+	"/usr/local/bin"
+	"/usr/local/go/bin"
+	# "/opt/homebrew/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
@@ -72,7 +72,7 @@ export PATH=${NEWPATHS}${PATH}
 
 # olcao stuff
 if [ $machine = 'Linux' ]; then
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib:$HOME/include:/usr/lib
 fi
 
 # ruby

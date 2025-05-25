@@ -223,14 +223,6 @@ require("lazy").setup({
 		"justinmk/vim-sneak",
 	},
 
-	{ -- add pairs automatically
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
-	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -1048,19 +1040,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- You can easily change to a different colorscheme.
-		-- Change the name of the colorscheme plugin below, and then
-		-- change the command in the config to whatever the name of that colorscheme is.
-		--
-		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000,
-		config = function()
-			-- vim.cmd.colorscheme("catppuccin-latte")
-		end,
-	},
 	{
 		"ellisonleao/gruvbox.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -1075,15 +1054,6 @@ require("lazy").setup({
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
-	},
-
-	{
-		"rebelot/kanagawa.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			-- vim.cmd("colorscheme kanagawa")
-		end,
 	},
 
 	{ -- Collection of various small independent plugins/modules
@@ -1105,7 +1075,13 @@ require("lazy").setup({
 			require("mini.surround").setup()
 
 			-- Highlight and remove trailing spaces
-			require("mini.surround").setup()
+			require("mini.trailspace").setup()
+
+			-- Autopairs
+			require("mini.pairs").setup()
+
+			-- Icons
+			require("mini.icons").setup()
 		end,
 	},
 })

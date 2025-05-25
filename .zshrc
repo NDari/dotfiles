@@ -53,14 +53,14 @@ export KEYTIMEOUT=1
 # Add wisely, as too many plugins slow down shell startup.
 # For autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins=(
-  #bundler
-  git
-  history-substring-search
-  #ubuntu
-  #archlinux
-  #kubectl
-  fzf
-  #rails
+	#bundler
+	git
+	history-substring-search
+	#ubuntu
+	#archlinux
+	#kubectl
+	fzf
+	#rails
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -102,17 +102,8 @@ alias kp='kgp' # requires kubernetes plugin
 alias kt='kubetail' # brew tap johanhaleby/kubetail && brew install kubetail
 alias kc="kubectx" # brew install kubectx
 kcon() {
-  keti $1 -- /bin/bash
+	keti $1 -- /bin/bash
 }
-
-# color for manpages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;0;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
 
 DEFAULT_USER=`whoami`
 
@@ -125,8 +116,8 @@ env=~/.ssh/agent.env
 agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
 
 agent_start () {
-  (umask 077; ssh-agent >| "$env")
-  . "$env" >| /dev/null ;
+	(umask 077; ssh-agent >| "$env")
+	. "$env" >| /dev/null ;
 }
 
 agent_load_env
@@ -135,10 +126,10 @@ agent_load_env
 agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-  agent_start
-  ssh-add -k
+	agent_start
+	ssh-add -k
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-  ssh-add -k
+	ssh-add -k
 fi
 unset env
 
@@ -147,20 +138,20 @@ unset env
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" -u --ignore-vcs'
 
 declare -a zshrc_files=(
-".zshrc-msts"
-".zshrc-personal"
-".zshrc-tc"
-".zshrc-personal-linux"
-".zshrc-personal-wsl"
+	".zshrc-msts"
+	".zshrc-personal"
+	".zshrc-tc"
+	".zshrc-personal-linux"
+	".zshrc-personal-wsl"
 )
 
 # source all the special files if they exist.
 for f in "${zshrc_files[@]}"
 do
-  if [ -L "${HOME}/${f}" ]; then
-    echo "loading $HOME/$f"
-    source "${HOME}/${f}"
-  fi
+	if [ -L "${HOME}/${f}" ]; then
+		echo "loading $HOME/$f"
+		source "${HOME}/${f}"
+	fi
 done
 
 # source custom shell functions
@@ -168,8 +159,8 @@ source $HOME/dotfiles/shell-functions
 
 # make direnv work, and work with tmux
 if which direnv > /dev/null; then
-  if [[ -n $TMUX && -n $DIRENV_DIR ]]; then
-      unset `printf '%s ' ${(kM)parameters:#DIRENV_*}`  # unset env vars starting with DIRENV_
-  fi
-  eval "$(direnv hook zsh)"
+	if [[ -n $TMUX && -n $DIRENV_DIR ]]; then
+		unset `printf '%s ' ${(kM)parameters:#DIRENV_*}`  # unset env vars starting with DIRENV_
+	fi
+	eval "$(direnv hook zsh)"
 fi
