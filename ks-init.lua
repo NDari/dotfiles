@@ -223,6 +223,14 @@ require("lazy").setup({
 		"justinmk/vim-sneak",
 	},
 
+	{ -- add pairs automatically
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		-- use opts = {} for passing setup options
+		-- this is equivalent to setup({}) function
+	},
+
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -263,7 +271,7 @@ require("lazy").setup({
 		lazy = false,
 		opts = {
 			-- bigfile = { enabled = true },
-			dashboard = { enabled = true },
+			-- dashboard = { enabled = true },
 			explorer = { enabled = true },
 			-- indent = { enabled = true },
 			-- input = { enabled = true },
@@ -967,7 +975,7 @@ require("lazy").setup({
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				completion = { completeopt = "menuone,noselect" },
+				completion = { completeopt = "menu,noselect" },
 
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
@@ -1078,9 +1086,6 @@ require("lazy").setup({
 			require("mini.trailspace").setup()
 
 			-- Autopairs
-			require("mini.pairs").setup()
-
-			-- Icons
 			require("mini.icons").setup()
 		end,
 	},
