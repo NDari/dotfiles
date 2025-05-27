@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 
+set -eu pipefail
+
+cd $HOME
+
 sudo dnf install -y zsh
 
 chsh -s /usr/bin/zsh
 
 mkdir -p $HOME/.config
 
-sudo dnf -y install ninja-build cmake gcc make gettext curl glibc-gconv-extra git
+# git
+sudo dnf install -y git
+git config --global user.email "naseerdari01@gmail.com"
+git config --global user.name "Naseer Dari"
+git config --global init.defaultbranch "main"
+git config --global core.whitespace "cr-at-eol"
+
+
+sudo dnf install -y ninja-build cmake gcc make gettext curl glibc-gconv-extra git
 mkdir - $HOME/tools && cd $HOME/tools
 git clone https://github.com/neovim/neovim.git
 cd ./neovim
