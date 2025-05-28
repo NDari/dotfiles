@@ -33,3 +33,9 @@ mkdir $HOME/.ssh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+
+# post download of this repo
+cd $HOME
+mkdir -p $HOME/.config/zsh
+ln -s $HOME/dotfiles/zsh/zshrc $HOME/.config/zsh/.zshrc
+ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv

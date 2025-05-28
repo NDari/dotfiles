@@ -1,0 +1,69 @@
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
+
+# manually set language environment
+export LANG=en_US.UTF-8
+
+# set editor stuff
+export EDITOR=`which nvim`
+
+# make ctrlp/n work with partially types commands
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
+# system aliases
+alias e='nvim'
+alias vi="nvim"
+alias less='less -R' # pass escape chars through
+alias c='clear'
+alias enw='emacs -nw'
+alias ls='ls --color=always'
+alias h='history | fzf'
+# git
+alias ga='git add'
+alias gst='git status'
+alias gp='git push'
+alias gc='git commit'
+alias gpo='gp --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
+# tmux
+alias tns='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias ta='tmux attach -t'
+
+# remove things like ^M on enter for interactive CLIs
+stty sane
+
+# ssh
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+        (umask 077; ssh-agent >| "$env")
+        . "$env" >| /dev/null ;
+}
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+        agent_start
+        ssh-add -k
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+        ssh-add -k
+fi
+unset env
