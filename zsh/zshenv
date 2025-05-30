@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# my configs
+export DOTFILES=$HOME/dotfiles
 
 # XDG
 export XDG_CONFIG_HOME=$HOME/.config

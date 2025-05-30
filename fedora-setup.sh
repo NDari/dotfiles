@@ -39,3 +39,6 @@ cd $HOME
 mkdir -p $HOME/.config/zsh
 ln -s $HOME/dotfiles/zsh/zshrc $HOME/.config/zsh/.zshrc
 ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv
+
+# oh my posh
+curl -s https://ohmyposh.dev/install.sh | bash -s

@@ -23,6 +23,9 @@ export EDITOR=`which nvim`
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
+# emacs mode on the command line
+bindkey -e
+
 # system aliases
 alias e='nvim'
 alias vi="nvim"
@@ -67,3 +70,5 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
         ssh-add -k
 fi
 unset env
+
+eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/atomic.omp.json)"
