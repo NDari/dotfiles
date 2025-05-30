@@ -71,4 +71,8 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 fi
 unset env
 
+# enable fzf
+eval "$(fzf --zsh)"
+
+# enable oh-my-posh theme
 eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/atomic.omp.json)"
