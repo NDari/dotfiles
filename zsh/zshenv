@@ -30,8 +30,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Go stuff
 export GOPATH=$HOME/.go
-export GOBIN=$GOPATH/bin
-export GOTELEMETRYDIR=$XDG_DATA_HOME/go-telemetry
+export GOBIN=$GOPATH/../.local/bin # has to be abs or use $GOPATH
 export GOMODCACHE=$GOPATH/pkg/mod
 export GOCACHE=$XDG_CACHE_HOME/go-build
 
