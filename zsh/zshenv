@@ -21,8 +21,9 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZRC="$ZDOTDIR/.zshrc"
 export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
-export HISTTIMEFORMAT="[%F %T] "
+export SAVEHIST=$HISTSIZE               # Maximum events in history file
+export HISTDUP=erase                    # erase duplicate
+export ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 
 # FZF stuff
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'

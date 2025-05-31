@@ -2,16 +2,25 @@ setopt BANG_HIST                 # Treat the '!' character specially during expa
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
+# zini stuff
+source "${ZINIT_HOME}/zinit.zsh"
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
 # add autocompletions
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+
+# zinit wants this...
+zinit cdreplay -q
 
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 export KEYTIMEOUT=1
@@ -75,12 +84,8 @@ elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
 fi
 unset env
 
-# enable fzf
+# shell integrations
 eval "$(fzf --zsh)"
-
-# enable oh-my-posh theme
-# eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/atomic.omp.json)"
 eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/term-theme.toml)"
-
-# enable direnv
 eval "$(direnv hook zsh)"
+eval "$(zoxide init --cmd cd zsh)"

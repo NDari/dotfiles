@@ -20,6 +20,11 @@ ln -s $HOME/dotfiles/zsh/zshrc $HOME/.config/zsh/.zshrc
 ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv
 # oh my posh
 curl -s https://ohmyposh.dev/install.sh | bash -s
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
 # nvim
 cd $HOME
@@ -43,6 +48,7 @@ sudo dnf install -y \
 	xclip \
 	ripgrep \
 	fd-find \
+	zoxide \
 	uv
 
 # tmux
