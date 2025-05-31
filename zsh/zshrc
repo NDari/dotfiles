@@ -22,12 +22,10 @@ export LANG=en_US.UTF-8
 # set editor stuff
 export EDITOR=`which nvim`
 
-# make ctrlp/n work with partially types commands
-bindkey "^P" history-beginning-search-backward
-bindkey "^N" history-beginning-search-forward
-
-# emacs mode on the command line
+# emacs mode
 bindkey -e
+bindkey "^p" history-search-backward
+bindkey "^n" history-search-forward
 
 # system aliases
 alias e='nvim'
@@ -81,7 +79,8 @@ unset env
 eval "$(fzf --zsh)"
 
 # enable oh-my-posh theme
-eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/atomic.omp.json)"
+# eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/atomic.omp.json)"
+eval "$(oh-my-posh init zsh --config $DOTFILES/oh-my-posh/term-theme.toml)"
 
 # enable direnv
 eval "$(direnv hook zsh)"
