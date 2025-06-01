@@ -29,16 +29,6 @@ final_space = true
       style = 'full'
 
   [[blocks.segments]]
-    template = ' {{ .CurrentDate | date .Format }} |'
-    foreground = 'red'
-    background = 'transparent'
-    type = 'time'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      time_format = '15:04:01'
-
-  [[blocks.segments]]
     template = ' {{ .Path }} |'
     foreground = 'green'
     background = 'transparent'
