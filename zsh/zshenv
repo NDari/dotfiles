@@ -46,6 +46,3 @@ ALLPATHS=(
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
-
-
-. "$HOME/.cargo/env"
