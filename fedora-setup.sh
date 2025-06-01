@@ -32,14 +32,6 @@ git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
 # nvim
 cd $HOME
-sudo dnf install -y ninja-build cmake gcc make gettext curl glibc-gconv-extra git
-mkdir -p $HOME/tools && cd $HOME/tools
-git clone https://github.com/neovim/neovim.git
-cd ./neovim
-git checkout stable
-make CMAKE_BUILD_TYPE=Release
-sudo make install
-cd $HOME
 mkdir -p $HOME/.config/nvim
 ln -s $HOME/dotfiles/nvim/init.lua $HOME/.config/nvim/init.lua
 
@@ -47,16 +39,19 @@ mkdir $HOME/.ssh
 
 sudo dnf install -y \
 	fzf \
+	neovim \
 	direnv \
 	tmux \
 	xclip \
+	tldr \
+	uv \
 	ripgrep \
 	fd-find \
+	just \
+	git-delta \
 	zoxide \
-	tldr \
 	procs \
-	bat \
-	uv
+	bat
 
 # tmux
 cd $HOME
@@ -68,14 +63,3 @@ ln -s $HOME/dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 mkdir -p $HOME/tools && cd $HOME/tools
 curl -LO https://go.dev/dl/go1.24.3.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.24.3.linux-amd64.tar.gz
-
-# rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-cargo install cargo-update --locked
-cargo install --locked grex
-cargo install --locked yazi
-cargo install --locked delta
-cargo install --locked du-dust
-cargo install --locked yazi-fm yazi-cli
-cargo install git-delta # cant be locked for now
-cargo install --locked just
