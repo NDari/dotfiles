@@ -57,6 +57,11 @@ alias ta='tmux attach -t'
 # copy and paste commands
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+# fix watch
+alias watch="watch "
+# command replacements
+alias cat='bat --paging=never'
+
 
 # remove things like ^M on enter for interactive CLIs
 stty sane

@@ -29,6 +29,9 @@ export ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Bat
+export BAT_THEME="gruvbox-dark"
+
 # Go stuff
 export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/../.local/bin # has to be abs or use $GOPATH
@@ -45,3 +48,4 @@ printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
 
 
+. "$HOME/.cargo/env"
