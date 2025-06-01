@@ -77,4 +77,5 @@ cargo install --locked yazi
 cargo install --locked delta
 cargo install --locked du-dust
 cargo install --locked yazi-fm yazi-cli
-cargo install git-delta
+cargo install git-delta # cant be locked for now
+cargo install --locked just
