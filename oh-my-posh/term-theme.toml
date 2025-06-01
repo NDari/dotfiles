@@ -18,9 +18,30 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    template = '{{ .Path }} |'
+    template = '{{ .UserName }} @ {{ .HostName }} |'
     background = 'transparent'
+    foreground = 'yellow'
+    type = 'session'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' {{ .CurrentDate | date .Format }} |'
+    foreground = 'red'
+    background = 'transparent'
+    type = 'time'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      time_format = '15:04:01'
+
+  [[blocks.segments]]
+    template = ' {{ .Path }} |'
     foreground = 'green'
+    background = 'transparent'
     type = 'path'
     style = 'plain'
 
@@ -40,21 +61,6 @@ final_space = true
       cache_duration = 'none'
       commit_icon = '@'
       fetch_status = true
-
-[[blocks]]
-  type = 'rprompt'
-  overflow = 'hidden'
-
-  [[blocks.segments]]
-    template = '{{ .FormattedMs }}'
-    foreground = 'yellow'
-    background = 'transparent'
-    type = 'executiontime'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
-      threshold = 5000
 
 [[blocks]]
   type = 'prompt'
