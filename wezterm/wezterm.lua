@@ -23,7 +23,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Gruvbox Dark (Gogh)"
 
 -- config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Bold", italic = false })
-config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Bold", italic = true })
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "ExtraBold", italic = true })
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 -- no audible bell
