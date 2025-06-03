@@ -220,7 +220,15 @@ require("lazy").setup({
 	},
 
 	{ -- s<char><char> to target, ; to repeat
-		"justinmk/vim-sneak",
+		"ggandor/leap.nvim",
+		config = function()
+			local leap = require("leap")
+			leap.set_default_mappings()
+			leap.opts.preview_filter = function()
+				return false
+			end
+			require("leap.user").set_repeat_keys("<enter>", "<backspace>")
+		end,
 	},
 
 	{ -- add pairs automatically
@@ -1051,9 +1059,6 @@ require("lazy").setup({
 		"ellisonleao/gruvbox.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			vim.cmd("colorscheme gruvbox")
-		end,
 	},
 
 	{ -- Highlight todo, notes, etc in comments
@@ -1074,13 +1079,6 @@ require("lazy").setup({
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 500 })
 
-			-- Add/delete/replace surroundings (brackets, quotes, etc.)
-			--
-			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-			-- - sd'   - [S]urround [D]elete [']quotes
-			-- - sr)'  - [S]urround [R]eplace [)] [']
-			require("mini.surround").setup()
-
 			-- Highlight and remove trailing spaces
 			require("mini.trailspace").setup()
 
@@ -1089,3 +1087,28 @@ require("lazy").setup({
 		end,
 	},
 })
+
+require("gruvbox").setup({
+	terminal_colors = true, -- add neovim terminal colors
+	undercurl = true,
+	underline = true,
+	bold = false,
+	italic = {
+		strings = false,
+		emphasis = false,
+		comments = false,
+		operators = false,
+		folds = true,
+	},
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	inverse = true, -- invert background for search, diffs, statuslines and errors
+	contrast = "", -- can be "hard", "soft" or empty string
+	palette_overrides = {},
+	overrides = {},
+	dim_inactive = false,
+	transparent_mode = false,
+})
+vim.cmd("colorscheme gruvbox")

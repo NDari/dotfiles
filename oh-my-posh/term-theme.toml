@@ -18,7 +18,7 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    template = '{{ .UserName }} @ {{ .HostName }} |'
+    template = '{{ .UserName }} @ {{ .HostName }} '
     background = 'transparent'
     foreground = 'yellow'
     type = 'session'
@@ -29,7 +29,7 @@ final_space = true
       style = 'full'
 
   [[blocks.segments]]
-    template = ' {{ .Path }} |'
+    template = '| {{ .Path }} '
     foreground = 'green'
     background = 'transparent'
     type = 'path'
@@ -40,7 +40,7 @@ final_space = true
       style = 'full'
 
   [[blocks.segments]]
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} *{{ end }} |'
+    template = '| {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} *{{ end }}'
     foreground = 'red'
     background = 'transparent'
     type = 'git'
