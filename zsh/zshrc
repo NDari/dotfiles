@@ -46,7 +46,7 @@ alias ls='ls --color=always'
 alias h='history | fzf'
 # git
 alias ga='git add'
-alias ga='git diff'
+alias gd='git diff'
 alias gst='git status'
 alias gp='git push'
 alias gc='git commit'
