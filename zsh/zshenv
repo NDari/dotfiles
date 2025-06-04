@@ -43,6 +43,7 @@ ALLPATHS=(
 	"$HOME/.local/bin"
 	"/usr/local/go/bin"
 	"$HOME/.cargo/bin"
+	"$HOME/.deno/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}

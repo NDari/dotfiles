@@ -11,9 +11,9 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Change default shell to powershell if on windows
-if vim.fn.has("windows") then
-	vim.o.shell = "pwsh"
-end
+-- if vim.fn.has("windows") then
+-- 	vim.o.shell = "pwsh"
+-- end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -32,7 +32,7 @@ end)
 -- set default tab to 4 spaces
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
-	command = "setlocal shiftwidth=4 tabstop=4",
+	command = "setlocal shiftwidth=2 tabstop=2",
 })
 
 -- Enable break indent
@@ -247,10 +247,13 @@ require("lazy").setup({
 	{
 		"stevearc/oil.nvim",
 		opts = {
-			use_default_keymaps = true,
+			use_default_keymaps = false,
+			skip_confirm_for_simple_edits = true,
+			delete_to_trash = true,
 			keymaps = {
+				["<leader>o?"] = { "actions.show_help", mode = "n" },
 				["<CR>"] = "actions.select",
-				["<leader>os"] = { "actions.select", opts = { vertical = true } },
+				["<leader>ov"] = { "actions.select", opts = { vertical = true } },
 				["<leader>oh"] = { "actions.select", opts = { horizontal = true } },
 				["<leader>op"] = "actions.preview",
 				["<leader>oc"] = { "actions.close", mode = "n" },
@@ -260,6 +263,9 @@ require("lazy").setup({
 				["`"] = { "actions.cd", mode = "n" },
 				["<leader>o."] = { "actions.toggle_hidden", mode = "n" },
 				["<leader>o\\"] = { "actions.toggle_trash", mode = "n" },
+			},
+			view_options = {
+				show_hidden = true,
 			},
 		},
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
