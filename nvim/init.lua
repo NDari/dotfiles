@@ -1,25 +1,19 @@
--- Set <space> as the leader key
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Change default shell to powershell if on windows
--- if vim.fn.has("windows") then
--- 	vim.o.shell = "pwsh"
--- end
+if vim.fn.has("windows") then
+	vim.o.shell = "pwsh"
+end
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -35,6 +29,7 @@ vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
 
+-- set default tab to 4 spaces
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	command = "setlocal shiftwidth=4 tabstop=4",
@@ -145,10 +140,15 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	desc = "remove trailing whitespace",
+	pattern = "*",
+	command = ":%s/\\s\\+$//e",
 })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -175,7 +175,6 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-	-- See `:help gitsigns` to understand what the configuration keys do
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -188,20 +187,6 @@ require("lazy").setup({
 			},
 		},
 	},
-
-	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
-	--
-	-- This is often very useful to both group configuration, as well as handle
-	-- lazy loading plugins that don't need to be loaded immediately at startup.
-	--
-	-- For example, in the following configuration, we use:
-	--  event = 'VimEnter'
-	--
-	-- which loads which-key before all the UI elements are loaded. Events can be
-	-- normal autocommands events (`:help autocmd-events`).
-	--
-	-- Then, because we use the `opts` key (recommended), the configuration runs
-	-- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
 	{ -- send code to repl
 		"jpalardy/vim-slime",
@@ -219,7 +204,7 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- s<char><char> to target, ; to repeat
+	{ -- s<char><char> to target, enter to go to next, backspace to prev
 		"ggandor/leap.nvim",
 		config = function()
 			local leap = require("leap")
@@ -237,6 +222,14 @@ require("lazy").setup({
 		config = true,
 		-- use opts = {} for passing setup options
 		-- this is equivalent to setup({}) function
+	},
+
+	{ -- ysiw' -> surround word with '. cs"' -> cs " to '. ds" -> delete surrounding ".
+		"tpope/vim-surround",
+	},
+
+	{ -- more extensive repeat
+		"tpope/vim-repeat",
 	},
 
 	{
@@ -1066,25 +1059,6 @@ require("lazy").setup({
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
-	},
-
-	{ -- Collection of various small independent plugins/modules
-		"echasnovski/mini.nvim",
-		config = function()
-			-- Better Around/Inside textobjects
-			--
-			-- Examples:
-			--  - va)  - [V]isually select [A]round [)]paren
-			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-			--  - ci'  - [C]hange [I]nside [']quote
-			require("mini.ai").setup({ n_lines = 500 })
-
-			-- Highlight and remove trailing spaces
-			require("mini.trailspace").setup()
-
-			-- Autopairs
-			require("mini.icons").setup()
-		end,
 	},
 })
 
