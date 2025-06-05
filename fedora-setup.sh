@@ -20,7 +20,7 @@ sudo dnf install -y zsh
 chsh -s /usr/bin/zsh
 mkdir -p $HOME/.config/zsh
 ln -s $HOME/dotfiles/zsh/zshrc $HOME/.config/zsh/.zshrc
-ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv
+# ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv
 
 # oh my posh
 curl -s https://ohmyposh.dev/install.sh | bash -s
@@ -57,7 +57,7 @@ sudo dnf install -y \
 cd $HOME
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -s $HOME/dotfiles/tmux/tmux.conf $HOME/.tmux.conf
-# after the above start tmux, c-s I to install plugins
+# after the above start tmux, prefix I to install plugins
 
 # go
 mkdir -p $HOME/tools && cd $HOME/tools

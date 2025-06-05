@@ -151,6 +151,29 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = ":%s/\\s\\+$//e",
 })
 
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+	desc = "Show diagnostics on a line in a popup",
+	pattern = "*",
+	callback = function()
+		for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.api.nvim_win_get_config(winid).zindex then
+				return
+			end
+		end
+		vim.diagnostic.open_float({
+			scope = "line",
+			focusable = false,
+			close_events = {
+				"CursorMoved",
+				"CursorMovedI",
+				"BufHidden",
+				"InsertCharPre",
+				"WinLeave",
+			},
+		})
+	end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -242,6 +265,7 @@ require("lazy").setup({
 
 	{ -- readline chords in insert
 		"tpope/vim-rsi",
+		lksdjf,
 	},
 
 	{
@@ -775,10 +799,11 @@ require("lazy").setup({
 			vim.diagnostic.config({
 				update_in_insert = false, -- so diags are updated on insertLeave
 				severity_sort = true,
-				virtual_text = { current_line = true, severity = { min = "INFO", max = "WARN" } },
+				-- virtual_text = { current_line = true, severity = { min = "INFO", max = "WARN" } },
 				virtual_lines = { current_line = true, severity = { min = "ERROR" } },
 				float = {
 					focusable = false,
+					severity = { min = "INFO", max = "WARN" },
 					style = "minimal",
 					border = "rounded",
 					source = "if_many",
