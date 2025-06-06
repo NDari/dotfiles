@@ -52,9 +52,10 @@ config.keys = {
 	{ key = "3", mods = "LEADER", action = act({ ActivateTab = 2 }) },
 	{ key = "4", mods = "LEADER", action = act({ ActivateTab = 3 }) },
 	{ key = "5", mods = "LEADER", action = act({ ActivateTab = 4 }) },
-	{ key = "p", mods = "CTRL|SHIFT", action = act.ActivateCommandPalette },
-	{ key = "v", mods = "CTRL|SHIFT", action = act({ PasteFrom = "Clipboard" }) },
-	{ key = "c", mods = "CTRL|SHIFT", action = act({ CopyTo = "Clipboard" }) },
+	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
+	{ key = "[", mods = "LEADER", action = act.ActivateCopyMode },
+	{ key = "]", mods = "LEADER", action = act({ PasteFrom = "Clipboard" }) },
+	{ key = "c", mods = "LEADER", action = act({ CopyTo = "Clipboard" }) },
 }
 
 config.wsl_domains = {

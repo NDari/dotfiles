@@ -2,6 +2,8 @@
 
 set -eu pipefail
 
+cd $HOME
+
 # git
 sudo dnf install -y git
 
@@ -18,9 +20,7 @@ git config --global include.path $HOME/dotfiles/delta/delta.conf
 cd $HOME
 sudo dnf install -y zsh
 chsh -s /usr/bin/zsh
-mkdir -p $HOME/.config/zsh
-ln -s $HOME/dotfiles/zsh/zshrc $HOME/.config/zsh/.zshrc
-# ln -s $HOME/dotfiles/zsh/zshenv $HOME/.zshenv
+ln -s $HOME/dotfiles/zsh/zshrc $HOME/.zshrc
 
 # oh my posh
 curl -s https://ohmyposh.dev/install.sh | bash -s

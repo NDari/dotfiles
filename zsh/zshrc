@@ -16,12 +16,13 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # ZSH
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export ZRC="$ZDOTDIR/.zshrc"
-export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export ZRC="$HOME/.zshrc"
+export HISTFILE="$HOME/.zhistory"       # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=$HISTSIZE               # Maximum events in history file
 export HISTDUP=erase                    # erase duplicate
+
+# zinit
 export ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 
 # FZF stuff
@@ -42,7 +43,6 @@ ALLPATHS=(
 	"$HOME/.local/bin"
 	"/usr/local/go/bin"
 	"$HOME/.cargo/bin"
-	"$HOME/.deno/bin"
 )
 printf -v NEWPATHS "%s:" "${ALLPATHS[@]}"
 export PATH=${NEWPATHS}${PATH}
