@@ -62,12 +62,12 @@ cd $HOME
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-cargo install cargo-update
-cargo install du-dust
-cargo install git-delta
-cargo install just
-cargo install fd-find
-cargo install ripgrep
-cargo install bat
-cargo install zoxide
-cargo install procs
+$HOME/.cargo/bin/cargo install cargo-update
+$HOME/.cargo/bin/cargo install du-dust
+$HOME/.cargo/bin/cargo install git-delta
+$HOME/.cargo/bin/cargo install just
+$HOME/.cargo/bin/cargo install fd-find
+$HOME/.cargo/bin/cargo install ripgrep
+$HOME/.cargo/bin/cargo install bat
+$HOME/.cargo/bin/cargo install zoxide
+$HOME/.cargo/bin/cargo install procs
