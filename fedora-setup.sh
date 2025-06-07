@@ -51,7 +51,7 @@ sudo dnf install -y \
 cd $HOME
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -s $HOME/dotfiles/tmux/tmux.conf $HOME/.tmux.conf
-# after the above start tmux, prefix I to install plugins
+$HOME/.tmux/plugins/tpm/bin/install_plugins
 
 # go
 mkdir -p $HOME/tools && cd $HOME/tools
