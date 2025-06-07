@@ -44,14 +44,8 @@ sudo dnf install -y \
 	tmux \
 	xclip \
 	tldr \
-	uv \
-	ripgrep \
-	fd-find \
-	just \
-	git-delta \
-	zoxide \
-	procs \
-	bat
+	openssl-devel \
+	uv
 
 # tmux
 cd $HOME
@@ -63,3 +57,15 @@ ln -s $HOME/dotfiles/tmux/tmux.conf $HOME/.tmux.conf
 mkdir -p $HOME/tools && cd $HOME/tools
 curl -LO https://go.dev/dl/go1.24.3.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.24.3.linux-amd64.tar.gz
+
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+cargo install cargo-update
+cargo install du-dust
+cargo install git-delta
+cargo install just
+cargo install fd-find
+cargo install ripgrep
+cargo install bat
+cargo install zoxide
+cargo install procs
